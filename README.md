@@ -17,3 +17,29 @@
 - Reset password
 - MDP oublié
 - Auth 2 facteurs
+
+## Pour le resto
+- Créer la table allergenes et intégrer aux plats
+
+- Formules
+- Pivot formule plats
+
+- Menus
+- Pivot menu formule
+
+- Cartes des vins
+- Pivot vin formule
+
+- Boissons alco
+- Pivot boisson alco formule
+
+- Boissons non alco
+- Pivot boisson non alco formule
+
+- Entrées
+- Pivot entrées formule
+
+- Desserts
+- Pivot desserts formule
+
++ policy + gates + allergenes + soft delete + force delete + restore
