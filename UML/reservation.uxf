@@ -1,0 +1,11 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>150</y><w>210</w><h>130</h></coordinates><panel_attributes>Reservation
+--
+- id
+- jour de la semaine
+- midi ou soir 
+- créneau_id (en demie heure)
+- nb convives
+- text : allergènes ou info supp</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>270</y><w>210</w><h>70</h></coordinates><panel_attributes>CreneauDecoupe
+--
+- id
+- </panel_attributes><additional_attributes></additional_attributes></element></diagram>

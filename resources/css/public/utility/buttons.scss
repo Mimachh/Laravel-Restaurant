@@ -1,0 +1,60 @@
+.btn-edit {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: var(--info);
+    color: var(--admin-light);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: var(--font-button-size);
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+}
+
+.btn-create {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: var(--success);
+    color: var(--admin-light);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: var(--font-button-size);
+}
+
+.btn-create:hover {
+    background-color: var(--hover-success);
+}
+
+
+
+.btn-delete {
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: var(--danger);
+    color: var(--admin-light);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: var(--font-button-size);
+}
+
+.btn-delete:hover {
+    background-color: var(--hover-danger);
+}
+
+.btn-restore {
+    cursor: pointer;
+    background-color: var(--info);
+    color: var(--admin-light);
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    font-size: var(--font-button-size);
+}
+
+.btn-restore:hover {
+    background-color: var(--hover-info);
+}

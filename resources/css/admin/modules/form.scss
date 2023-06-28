@@ -1,0 +1,51 @@
+.admin-form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+
+    form {
+      div {
+        margin-bottom: 0.9rem;
+      }
+    }
+  }
+  
+  .admin-form-container h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .admin-form-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .admin-form-container input[type="text"],
+  .admin-form-container input[type="email"],
+  .admin-form-container input[type="password"],
+  .admin-form-container button[type="submit"],
+  .admin-form-container input[type="number"],
+  .admin-form-container textarea  {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .admin-form-container button[type="submit"] {
+    background-color: var(--success);
+    color: white;
+    cursor: pointer;
+  }
+  
+  .admin-form-container button[type="submit"]:hover {
+    background-color: var(--hover-success);
+  }
+
+.error {
+  color: var(--danger);
+  font-style: italic;
+
+}

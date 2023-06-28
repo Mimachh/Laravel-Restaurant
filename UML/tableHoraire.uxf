@@ -1,0 +1,17 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>291</x><y>531</y><w>150</w><h>100</h></coordinates><panel_attributes>Couverts
+--
+-id
+-nombre</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>291</x><y>91</y><w>150</w><h>100</h></coordinates><panel_attributes>JoursSemaine
+--
+-id
+-nom</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>191</x><y>231</y><w>340</w><h>100</h></coordinates><panel_attributes>CréneauHoraire
+--
+- id (clé primaire) : Identifiant unique du créneau horaire.
+- heure_debut : Heure de début du créneau horaire.
+- heure_fin : Heure de fin du créneau horaire.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>11</x><y>361</y><w>710</w><h>120</h></coordinates><panel_attributes>HoraireRestaurant
+--
+- id (clé primaire) : Identifiant unique de l'horaire.
+- jour_semaine_id (clé étrangère) : Référence à l'identifiant du jour de la semaine.
+- creneau_horaire_id (clé étrangère) : Référence à l'identifiant du créneau horaire. nullable
+- ouverture : Indicateur indiquant si le restaurant est ouvert pendant ce créneau horaire pour ce jour de la semaine. 1 ou 0
+- couvert_id</panel_attributes><additional_attributes></additional_attributes></element></diagram>

@@ -1,0 +1,89 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>90</x><y>200</y><w>130</w><h>120</h></coordinates><panel_attributes>Menus
+--
+- id
+- nom
+- description
+-autre info
+
+--
+Ajout dans la table pivot depuis cette table
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>430</x><y>190</y><w>130</w><h>120</h></coordinates><panel_attributes>Formules
+--
+- id
+- nom
+- description
+-autre info
+- prix
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>0</y><w>130</w><h>60</h></coordinates><panel_attributes>MenusFormules
+--
+- menu_id
+- formule_id
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>190</x><y>20</y><w>100</w><h>200</h></coordinates><panel_attributes>lt=-
+m1=0..1
+m2=1..n
+a &gt;</panel_attributes><additional_attributes>10;180;10;10;80;10</additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>20</y><w>110</w><h>190</h></coordinates><panel_attributes>lt=-
+m1=0..1
+m2=1..n
+a &gt;</panel_attributes><additional_attributes>70;170;70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>430</x><y>490</y><w>130</w><h>120</h></coordinates><panel_attributes>Plats
+--
+- id
+- nom
+- description
+- prix
+-autre info
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>690</x><y>370</y><w>130</w><h>70</h></coordinates><panel_attributes>FormulesPlats
+--
+-formule_id
+- plat_id
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>400</y><w>160</w><h>170</h></coordinates><panel_attributes>lt=-
+m1=0..1
+m2=1..n
+a &gt;</panel_attributes><additional_attributes>10;140;70;140;70;10;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>250</y><w>160</w><h>170</h></coordinates><panel_attributes>lt=-
+m1=1..n
+m2=0..1
+a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Entrées
+--
+- id
+- nom
+- description
+- prix
+-autre info
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Boissons non alcolisées
+--
+- id
+- nom
+- description
+- prix
+-autre info
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Boissons alcolisées
+--
+- id
+- nom
+- description
+- prix
+-autre info
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>430</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Carte des vins
+--
+- id
+- nom
+- description
+- prix
+-autre info
+
+
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

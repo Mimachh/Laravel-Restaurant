@@ -1,0 +1,68 @@
+/* Styles pour le layout du panneau d'administration */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.admin-panel {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+  
+
+.sidebar {
+    padding-top: 90px;
+    width: 180px;
+    background-color: var(--admin-dark);
+}
+  
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  
+.sidebar li {
+    padding: 10px;
+}
+  
+.sidebar li a {
+    font-size: 0.8rem;
+    font-weight: normal;
+    text-decoration: none;
+    color: var(--admin-light);
+}
+  
+.sidebar li a:hover,
+.sidebar li a.active
+{
+    color: var(--admin-highlight);
+    font-weight: 700;
+}
+  
+.admin-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: var(--admin-light);
+
+    h1 {
+        font-size: 1.8rem;
+        font-weight: 800;
+    }
+
+    .welcome-text {
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin-top: 0.8rem;
+        color: var(--admin-highlight);
+
+        .coucou {
+            font-size: 1.5rem;
+        }
+
+    }
+}
+
+
