@@ -9,7 +9,7 @@
             @csrf
            
             <div>
-                <label for="nom">Nom :</label>
+                <label class="label" for="nom">Nom :</label>
                 <input type="text" name="nom" id="nom" required value="{{ old('nom') }}">
                 @error('nom')
                     <span class="error">{{ $message }}</span>
@@ -17,7 +17,7 @@
             </div>
 
             <div>
-                <label for="photo">Photo :</label>
+                <label class="label" for="photo">Photo :</label>
                 <input type="file" name="photo" id="photo" accept="image/*" onchange="previewImage(event)">
                 @error('photo')
                     <span class="error">{{ $message }}</span>
@@ -29,7 +29,7 @@
             </div>
 
             <div>
-                <label for="description">Description :</label>
+                <label class="label" for="description">Description :</label>
                 <textarea name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                 @error('description')
                     <span class="error">{{ $message }}</span>
@@ -37,7 +37,7 @@
             </div>
 
             <div>
-                <label>Allergènes :</label><br>
+                <label class="label">Allergènes :</label><br>
                 @foreach($allergenes as $allergene)
                     <label>
                         <input type="checkbox" name="allergenes[]" value="{{ $allergene->id }}" {{ in_array($allergene->id, old('allergenes', [])) ? 'checked' : '' }}>
@@ -50,7 +50,7 @@
             </div>
 
             <div>
-                <label for="prix">Prix :</label>
+                <label class="label" for="prix">Prix :</label>
                 <input type="number" step="0.01" name="prix" id="prix" required value="{{ old('prix') }}">
                 @error('prix')
                     <span class="error">{{ $message }}</span>
@@ -58,7 +58,7 @@
             </div>
 
             <div>
-                <label for="info_supp">Informations supplémentaires :</label>
+                <label class="label" for="info_supp">Informations supplémentaires :</label>
                 <input type="text" name="info_supp" id="info_supp" required value="{{ old('info_supp') }}">
                 @error('info_supp')
                     <span class="error">{{ $message }}</span>

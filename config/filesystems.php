@@ -79,6 +79,10 @@ return [
         public_path('storage/vins') => storage_path('app/public/vins'),
         public_path('storage/vins/portraits') => storage_path('app/public/vins/portraits'),
         public_path('storage/vins/thumbnails') => storage_path('app/public/vins/thumbnails'),
+
+        public_path('storage/entrees') => storage_path('app/public/entrees'),
+        public_path('storage/entrees/portraits') => storage_path('app/public/entrees/portraits'),
+        public_path('storage/entrees/thumbnails') => storage_path('app/public/entrees/thumbnails'),
     ],
 
 ];
