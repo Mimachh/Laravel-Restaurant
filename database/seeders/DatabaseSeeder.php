@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AllergeneSeeder::class);
         $this->call(MenuSeeder::class);
         $this->call(FormuleSeeder::class);
+        $this->call(VinSeeder::class);
+        $this->call(EntreeSeeder::class);
     }
 }

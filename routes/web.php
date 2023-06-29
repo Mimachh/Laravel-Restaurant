@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\PlatController;
 use App\Http\Controllers\Admin\AllergeneController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\FormuleController;
+use App\Http\Controllers\Admin\VinController;
+use App\Http\Controllers\Admin\EntreeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +145,48 @@ Route::group(["middleware" => ['auth', 'role:1,2,3'], "prefix" => "admin", "as" 
 
         // Restore
         Route::post('/restore-multiple', [FormuleController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // VINS
+    Route::group(["prefix" => "vins", "as" => "vins."], function() {
+        Route::get('/', [VinController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [VinController::class, 'create'])->name('create');
+        Route::post('/', [VinController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [VinController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [VinController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [VinController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [VinController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [VinController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [VinController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // ENTREES
+    Route::group(["prefix" => "entrees", "as" => "entrees."], function() {
+        Route::get('/', [EntreeController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [EntreeController::class, 'create'])->name('create');
+        Route::post('/', [EntreeController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [EntreeController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [EntreeController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [EntreeController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [EntreeController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [EntreeController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [EntreeController::class, 'restoreMultiple'])->name('restore-multiple');
     });
 
 });

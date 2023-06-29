@@ -23,6 +23,13 @@
                     @endcan
 
                     <br>
+
+                    @can('viewEntreesInAdmin')
+                    <li><a href="{{ route('admin.entrees.index') }}"
+                    class="{{ setMenuActive('admin.entrees.') }}"
+                    >Entrées</a></li>
+                    @endcan
+
                     @can('viewPlatInAdmin')
                     <li><a href="{{ route('admin.plats.index') }}"
                     class="{{ setMenuActive('admin.plats.') }}"
@@ -46,6 +53,12 @@
                     <li><a href="{{ route('admin.allergenes.index') }}"
                     class="{{ setMenuActive('admin.allergenes.') }}"
                     >Allergènes</a></li>
+                    @endcan
+
+                    @can('viewVinsInAdmin')
+                    <li><a href="{{ route('admin.vins.index') }}"
+                    class="{{ setMenuActive('admin.vins.') }}"
+                    >Vins</a></li>
                     @endcan
 
                     <br>

@@ -25,33 +25,38 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-  
-        // Gate::define('viewUserInAdmin', fn(User $user) => $user->roles->contains('id', 1));
+        // SUPER ADMIN
         Gate::define('viewUserInAdmin', function (User $user) {
-            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
             return $user->hasRole('Super Admin');
         });
 
+        // CARTE / AUTEUR
         Gate::define('viewMenuInAdmin', function (User $user) {
-            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
 
         Gate::define('viewPlatInAdmin', function (User $user) {
-            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
-
+        
         Gate::define('viewAllergenesInAdmin', function (User $user) {
-            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
         
         Gate::define('viewFormulesInAdmin', function (User $user) {
-            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
 
+        Gate::define('viewVinsInAdmin', function (User $user) {
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
+        });
+
+        Gate::define('viewEntreesInAdmin', function (User $user) {
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
+        });
+
+
+        // GESTION RESTAURANT
         Gate::define('viewHorairesInAdmin', function (User $user) {
             // return $user->roles->contains('id', 2) || $user->roles->contains('id', 4);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Gestionnaire de réservation']);
