@@ -11,7 +11,7 @@ export default defineConfig({
                 'resources/js/public/index.js',
                 'resources/js/public/modules/login-register.js',
 
-                'resources/js/admin.js/dashboard.js'
+                'resources/js/admin/dashboard.js',
             ],
             refresh: true,
         }),

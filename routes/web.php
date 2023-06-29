@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PlatController;
+use App\Http\Controllers\Admin\AllergeneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,27 @@ Route::group(["middleware" => ['auth', 'role:1,2,3'], "prefix" => "admin", "as" 
 
         // Restore
         Route::post('/restore-multiple', [PlatController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // ALLERGENES
+    Route::group(["prefix" => "allergenes", "as" => "allergenes."], function() {
+        Route::get('/', [AllergeneController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [AllergeneController::class, 'create'])->name('create');
+        Route::post('/', [AllergeneController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [AllergeneController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [AllergeneController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [AllergeneController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [AllergeneController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [AllergeneController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [AllergeneController::class, 'restoreMultiple'])->name('restore-multiple');
     });
 
 });

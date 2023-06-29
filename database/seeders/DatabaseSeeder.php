@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(PlatsTableSeeder::class);
+        $this->call(AllergeneSeeder::class);
+        $this->call(MenuSeeder::class);
     }
 }

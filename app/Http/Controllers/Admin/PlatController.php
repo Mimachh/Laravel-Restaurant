@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Plat;
+use App\Models\Allergene;
+
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class PlatController extends Controller
 {
@@ -19,7 +24,7 @@ class PlatController extends Controller
     {
         $this->authorize('viewAny', Plat::class);
 
-        $plats = Plat::all();
+        $plats = Plat::with('allergenes')->get();
 
         $trashedPlats = Plat::onlyTrashed()->get();
 
@@ -32,8 +37,9 @@ class PlatController extends Controller
     public function create()
     {
         $this->authorize('create', Plat::class);
+        $allergenes = Allergene::all();
 
-        return view('admin.plats.create');
+        return view('admin.plats.create', compact('allergenes'));
     }
 
     /**
@@ -49,6 +55,7 @@ class PlatController extends Controller
             'description' => 'required',
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'required',
+            'allergenes' => 'array'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'description.required' => 'Le champ "Description" est requis.',
@@ -56,6 +63,7 @@ class PlatController extends Controller
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
             'info_supp.required' => 'Le champ "Informations supplémentaires" est requis.',
+            'allergenes.array' => 'Les allergènes doivent être de type tableau.'
         ]);
 
         // Créer le plat en utilisant les données validées
@@ -64,18 +72,40 @@ class PlatController extends Controller
         $plat->description = $validatedData['description'];
         $plat->prix = $validatedData['prix'];
         $plat->info_supp = $validatedData['info_supp'];
+       
+
+        // Enregistrement de la photo
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+
+            // Générer un nom unique pour la photo
+            $photoName = uniqid('plat_') . '.' . $photo->getClientOriginalExtension();
+
+            // Redimensionner et enregistrer l'image portrait
+            $portraitImage = Image::make($photo)->fit(16 * 100, 9 * 100, function ($constraint) {
+                $constraint->upsize();
+            });
+            $portraitImage->save(public_path('storage/plats/portraits/' . $photoName));
+
+            // Redimensionner et enregistrer la miniature (thumbnail) de l'image
+            $thumbnailImage = Image::make($photo)->fit(300, 300);
+            $thumbnailImage->save(public_path('storage/plats/thumbnails/' . $photoName));
+
+            // Enregistrer les noms des fichiers dans la base de données
+            $plat->photo_portrait = $photoName;
+            $plat->photo_thumbnail = $photoName;
+        }
+  
         $plat->save();
+
+        $allergenes = $request->input('allergenes');
+        if(!empty($allergenes)) {
+            $plat->allergenes()->attach($allergenes);
+        }
 
         return redirect()->route('admin.plats.index')->with('success', 'Le plat a été créé avec succès.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -85,7 +115,10 @@ class PlatController extends Controller
         $this->authorize('update', Plat::class);
 
         $plat = Plat::findOrFail($id);
-        return view('admin.plats.edit', compact('plat'));
+        $allergenes = Allergene::all();
+        $platAllergenes = $plat->allergenes->pluck('id')->toArray();
+
+        return view('admin.plats.edit', compact('plat', 'allergenes', 'platAllergenes'));
     }
 
     /**
@@ -100,6 +133,7 @@ class PlatController extends Controller
             'description' => 'required',
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'required',
+            'allergenes' => 'array',
         ], [
             'nom.required' => 'Le nom du plat est obligatoire.',
             'description.required' => 'La description du plat est obligatoire.',
@@ -107,6 +141,7 @@ class PlatController extends Controller
             'prix.numeric' => 'Le prix du plat doit être un nombre.',
             'prix.min' => 'Le prix du plat ne peut pas être négatif.',
             'info_supp.required' => 'Les informations supplémentaires du plat sont obligatoires.',
+            'allergenes.array' => 'Les allergènes doivent être sélectionnés sous forme de tableau.',
         ]);
     
         $plat = Plat::findOrFail($id);
@@ -114,7 +149,58 @@ class PlatController extends Controller
         $plat->description = $request->description;
         $plat->prix = $request->prix;
         $plat->info_supp = $request->info_supp;
+
+            // Gérer l'image
+        if ($request->hasFile('photo')) {
+            // Supprimer les anciens fichiers d'image s'ils existent
+            if($plat->photo_portrait && $plat->photo_thumbnail) {
+                $portraitPath = public_path('storage/plats/portraits/' . $plat->photo_portrait);
+                $thumbnailPath = public_path('storage/plats/thumbnails/' . $plat->photo_thumbnail);
+    
+                if (file_exists($portraitPath)) {
+                    unlink($portraitPath);
+                }
+    
+                if (file_exists($thumbnailPath)) {
+                    unlink($thumbnailPath);
+                }
+            }
+
+            $photo = $request->file('photo');
+            $photoName = uniqid('plat_') . '.' . $photo->getClientOriginalExtension();
+
+            // Redimensionner et enregistrer l'image portrait
+            $portraitImage = Image::make($photo)->fit(16 * 100, 9 * 100, function ($constraint) {
+                $constraint->upsize();
+            });
+            $portraitImage->save(public_path('storage/plats/portraits/' . $photoName));
+
+            // Redimensionner et enregistrer la miniature (thumbnail) de l'image
+            $thumbnailImage = Image::make($photo)->fit(300, 300);
+            $thumbnailImage->save(public_path('storage/plats/thumbnails/' . $photoName));
+
+            // Mettre à jour les noms des fichiers dans la base de données
+            $plat->photo_portrait = $photoName;
+            $plat->photo_thumbnail = $photoName;
+        } elseif ($request->has('supprimer_photo')) {
+            // Supprimer les fichiers d'image existants
+            Storage::delete([
+                'plats/portraits/' . $plat->photo_portrait,
+                'plats/thumbnails/' . $plat->photo_thumbnail
+            ]);
+
+            // Effacer les noms des fichiers dans la base de données
+            $plat->photo_portrait = null;
+            $plat->photo_thumbnail = null;
+        }
+
         $plat->save();
+
+        if ($request->filled('allergenes')) {
+            $plat->allergenes()->sync($request->input('allergenes'));
+        } else {
+            $plat->allergenes()->detach();
+        }
     
         return redirect()->route('admin.plats.index')->with('success', 'Le plat a été modifié avec succès.');
     }
@@ -153,17 +239,41 @@ class PlatController extends Controller
 
     public function forceDestroyMultiple(Request $request)
     {
+  
         $this->authorize('forceDelete', Plat::class);
 
         $platIds = json_decode($request->input('selectedItems', '[]'), true);
-
+        
         if (!is_array($platIds)) {
             $platIds = [$platIds];
         }
-
+        $platIds = array_map('intval', $platIds);
         $count = count($platIds);
-  
+        // dd($count);
         if ($count > 0) {
+            // $plats = Plat::whereIn('id', $platIds)->get();
+            // dd(Plat::withTrashed()->whereIn('id', $platIds)->get());
+            $platsWithTrashed = Plat::withTrashed()->whereIn('id', $platIds)->get();
+            foreach ($platsWithTrashed as $plat) {
+                // Supprimer les fichiers d'image du plat
+                // Storage::delete([
+                //     'plats/portraits/' . $plat->photo_portrait,
+                //     'plats/thumbnails/' . $plat->photo_thumbnail
+                // ]);
+
+                $portraitPath = public_path('storage/plats/portraits/' . $plat->photo_portrait);
+                $thumbnailPath = public_path('storage/plats/thumbnails/' . $plat->photo_thumbnail);
+    
+                if ($portraitPath && File::exists($portraitPath)) {
+                    File::delete($portraitPath);
+                }
+                
+                if ($thumbnailPath && File::exists($thumbnailPath)) {
+                    File::delete($thumbnailPath);
+                }
+
+                // $plat->forceDelete();
+            }
             Plat::whereIn('id', $platIds)->forceDelete();
         
             return redirect()->route('admin.plats.index')

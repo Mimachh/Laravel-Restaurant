@@ -17,6 +17,7 @@
             <tr>
                 <th>#</th>
                 <th>Nom</th>
+                <th>Allergènes</th>
                 <th>Prix</th>
                 <th>Action</th>
                 <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
@@ -27,6 +28,7 @@
                 <tr>
                     <td>{{ $plat->id }}</td>
                     <td>{{ $plat->nom }}</td>
+                    <td>{{ $plat->allAllergenesNames }}</td>
                     <td>{{ $plat->prix }}</td>
                     <td>
                         <a href="{{ route('admin.plats.edit', $plat->id) }}" class="btn-edit">Éditer</a>

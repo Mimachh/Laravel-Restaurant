@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plats', function (Blueprint $table) {
+        Schema::create('allergenes', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('photo_portrait')->nullable();
-            $table->string('photo_thumbnail')->nullable();
-            $table->text('description')->nullable();
-            $table->decimal('prix', 8, 2);
-            $table->string('info_supp')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plats');
+        Schema::dropIfExists('allergenes');
     }
 };

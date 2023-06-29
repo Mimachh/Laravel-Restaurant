@@ -41,6 +41,11 @@ class AuthServiceProvider extends ServiceProvider
             // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
+
+        Gate::define('viewAllergenesInAdmin', function (User $user) {
+            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
+        });
         
         Gate::define('viewFormulesInAdmin', function (User $user) {
             // return $user->roles->contains('id', 2) || $user->roles->contains('id', 3);

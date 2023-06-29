@@ -18,8 +18,12 @@
 - MDP oublié
 - Auth 2 facteurs
 
+
+## Vérifier : 
+- si les photos se suppriment toutes bien, quand il y en a
+- voir dans le edit si la suppression fonctionne aussi
 ## Pour le resto
-- Créer la table allergenes et intégrer aux plats
+- Photo pour les plats
 
 - Formules
 - Pivot formule plats

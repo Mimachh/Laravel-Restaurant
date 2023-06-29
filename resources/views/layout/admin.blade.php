@@ -22,6 +22,7 @@
                     >Utilisateurs</a></li>
                     @endcan
 
+                    <br>
                     @can('viewPlatInAdmin')
                     <li><a href="{{ route('admin.plats.index') }}"
                     class="{{ setMenuActive('admin.plats.index') }}"
@@ -37,6 +38,13 @@
                     <li><a href="">Formules</a></li>
                     @endcan
 
+                    @can('viewAllergenesInAdmin')
+                    <li><a href="{{ route('admin.allergenes.index') }}"
+                    class="{{ setMenuActive('admin.allergenes.index') }}"
+                    >Allergènes</a></li>
+                    @endcan
+
+                    <br>
                     @can('viewHorairesInAdmin')
                     <li><a href="">Horaires</a></li>
                     @endcan

@@ -17,14 +17,16 @@ import '../../css/admin/users.scss';
 
 // USER SELECTION CHECKBOX
 
-const selectAllCheckbox = document.getElementById('select-all');
-const userCheckboxes = document.querySelectorAll('input[name="selected_users[]"]');
+// const selectAllCheckbox = document.getElementById('select-all');
+// const userCheckboxes = document.querySelectorAll('input[name="selected_users[]"]');
 
-selectAllCheckbox.addEventListener('change', function () {
-    const isChecked = selectAllCheckbox.checked;
+// selectAllCheckbox.addEventListener('change', function () {
+//     const isChecked = selectAllCheckbox.checked;
 
-    userCheckboxes.forEach(function (checkbox) {
-        checkbox.checked = isChecked;
-    });
-});
+//     userCheckboxes.forEach(function (checkbox) {
+//         checkbox.checked = isChecked;
+//     });
+// });
+
+
 
