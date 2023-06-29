@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\FormuleController;
 use App\Http\Controllers\Admin\VinController;
 use App\Http\Controllers\Admin\EntreeController;
+use App\Http\Controllers\Admin\DessertController;
 
 /*
 |--------------------------------------------------------------------------
@@ -187,6 +188,27 @@ Route::group(["middleware" => ['auth', 'role:1,2,3'], "prefix" => "admin", "as" 
 
         // Restore
         Route::post('/restore-multiple', [EntreeController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // DESSERTS
+    Route::group(["prefix" => "desserts", "as" => "desserts."], function() {
+        Route::get('/', [DessertController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [DessertController::class, 'create'])->name('create');
+        Route::post('/', [DessertController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [DessertController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [DessertController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [DessertController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [DessertController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [DessertController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [DessertController::class, 'restoreMultiple'])->name('restore-multiple');
     });
 
 });

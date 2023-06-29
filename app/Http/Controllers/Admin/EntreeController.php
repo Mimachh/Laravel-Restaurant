@@ -26,7 +26,7 @@ class EntreeController extends Controller
 
     public function create()
     {
-        // $this->authorize('create', Entree::class);
+        $this->authorize('create', Entree::class);
         $allergenes = Allergene::all();
 
         return view('admin.entrees.create', compact('allergenes'));
@@ -67,7 +67,7 @@ class EntreeController extends Controller
             $photo = $request->file('photo');
 
             // Générer un nom unique pour la photo
-            $photoName = uniqid('entree') . '.' . $photo->getClientOriginalExtension();
+            $photoName = uniqid('entree_') . '.' . $photo->getClientOriginalExtension();
 
             // Redimensionner et enregistrer l'image portrait
             $portraitImage = Image::make($photo)->fit(16 * 100, 9 * 100, function ($constraint) {
@@ -123,10 +123,10 @@ class EntreeController extends Controller
             'info_supp' => 'nullable',
             'allergenes' => 'array',
         ], [
-            'nom.required' => 'Le nom du plat est obligatoire.',
-            'prix.required' => 'Le prix du plat est obligatoire.',
-            'prix.numeric' => 'Le prix du plat doit être un nombre.',
-            'prix.min' => 'Le prix du plat ne peut pas être négatif.',
+            'nom.required' => 'Le nom de l\'entrée est obligatoire.',
+            'prix.required' => 'Le prix de l\'entrée est obligatoire.',
+            'prix.numeric' => 'Le prix de l\'entrée doit être un nombre.',
+            'prix.min' => 'Le prix de l\'entrée ne peut pas être négatif.',
             'allergenes.array' => 'Les allergènes doivent être sélectionnés sous forme de tableau.',
         ]);
     
@@ -199,7 +199,7 @@ class EntreeController extends Controller
 
     public function trash()
     {
-        // $this->authorize('viewInTrash', Entree::class);
+        $this->authorize('viewInTrash', Entree::class);
 
         $trashedEntrees = Entree::onlyTrashed()->get();
 

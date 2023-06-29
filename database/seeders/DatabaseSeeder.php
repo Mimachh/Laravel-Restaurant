@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FormuleSeeder::class);
         $this->call(VinSeeder::class);
         $this->call(EntreeSeeder::class);
+        $this->call(DessertSeeder::class);
     }
 }

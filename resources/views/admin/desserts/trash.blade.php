@@ -20,25 +20,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($trashedEntrees as $entree)
+            @foreach($trashedDesserts as $dessert)
                 <tr>
-                    <td>{{ $entree->id }}</td>
-                    <td>{{ $entree->nom }}</td>
-                    <td>{{ $entree->prix }}</td>
+                    <td>{{ $dessert->id }}</td>
+                    <td>{{ $dessert->nom }}</td>
+                    <td>{{ $dessert->prix }}</td>
                     <td class="checkbox-column">
-                        <input type="checkbox" name="selected_items[]" value="{{ $entree->id }}" class="select-checkbox">
+                        <input type="checkbox" name="selected_items[]" value="{{ $dessert->id }}" class="select-checkbox">
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    <form id="restoreSelectedForm" action="{{ route('admin.entrees.restore-multiple') }}" method="POST" style="display: none;">
+    <form id="restoreSelectedForm" action="{{ route('admin.desserts.restore-multiple') }}" method="POST" style="display: none;">
         @csrf
         <input type="hidden" name="selectedItems" id="selectedRestoreCheckboxesInput">
     </form>
 
-    <form id="deleteSelectedForm" action="{{ route('admin.entrees.force-destroy-multiple') }}" method="POST" style="display: none;">
+    <form id="deleteSelectedForm" action="{{ route('admin.desserts.force-destroy-multiple') }}" method="POST" style="display: none;">
         @csrf
         @method('DELETE')
         <input type="hidden" name="selectedItems" id="selectedDeleteCheckboxesInput">

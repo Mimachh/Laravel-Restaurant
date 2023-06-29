@@ -36,6 +36,11 @@
                     >Plats</a></li>
                     @endcan
 
+                    @can('viewDessertsInAdmin')
+                    <li><a href="{{ route('admin.desserts.index') }}"
+                    class="{{ setMenuActive('admin.desserts.') }}"
+                    >Desserts</a></li>
+                    @endcan
 
                     @can('viewMenuInAdmin')
                     <li><a href="{{ route('admin.menus.index') }}"

@@ -44,10 +44,6 @@
 - Boissons non alco
 
 
-- Entrées : je me suis arrete à l'affichage de l'index
-
-
-- Desserts
 
 
 + policy + gates + soft delete + force delete + restore
@@ -55,3 +51,5 @@
 
 
 ## Mettre des slugs partouz
+
+## MAILING

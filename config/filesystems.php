@@ -83,6 +83,10 @@ return [
         public_path('storage/entrees') => storage_path('app/public/entrees'),
         public_path('storage/entrees/portraits') => storage_path('app/public/entrees/portraits'),
         public_path('storage/entrees/thumbnails') => storage_path('app/public/entrees/thumbnails'),
+
+        public_path('storage/desserts') => storage_path('app/public/desserts'),
+        public_path('storage/desserts/portraits') => storage_path('app/public/desserts/portraits'),
+        public_path('storage/desserts/thumbnails') => storage_path('app/public/desserts/thumbnails'),
     ],
 
 ];
