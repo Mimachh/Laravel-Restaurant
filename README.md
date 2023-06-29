@@ -23,27 +23,35 @@
 - si les photos se suppriment toutes bien, quand il y en a
 - voir dans le edit si la suppression fonctionne aussi
 ## Pour le resto
-- Photo pour les plats
 
-- Formules
+
 - Pivot formule plats
-
-- Menus
-- Pivot menu formule
-
-- Cartes des vins
+- Pivot entrées formule
+- Pivot desserts formule
 - Pivot vin formule
 
-- Boissons alco
+- Pivot boisson non alco formule
 - Pivot boisson alco formule
 
+- Pivot menu formule
+
+
+
+
+
+- Cartes des vins
+
+
+- Boissons alco
+
+
 - Boissons non alco
-- Pivot boisson non alco formule
+
 
 - Entrées
-- Pivot entrées formule
+
 
 - Desserts
-- Pivot desserts formule
 
-+ policy + gates + allergenes + soft delete + force delete + restore
+
++ policy + gates + soft delete + force delete + restore

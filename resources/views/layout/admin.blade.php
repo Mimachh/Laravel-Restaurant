@@ -25,22 +25,26 @@
                     <br>
                     @can('viewPlatInAdmin')
                     <li><a href="{{ route('admin.plats.index') }}"
-                    class="{{ setMenuActive('admin.plats.index') }}"
+                    class="{{ setMenuActive('admin.plats.') }}"
                     >Plats</a></li>
                     @endcan
 
 
                     @can('viewMenuInAdmin')
-                    <li><a href="">Menus</a></li>
+                    <li><a href="{{ route('admin.menus.index') }}"
+                    class="{{ setMenuActive('admin.menus.') }}"
+                    >Menus</a></li>
                     @endcan
 
                     @can('viewFormulesInAdmin')
-                    <li><a href="">Formules</a></li>
+                    <li><a href="{{ route('admin.formules.index') }}"
+                    class="{{ setMenuActive('admin.formules.') }}"
+                    >Formules</a></li>
                     @endcan
 
                     @can('viewAllergenesInAdmin')
                     <li><a href="{{ route('admin.allergenes.index') }}"
-                    class="{{ setMenuActive('admin.allergenes.index') }}"
+                    class="{{ setMenuActive('admin.allergenes.') }}"
                     >Allergènes</a></li>
                     @endcan
 

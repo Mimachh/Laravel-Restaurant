@@ -184,10 +184,16 @@ class PlatController extends Controller
             $plat->photo_thumbnail = $photoName;
         } elseif ($request->has('supprimer_photo')) {
             // Supprimer les fichiers d'image existants
-            Storage::delete([
-                'plats/portraits/' . $plat->photo_portrait,
-                'plats/thumbnails/' . $plat->photo_thumbnail
-            ]);
+            $portraitPath = public_path('storage/plats/portraits/' . $plat->photo_portrait);
+            $thumbnailPath = public_path('storage/plats/thumbnails/' . $plat->photo_thumbnail);
+
+            if (file_exists($portraitPath)) {
+                unlink($portraitPath);
+            }
+
+            if (file_exists($thumbnailPath)) {
+                unlink($thumbnailPath);
+            }
 
             // Effacer les noms des fichiers dans la base de données
             $plat->photo_portrait = null;
@@ -303,6 +309,6 @@ class PlatController extends Controller
                 ->with('success', 'Plat(s) restauré(s) avec succès.');
         }
 
-        return redirect()->back()->with('error', 'Aucun plat sélectionné.');;
+        return redirect()->back()->with('error', 'Aucun plat sélectionné.');
     }
 }

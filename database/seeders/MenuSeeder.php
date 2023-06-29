@@ -16,28 +16,24 @@ class MenuSeeder extends Seeder
         Menu::create([
             'nom' => 'Plat 1',
             'description' => 'Description du plat 1',
-            'prix' => 12.99,
             'info_supp' => 'Informations supplémentaires du plat 1',
         ]);
 
         Menu::create([
             'nom' => 'Plat 2',
             'description' => 'Description du plat 2',
-            'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du plat 2',
         ]);
 
         Menu::create([
             'nom' => 'Plat 3',
             'description' => 'Description du plat 3',
-            'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du plat 3',
         ]);
 
         Menu::create([
             'nom' => 'Plat 4',
             'description' => 'Description du plat 4',
-            'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du plat 4',
         ]);
     }

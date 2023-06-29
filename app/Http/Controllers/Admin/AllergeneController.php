@@ -11,6 +11,8 @@ class AllergeneController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Allergene::class);
+
         $allergenes = Allergene::all();
         $trashedAllergenes = Allergene::onlyTrashed()->get();
         return view('admin.allergenes.index', compact('allergenes', 'trashedAllergenes'));
@@ -19,12 +21,16 @@ class AllergeneController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Allergene::class);
+
         return view('admin.allergenes.create');
     }
 
 
     public function store(Request $request)
     {
+        $this->authorize('create', Allergene::class);
+
         $request->validate([
             'nom' => 'required|string|max:255|unique:allergenes',
         ]);
@@ -36,12 +42,16 @@ class AllergeneController extends Controller
 
     public function edit(string $id)
     {
+        $this->authorize('update', Allergene::class);
+
         $allergene = Allergene::findOrFail($id);
         return view('admin.allergenes.edit', compact('allergene'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Allergene::class);
+
         $request->validate([
             'nom' => 'required|string|max:255',
         ]);
@@ -55,7 +65,7 @@ class AllergeneController extends Controller
 
     public function trash()
     {
-    
+        $this->authorize('viewInTrash', Allergene::class);
 
         $trashedAllergenes = Allergene::onlyTrashed()->get();
 
@@ -64,6 +74,7 @@ class AllergeneController extends Controller
 
     public function destroyMultiple(Request $request)
     {
+        $this->authorize('softDelete', Allergene::class);
 
         $allergeneIds = json_decode($request->input('selectedAllergenes', '[]'), true);
        
@@ -86,6 +97,7 @@ class AllergeneController extends Controller
 
     public function forceDestroyMultiple(Request $request)
     {
+        $this->authorize('forceDelete', Allergene::class);
 
         $allergeneIds = json_decode($request->input('selectedItems', '[]'), true);
 
@@ -108,7 +120,7 @@ class AllergeneController extends Controller
 
     public function restoreMultiple(Request $request)
     {
-
+        $this->authorize('restore', Allergene::class);
 
         $allergeneIds = json_decode($request->input('selectedItems'));
 

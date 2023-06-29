@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PlatController;
 use App\Http\Controllers\Admin\AllergeneController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\FormuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +101,48 @@ Route::group(["middleware" => ['auth', 'role:1,2,3'], "prefix" => "admin", "as" 
 
         // Restore
         Route::post('/restore-multiple', [AllergeneController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // MENUS
+    Route::group(["prefix" => "menus", "as" => "menus."], function() {
+        Route::get('/', [MenuController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [MenuController::class, 'create'])->name('create');
+        Route::post('/', [MenuController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [MenuController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [MenuController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [MenuController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [MenuController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [MenuController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [MenuController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // FORMULES
+    Route::group(["prefix" => "formules", "as" => "formules."], function() {
+        Route::get('/', [FormuleController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [FormuleController::class, 'create'])->name('create');
+        Route::post('/', [FormuleController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [FormuleController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [FormuleController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [FormuleController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [FormuleController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [FormuleController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [FormuleController::class, 'restoreMultiple'])->name('restore-multiple');
     });
 
 });

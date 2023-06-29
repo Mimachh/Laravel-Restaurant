@@ -18,6 +18,12 @@
   .admin-form-container label {
     display: block;
     margin-bottom: 5px;
+
+  }
+
+  .label {
+    font-size: 1rem;
+    font-weight: 500;
   }
   
   .admin-form-container input[type="text"],
@@ -55,3 +61,10 @@
   height: auto;
   display: none;
 }
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+

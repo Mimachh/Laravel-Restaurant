@@ -9,7 +9,7 @@
         @method('PUT')
 
         <div>
-            <label for="nom">Nom :</label>
+            <label for="nom" class="label">Nom :</label>
             <input type="text" name="nom" id="nom" required value="{{ old('nom', $plat->nom) }}">
             @error('nom')
                 <span class="error">{{ $message }}</span>
@@ -17,7 +17,7 @@
         </div>
 
         <div>
-            <label for="photo">Photo :</label>
+            <label for="photo" class="label">Photo :</label>
             <div>
                 @if($plat->photo_portrait)
                     <img src="{{ asset('storage/plats/portraits/' . $plat->photo_portrait) }}" alt="Preview" id="preview" style="display: block; width: 300px; height: auto; margin-bottom: 10px;">
@@ -31,13 +31,13 @@
             @enderror
         </div>
 
-        <div>
-            <label for="supprimer_photo">Supprimer l'image :</label>
+        <div class="checkbox-row">
+            <label for="supprimer_photo" class="label">Supprimer l'image : (à ne cocher que si ne souhaitez plus afficher de photo)</label>
             <input type="checkbox" name="supprimer_photo" id="supprimer_photo">
         </div>
 
         <div>
-            <label for="description">Description :</label>
+            <label for="description" class="label">Description :</label>
             <textarea name="description" id="description" cols="30" rows="10">{{ old('description', $plat->description) }}</textarea>
             @error('description')
                 <span class="error">{{ $message }}</span>
@@ -45,10 +45,10 @@
         </div>
 
         <div>
-            <label>Allergènes</label> <br>
+            <label class="label">Allergènes</label> <br>
             <div>
                 @foreach($allergenes as $allergene)
-                    <div class="form-check">
+                    <div class="form-check checkbox-row">
                         <input class="form-check-input" type="checkbox" name="allergenes[]" id="allergene{{ $allergene->id }}" value="{{ $allergene->id }}" {{ in_array($allergene->id, $platAllergenes) ? 'checked' : '' }}>
                         <label class="form-check-label" for="allergene{{ $allergene->id }}">{{ $allergene->nom }}</label>
                     </div>
@@ -60,7 +60,7 @@
         </div>
 
         <div>
-            <label for="prix">Prix :</label>
+            <label for="prix" class="label">Prix :</label>
             <input type="number" step="0.01" name="prix" id="prix" required value="{{ old('prix', $plat->prix) }}">
             @error('prix')
                 <span class="error">{{ $message }}</span>
@@ -68,7 +68,7 @@
         </div>
 
         <div>
-            <label for="info_supp">Informations supplémentaires :</label>
+            <label for="info_supp" class="label">Informations supplémentaires :</label>
             <input type="text" name="info_supp" id="info_supp" required value="{{ old('info_supp', $plat->info_supp) }}">
             @error('info_supp')
                 <span class="error">{{ $message }}</span>
