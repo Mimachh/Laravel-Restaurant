@@ -26,10 +26,12 @@
   
 .sidebar li {
     padding: 10px;
+
 }
   
 .sidebar li a {
     font-size: 0.8rem;
+    padding-left: 0.3rem;
     font-weight: normal;
     text-decoration: none;
     color: var(--admin-light);
@@ -65,4 +67,20 @@
     }
 }
 
+.menu-button-carte {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    color: var(--admin-light);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    border-radius: var(--border-radius);
+    width: 100%;
+    
+}
 
+.open-links-div-carte {
+    color: var(--admin-dark);
+    background-color: var(--admin-highlight);
+}

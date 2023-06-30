@@ -50,6 +50,21 @@ function setMenuActive($route) {
 
 }
 
+function setMenuOpen($routes, $classe) {
+
+    $routeActuelle = request()->route()->getName();
+
+    foreach ($routes as $route) {
+        if (str_contains($routeActuelle, $route)) {
+            return $classe;
+        }
+    }
+
+    return "";
+
+    // Ensuite il suffit de mettre dans la class du menu correspondant {{ setMenuClass('admin.utilisateurs.', 'menu-open') }} ou encore {{ setMenuClass('admin.utilisateurs.', 'active') }}
+}
+
 // Fonction qui va servir notamment pour le setMenuOpen, à vérifier par exemple que le route name contient un prefix par exemple
 function contains($container, $contenu) {
     return Str::contains($container, $contenu);

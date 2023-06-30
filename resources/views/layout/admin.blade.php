@@ -23,62 +23,90 @@
                     @endcan
 
                     <br>
-
                     @can('viewEntreesInAdmin')
-                    <li><a href="{{ route('admin.entrees.index') }}"
-                    class="{{ setMenuActive('admin.entrees.') }}"
-                    >Entrées</a></li>
+                    <li><span 
+                    class="menu-button-carte
+                    {{ 
+                        setMenuOpen([
+                            'admin.entrees.',
+                            'admin.plats.',
+                            'admin.desserts.',
+                            'admin.menus.',
+                            'admin.formules.',
+                            'admin.allergenes.',
+                            'admin.vins.',
+                            'admin.alcools.',
+                            'admin.softs.'
+                        ], 'open-links-div-carte') 
+                    }}
+                    "
+                    onclick="toggleMenuLinksCarte()"
+                    ><span>Carte</span>
+                    <span class="toggleSpanPlusCarte">+</span>
+                    <span class="toggleSpanMinusCarte">-</span>
+                    </span>
+                    
+                    </li>
                     @endcan
 
-                    @can('viewPlatInAdmin')
-                    <li><a href="{{ route('admin.plats.index') }}"
-                    class="{{ setMenuActive('admin.plats.') }}"
-                    >Plats</a></li>
-                    @endcan
+                    <div class="menu-links-container" id="menuLinksContainerCarte">
+                        @can('viewEntreesInAdmin')
+                        <li><a href="{{ route('admin.entrees.index') }}"
+                        class="{{ setMenuActive('admin.entrees.') }}"
+                        >Entrées</a></li>
+                        @endcan
 
-                    @can('viewDessertsInAdmin')
-                    <li><a href="{{ route('admin.desserts.index') }}"
-                    class="{{ setMenuActive('admin.desserts.') }}"
-                    >Desserts</a></li>
-                    @endcan
+                        @can('viewPlatInAdmin')
+                        <li><a href="{{ route('admin.plats.index') }}"
+                        class="{{ setMenuActive('admin.plats.') }}"
+                        >Plats</a></li>
+                        @endcan
 
-                    @can('viewMenuInAdmin')
-                    <li><a href="{{ route('admin.menus.index') }}"
-                    class="{{ setMenuActive('admin.menus.') }}"
-                    >Menus</a></li>
-                    @endcan
+                        @can('viewDessertsInAdmin')
+                        <li><a href="{{ route('admin.desserts.index') }}"
+                        class="{{ setMenuActive('admin.desserts.') }}"
+                        >Desserts</a></li>
+                        @endcan
 
-                    @can('viewFormulesInAdmin')
-                    <li><a href="{{ route('admin.formules.index') }}"
-                    class="{{ setMenuActive('admin.formules.') }}"
-                    >Formules</a></li>
-                    @endcan
+                        @can('viewMenuInAdmin')
+                        <li><a href="{{ route('admin.menus.index') }}"
+                        class="{{ setMenuActive('admin.menus.') }}"
+                        >Menus</a></li>
+                        @endcan
 
-                    @can('viewAllergenesInAdmin')
-                    <li><a href="{{ route('admin.allergenes.index') }}"
-                    class="{{ setMenuActive('admin.allergenes.') }}"
-                    >Allergènes</a></li>
-                    @endcan
+                        @can('viewFormulesInAdmin')
+                        <li><a href="{{ route('admin.formules.index') }}"
+                        class="{{ setMenuActive('admin.formules.') }}"
+                        >Formules</a></li>
+                        @endcan
 
-                    @can('viewVinsInAdmin')
-                    <li><a href="{{ route('admin.vins.index') }}"
-                    class="{{ setMenuActive('admin.vins.') }}"
-                    >Vins</a></li>
-                    @endcan
+                        @can('viewAllergenesInAdmin')
+                        <li><a href="{{ route('admin.allergenes.index') }}"
+                        class="{{ setMenuActive('admin.allergenes.') }}"
+                        >Allergènes</a></li>
+                        @endcan
 
-                    @can('viewAlcoolsInAdmin')
-                    <li><a href="{{ route('admin.alcools.index') }}"
-                    class="{{ setMenuActive('admin.alcools.') }}"
-                    >Boissons alcoolisées</a></li>
-                    @endcan
+                        @can('viewVinsInAdmin')
+                        <li><a href="{{ route('admin.vins.index') }}"
+                        class="{{ setMenuActive('admin.vins.') }}"
+                        >Vins</a></li>
+                        @endcan
 
-                    @can('viewSoftsInAdmin')
-                    <li><a href="{{ route('admin.softs.index') }}"
-                    class="{{ setMenuActive('admin.softs.') }}"
-                    >Boissons non-alcoolisées</a></li>
-                    @endcan
+                        @can('viewAlcoolsInAdmin')
+                        <li><a href="{{ route('admin.alcools.index') }}"
+                        class="{{ setMenuActive('admin.alcools.') }}"
+                        >Boissons alcoolisées</a></li>
+                        @endcan
 
-                    <br>
+                        @can('viewSoftsInAdmin')
+                        <li><a href="{{ route('admin.softs.index') }}"
+                        class="{{ setMenuActive('admin.softs.') }}"
+                        >Boissons non-alcoolisées</a></li>
+                        @endcan
+                        <br>
+                    </div>
+
+                    
                     @can('viewHorairesInAdmin')
                     <li><a href="">Horaires</a></li>
                     @endcan
@@ -120,6 +148,8 @@
     </section>
 
     @vite('resources/js/admin/dashboard.js')
+    
+    <script src="{{ asset('js/admin/toggleMenuLink.js') }}"></script>
     @yield('scripts')
 
     @push('scripts')
