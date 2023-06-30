@@ -66,6 +66,18 @@
                     >Vins</a></li>
                     @endcan
 
+                    @can('viewAlcoolsInAdmin')
+                    <li><a href="{{ route('admin.alcools.index') }}"
+                    class="{{ setMenuActive('admin.alcools.') }}"
+                    >Boissons alcoolisées</a></li>
+                    @endcan
+
+                    @can('viewSoftsInAdmin')
+                    <li><a href="{{ route('admin.softs.index') }}"
+                    class="{{ setMenuActive('admin.softs.') }}"
+                    >Boissons non-alcoolisées</a></li>
+                    @endcan
+
                     <br>
                     @can('viewHorairesInAdmin')
                     <li><a href="">Horaires</a></li>

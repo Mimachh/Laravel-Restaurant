@@ -37,15 +37,6 @@
 
 
 
-
-- Boissons alco
-
-
-- Boissons non alco
-
-
-
-
 + policy + gates + soft delete + force delete + restore
 
 
@@ -53,3 +44,5 @@
 ## Mettre des slugs partouz
 
 ## MAILING
+
+## Système de résa : proposer une validation manuelle à partir d'un certain moment

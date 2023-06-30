@@ -87,6 +87,14 @@ return [
         public_path('storage/desserts') => storage_path('app/public/desserts'),
         public_path('storage/desserts/portraits') => storage_path('app/public/desserts/portraits'),
         public_path('storage/desserts/thumbnails') => storage_path('app/public/desserts/thumbnails'),
+
+        public_path('storage/alcools') => storage_path('app/public/alcools'),
+        public_path('storage/alcools/portraits') => storage_path('app/public/alcools/portraits'),
+        public_path('storage/alcools/thumbnails') => storage_path('app/public/alcools/thumbnails'),
+
+        public_path('storage/softs') => storage_path('app/public/softs'),
+        public_path('storage/softs/portraits') => storage_path('app/public/softs/portraits'),
+        public_path('storage/softs/thumbnails') => storage_path('app/public/softs/thumbnails'),
     ],
 
 ];

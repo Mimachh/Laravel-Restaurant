@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>138</x><y>270</y><w>130</w><h>120</h></coordinates><panel_attributes>Menus
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>200</y><w>130</w><h>120</h></coordinates><panel_attributes>Menus
 --
 - id
 - nom
@@ -10,7 +10,7 @@
 Ajout dans la table pivot depuis cette table
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>478</x><y>260</y><w>130</w><h>120</h></coordinates><panel_attributes>Formules
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>190</y><w>130</w><h>120</h></coordinates><panel_attributes>Formules
 --
 - id
 - nom
@@ -19,18 +19,18 @@ Ajout dans la table pivot depuis cette table
 - prix
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>318</x><y>70</y><w>130</w><h>60</h></coordinates><panel_attributes>MenusFormules
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>0</y><w>130</w><h>60</h></coordinates><panel_attributes>MenusFormules
 --
 - menu_id
 - formule_id
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>238</x><y>90</y><w>100</w><h>200</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>100</x><y>20</y><w>100</w><h>200</h></coordinates><panel_attributes>lt=-
 m1=0..1
 m2=1..n
-a &gt;</panel_attributes><additional_attributes>10;180;10;10;80;10</additional_attributes></element><element><id>Relation</id><coordinates><x>438</x><y>90</y><w>110</w><h>190</h></coordinates><panel_attributes>lt=-
+a &gt;</panel_attributes><additional_attributes>10;180;10;10;80;10</additional_attributes></element><element><id>Relation</id><coordinates><x>300</x><y>20</y><w>110</w><h>190</h></coordinates><panel_attributes>lt=-
 m1=0..1
 m2=1..n
-a &gt;</panel_attributes><additional_attributes>70;170;70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>478</x><y>560</y><w>130</w><h>120</h></coordinates><panel_attributes>Plats
+a &gt;</panel_attributes><additional_attributes>70;170;70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>490</y><w>130</w><h>120</h></coordinates><panel_attributes>Plats
 --
 - id
 - nom
@@ -39,19 +39,19 @@ a &gt;</panel_attributes><additional_attributes>70;170;70;10;10;10</additional_a
 -autre info
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>738</x><y>440</y><w>130</w><h>70</h></coordinates><panel_attributes>FormulesPlats
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>370</y><w>130</w><h>70</h></coordinates><panel_attributes>FormulesPlats
 --
 -formule_id
 - plat_id
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>598</x><y>470</y><w>160</w><h>170</h></coordinates><panel_attributes>lt=-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>400</y><w>160</w><h>170</h></coordinates><panel_attributes>lt=-
 m1=0..1
 m2=1..n
-a &gt;</panel_attributes><additional_attributes>10;140;70;140;70;10;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>598</x><y>320</y><w>160</w><h>170</h></coordinates><panel_attributes>lt=-
+a &gt;</panel_attributes><additional_attributes>10;140;70;140;70;10;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>460</x><y>250</y><w>160</w><h>170</h></coordinates><panel_attributes>lt=-
 m1=1..n
 m2=0..1
-a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>618</x><y>710</y><w>130</w><h>120</h></coordinates><panel_attributes>Entrées
+a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Entrées
 --
 - id
 - nom
@@ -60,7 +60,7 @@ a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</addi
 -autre info
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>198</x><y>710</y><w>130</w><h>120</h></coordinates><panel_attributes>Boissons non alcolisées
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>60</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Boissons non alcolisées
 --
 - id
 - nom
@@ -69,7 +69,7 @@ a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</addi
 -autre info
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>338</x><y>710</y><w>130</w><h>120</h></coordinates><panel_attributes>Boissons alcolisées
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Boissons alcolisées
 --
 - id
 - nom
@@ -78,7 +78,7 @@ a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</addi
 -autre info
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>478</x><y>710</y><w>130</w><h>120</h></coordinates><panel_attributes>Carte des vins
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>640</y><w>130</w><h>120</h></coordinates><panel_attributes>Carte des vins
 --
 - id
 - nom
@@ -87,7 +87,7 @@ a &gt;</panel_attributes><additional_attributes>140;140;70;140;70;10;10;10</addi
 -autre info
 
 
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>618</x><y>850</y><w>130</w><h>120</h></coordinates><panel_attributes>Desserts
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>780</y><w>130</w><h>120</h></coordinates><panel_attributes>Desserts
 --
 - id
 - nom

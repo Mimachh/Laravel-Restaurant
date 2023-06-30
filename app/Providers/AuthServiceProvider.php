@@ -58,7 +58,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('viewDessertsInAdmin', function (User $user) {
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
+        
+        Gate::define('viewAlcoolsInAdmin', function (User $user) {
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
+        });
 
+        Gate::define('viewSoftsInAdmin', function (User $user) {
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
+        });
 
         // GESTION RESTAURANT
         Gate::define('viewHorairesInAdmin', function (User $user) {

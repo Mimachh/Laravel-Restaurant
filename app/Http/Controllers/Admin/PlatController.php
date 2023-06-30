@@ -52,17 +52,15 @@ class PlatController extends Controller
 
         $validatedData = $request->validate([
             'nom' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
-            'info_supp' => 'required',
+            'info_supp' => 'nullable',
             'allergenes' => 'array'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
-            'description.required' => 'Le champ "Description" est requis.',
             'prix.required' => 'Le champ "Prix" est requis.',
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
-            'info_supp.required' => 'Le champ "Informations supplémentaires" est requis.',
             'allergenes.array' => 'Les allergènes doivent être de type tableau.'
         ]);
 
@@ -286,7 +284,7 @@ class PlatController extends Controller
                 ->with('success', 'Plat(s) supprimé(s) avec succès.');
         }
     
-        return redirect()->route('admin.users.index')
+        return redirect()->route('admin.plats.index')
             ->with('error', 'Aucun plat sélectionné.');
     }
 

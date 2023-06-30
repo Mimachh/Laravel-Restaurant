@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\FormuleController;
 use App\Http\Controllers\Admin\VinController;
 use App\Http\Controllers\Admin\EntreeController;
 use App\Http\Controllers\Admin\DessertController;
+use App\Http\Controllers\Admin\AlcoolController;
+use App\Http\Controllers\Admin\SoftController;
 
 /*
 |--------------------------------------------------------------------------
@@ -209,6 +211,48 @@ Route::group(["middleware" => ['auth', 'role:1,2,3'], "prefix" => "admin", "as" 
 
         // Restore
         Route::post('/restore-multiple', [DessertController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // ALCOOLS
+    Route::group(["prefix" => "alcools", "as" => "alcools."], function() {
+        Route::get('/', [AlcoolController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [AlcoolController::class, 'create'])->name('create');
+        Route::post('/', [AlcoolController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [AlcoolController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [AlcoolController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [AlcoolController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [AlcoolController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [AlcoolController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [AlcoolController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+    // SOFTS
+    Route::group(["prefix" => "softs", "as" => "softs."], function() {
+        Route::get('/', [SoftController::class, 'index'])->name('index');
+
+        // Create
+        Route::get('/create', [SoftController::class, 'create'])->name('create');
+        Route::post('/', [SoftController::class, 'store'])->name('store');
+
+        // Edit
+        Route::get('/{id}/edit', [SoftController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [SoftController::class, 'update'])->name('update');
+
+        // Système de suppression
+        Route::delete('/destroy-multiple', [SoftController::class, 'destroyMultiple'])->name('destroy-multiple');
+        Route::get('/trash', [SoftController::class, 'trash'])->name('trash');
+        Route::delete('/force-destroy-multiple', [SoftController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        Route::post('/restore-multiple', [SoftController::class, 'restoreMultiple'])->name('restore-multiple');
     });
 
 });
