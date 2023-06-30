@@ -19,6 +19,7 @@
                 <th>Nom</th>
                 <th>Allergènes</th>
                 <th>Prix</th>
+                <th>Statut</th>
                 <th>Action</th>
                 <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
             </tr>
@@ -30,6 +31,13 @@
                     <td>{{ $plat->nom }}</td>
                     <td>{{ $plat->allAllergenesNames }}</td>
                     <td>{{ $plat->prix }}</td>
+                    <td>
+                        @if($plat->status)
+                            En ligne
+                        @else 
+                            Hors-ligne
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('admin.plats.edit', $plat->id) }}" class="btn-edit">Éditer</a>
                     </td>

@@ -1,0 +1,19 @@
+.toggleLabel {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    cursor: pointer;
+}
+.toggleSpan {
+    background-color: var(--admin-highlight);
+    color: var(--admin-light);
+    width: 20px;
+    height: 20px;
+    border-radius: var(--border-radius);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+

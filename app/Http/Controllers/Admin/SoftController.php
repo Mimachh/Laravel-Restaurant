@@ -40,12 +40,14 @@ class SoftController extends Controller
             'nom' => 'required',
             'prix' => 'nullable|numeric|min:0',
             'info_supp' => 'nullable',
-            'allergenes' => 'array'
+            'allergenes' => 'array',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.required' => 'Le champ "Prix" est requis.',
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'info_supp.required' => 'Le champ "Informations supplémentaires" est requis.',
             'allergenes.array' => 'Les allergènes doivent être de type tableau.'
         ]);
@@ -55,6 +57,7 @@ class SoftController extends Controller
         $soft->nom = $validatedData['nom'];
         $soft->prix = $validatedData['prix'];
         $soft->info_supp = $validatedData['info_supp'];
+        $soft->status = $validatedData['status'];
        
 
         // Enregistrement de la photo
@@ -94,10 +97,16 @@ class SoftController extends Controller
         $this->authorize('update', Soft::class);
 
         $soft = Soft::findOrFail($id);
+        $statusChecked = old('status', $soft->status) ? 'checked' : '';
         $allergenes = Allergene::all();
         $softAllergenes = $soft->allergenes->pluck('id')->toArray();
 
-        return view('admin.softs.edit', compact('soft', 'allergenes', 'softAllergenes'));
+        return view('admin.softs.edit', compact(
+            'soft', 
+            'allergenes', 
+            'softAllergenes',
+            'statusChecked'
+        ));
     }
 
     public function update(Request $request, $id)
@@ -109,10 +118,12 @@ class SoftController extends Controller
             'prix' => 'nullable|numeric|min:0',
             'info_supp' => 'nullable',
             'allergenes' => 'array',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le nom de la boisson est obligatoire.',
             'prix.numeric' => 'Le prix de la boisson doit être un nombre.',
             'prix.min' => 'Le prix de la boisson ne peut pas être négatif.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'allergenes.array' => 'Les allergènes doivent être sélectionnés sous forme de tableau.',
         ]);
     
@@ -120,6 +131,7 @@ class SoftController extends Controller
         $soft->nom = $request->nom;
         $soft->prix = $request->prix;
         $soft->info_supp = $request->info_supp;
+        $soft->status = $request->status;
 
             // Gérer l'image
         if ($request->hasFile('photo')) {

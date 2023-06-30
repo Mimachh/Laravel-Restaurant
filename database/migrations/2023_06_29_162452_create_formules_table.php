@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('info_supp')->nullable();
             $table->decimal('prix', 8, 2);
+            $table->boolean('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

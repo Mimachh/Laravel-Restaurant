@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nom');
             $table->string('description')->nullable();
             $table->string('info_supp')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

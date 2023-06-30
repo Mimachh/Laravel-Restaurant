@@ -22,4 +22,12 @@ class Alcool extends Model
     public function getAllAllergenesNamesAttribute() {
         return $this->allergenes->implode("nom", ', ' );
     }
+
+    public function isOnline() {
+        if($this->status == 1) {
+            return 'En ligne';
+        } else {
+            return 'Hors-ligne';
+        }
+    }
 }

@@ -17,6 +17,7 @@ class VinSeeder extends Seeder
             'description' => 'Description du vin 1',
             'prix' => 12.99,
             'annee' => '1996',
+            'status' => '1',
         ]);
 
         Vin::create([
@@ -31,6 +32,7 @@ class VinSeeder extends Seeder
             'description' => 'Description du vin 1',
             'prix' => 12.99,
             'annee' => '1996',
+            'status' => '1',
         ]);
 
         Vin::create([

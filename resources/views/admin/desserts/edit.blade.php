@@ -30,12 +30,12 @@
                 <span class="error">{{ $message }}</span>
             @enderror
         </div>
-
-        <div class="checkbox-row">
-            <label for="supprimer_photo" class="label">Supprimer l'image : (à ne cocher que si ne souhaitez plus afficher de photo)</label>
-            <input type="checkbox" name="supprimer_photo" id="supprimer_photo">
-        </div>
-
+        @if($dessert->photo_portrait)
+            <div class="checkbox-row">
+                <label for="supprimer_photo" class="label">Supprimer l'image : (à ne cocher que si ne souhaitez plus afficher de photo)</label>
+                <input type="checkbox" name="supprimer_photo" id="supprimer_photo">
+            </div>
+        @endif
         <div>
             <label for="description" class="label">Description :</label>
             <textarea name="description" id="description" cols="30" rows="10">{{ old('description', $dessert->description) }}</textarea>
@@ -74,6 +74,11 @@
                 <span class="error">{{ $message }}</span>
             @enderror
         </div>
+
+        <x-switch-button
+            label="Mettre l'entrée en ligne ?"
+            :checked="$statusChecked"
+        />
 
         <button type="submit">Modifier</button>
     </form>

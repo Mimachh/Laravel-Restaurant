@@ -19,6 +19,7 @@
                 <th>Nom</th>
                 <th>Année</th>
                 <th>Prix</th>
+                <th>Statut</th>
                 <th>Action</th>
                 <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
             </tr>
@@ -30,6 +31,7 @@
                     <td>{{ $vin->nom }}</td>
                     <td>{{ $vin->annee }}</td>
                     <td>{{ $vin->prix }}</td>
+                    <td>{{ $vin->isOnline() }} </td>
                     <td>
                         <a href="{{ route('admin.vins.edit', $vin->id) }}" class="btn-edit">Éditer</a>
                     </td>

@@ -95,10 +95,16 @@ class AlcoolController extends Controller
         $this->authorize('update', Alcool::class);
 
         $alcool = Alcool::findOrFail($id);
+        $statusChecked = old('status', $alcool->status) ? 'checked' : '';
         $allergenes = Allergene::all();
         $alcoolAllergenes = $alcool->allergenes->pluck('id')->toArray();
 
-        return view('admin.alcools.edit', compact('alcool', 'allergenes', 'alcoolAllergenes'));
+        return view('admin.alcools.edit', compact(
+            'alcool', 
+            'allergenes', 
+            'alcoolAllergenes', 
+            'statusChecked',
+        ));
     }
 
     public function update(Request $request, $id)

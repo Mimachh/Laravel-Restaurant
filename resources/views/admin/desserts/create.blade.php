@@ -65,6 +65,11 @@
                 @enderror
             </div>
 
+            <x-switch-button
+                label="Mettre l'entrée en ligne ?"
+                :checked="old('status')"
+            />
+
             <button type="submit">Créer</button>
         </form>
     </section>

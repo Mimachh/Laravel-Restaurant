@@ -40,9 +40,11 @@ class VinController extends Controller
             'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
             'annee' => 'nullable',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
         ]);
 
@@ -52,6 +54,7 @@ class VinController extends Controller
         $vin->description = $validatedData['description'];
         $vin->prix = $validatedData['prix'];
         $vin->annee = $validatedData['annee'];
+        $vin->status = $validatedData['status'];
        
 
         // Enregistrement de la photo
@@ -86,7 +89,8 @@ class VinController extends Controller
         $this->authorize('update', Vin::class);
 
         $vin = Vin::findOrFail($id);
-        return view('admin.vins.edit', compact('vin'));
+        $statusChecked = old('status', $vin->status) ? 'checked' : '';
+        return view('admin.vins.edit', compact('vin', 'statusChecked'));
     }
 
     public function update(Request $request, $id)
@@ -98,10 +102,12 @@ class VinController extends Controller
             'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
             'annee' => 'nullable',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
         ]);
     
         $vin = Vin::findOrFail($id);
@@ -109,6 +115,7 @@ class VinController extends Controller
         $vin->description = $request->description;
         $vin->prix = $request->prix;
         $vin->annee = $request->annee;
+        $vin->status = $request->status;
 
             // Gérer l'image
         if ($request->hasFile('photo')) {

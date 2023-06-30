@@ -18,6 +18,7 @@ class EntreeSeeder extends Seeder
             'description' => 'Description du Entree 1',
             'prix' => 12.99,
             'info_supp' => 'Informations supplémentaires du Entree 1',
+            'status' => '1',
         ]);
 
         Entree::create([
@@ -25,6 +26,7 @@ class EntreeSeeder extends Seeder
             'description' => 'Description du Entree 2',
             'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du Entree 2',
+            'status' => '1',
         ]);
 
         Entree::create([
@@ -32,6 +34,7 @@ class EntreeSeeder extends Seeder
             'description' => 'Description du Entree 3',
             'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du Entree 3',
+            'status' => '1',
         ]);
 
         Entree::create([

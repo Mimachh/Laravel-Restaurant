@@ -65,6 +65,12 @@
                 @enderror
             </div>
 
+            <!-- ACTIVATE -->
+            <x-switch-button
+                label="Mettre le plat en ligne ?"
+                :checked="old('status')"
+            />
+
             <button type="submit">Créer</button>
         </form>
     </section>

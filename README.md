@@ -19,30 +19,12 @@
 - Auth 2 facteurs
 
 
-## Vérifier : 
-- si les photos se suppriment toutes bien, quand il y en a
-- voir dans le edit si la suppression fonctionne aussi
-## Pour le resto
-
-
-- Pivot formule plats
-- Pivot entrées formule
-- Pivot desserts formule
-- Pivot vin formule
-
-- Pivot boisson non alco formule
-- Pivot boisson alco formule
-
-- Pivot menu formule
-
-
-
-+ policy + gates + soft delete + force delete + restore
-
-
-
 ## Mettre des slugs partouz
+
 
 ## MAILING
 
 ## Système de résa : proposer une validation manuelle à partir d'un certain moment
+
+
+## Factoriser les champs qui se répètent

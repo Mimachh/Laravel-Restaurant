@@ -16,12 +16,14 @@ class SoftSeeder extends Seeder
             'nom' => 'Soft 1',
             'prix' => 12.99,
             'info_supp' => 'Informations supplémentaires du Soft 1',
+            'status' => '1',
         ]);
 
         Soft::create([
             'nom' => 'Soft 2',
             'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du Soft 2',
+            'status' => '1',
         ]);
 
         Soft::create([

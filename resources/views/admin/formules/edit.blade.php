@@ -40,9 +40,46 @@
             @enderror
         </div>
 
+        <!-- MENUS -->
+        <div>
+            <span class="label toggleLabel"
+            id="menusToggle" onclick="toggleCheckboxList(
+                'menusCheckboxList', 
+                'toggleSpan',
+                'toggleSpanPlusMenu',
+                'toggleSpanMinusMenu'
+                )"
+            >   <span>Menus de la formule</span>
+                <span class="toggleSpan"> 
+                    <span class="toggleSpanPlusMenu" id="toggleSpanPlusMenu">+</span>
+                    <span class="toggleSpanMinusMenu hidden" id="toggleSpanMinusMenu">-</span> 
+                </span>
+            </span><br>
+            <div id="menusCheckboxList" style="display: none;">
+                @foreach($menus as $menu)
+                    <label>
+                        <input type="checkbox" name="menus[]" id="menu{{ $menu->id }}" value="{{ $menu->id }}" {{ in_array($menu->id, $formuleMenus) ? 'checked' : '' }}>
+                        {{ $menu->nom }}
+                    </label><br>
+                @endforeach
+            </div>
+            <hr>
+            @error('menus')
+                <span class="error">{{ $message }}</span>
+            @enderror
+        </div>
+
+        <x-switch-button
+            label="Mettre le menu en ligne ?"
+            :checked="$statusChecked"
+        />
+
         <button type="submit">Modifier</button>
     </form>
 </section>
 
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/admin/toggleList.js') }}" defer></script>
 @endsection

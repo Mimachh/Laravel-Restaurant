@@ -18,4 +18,5 @@ class Allergene extends Model
     // {
     //     return $this->belongsToMany(Plat::class, 'allergene_plat');
     // }
+
 }

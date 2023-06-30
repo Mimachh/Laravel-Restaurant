@@ -16,12 +16,14 @@ class AlcoolSeeder extends Seeder
             'nom' => 'Alcool 1',
             'prix' => 12.99,
             'info_supp' => 'Informations supplémentaires du Alcool 1',
+            'status' => '1',
         ]);
 
         Alcool::create([
             'nom' => 'Alcool 2',
             'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du Alcool 2',
+            'status' => '1',
         ]);
 
         Alcool::create([

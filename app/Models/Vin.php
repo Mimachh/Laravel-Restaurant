@@ -19,4 +19,12 @@ class Vin extends Model
         'photo_thumbnail', 
         'photo_portrait'
     ];
+
+    public function isOnline() {
+        if($this->status == 1) {
+            return 'En ligne';
+        } else {
+            return 'Hors-ligne';
+        }
+    }
 }

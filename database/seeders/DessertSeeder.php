@@ -17,6 +17,7 @@ class DessertSeeder extends Seeder
             'description' => 'Description du Dessert 1',
             'prix' => 12.99,
             'info_supp' => 'Informations supplémentaires du Dessert 1',
+            'status' => '1',
         ]);
 
         Dessert::create([
@@ -24,6 +25,7 @@ class DessertSeeder extends Seeder
             'description' => 'Description du Dessert 2',
             'prix' => 15.99,
             'info_supp' => 'Informations supplémentaires du Dessert 2',
+            'status' => '1',
         ]);
 
         Dessert::create([

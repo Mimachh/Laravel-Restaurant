@@ -45,11 +45,13 @@ class DessertController extends Controller
             'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'nullable',
-            'allergenes' => 'array'
+            'allergenes' => 'array',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.required' => 'Le champ "Prix" est requis.',
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
             'allergenes.array' => 'Les allergènes doivent être de type tableau.'
         ]);
@@ -60,6 +62,7 @@ class DessertController extends Controller
         $dessert->description = $validatedData['description'];
         $dessert->prix = $validatedData['prix'];
         $dessert->info_supp = $validatedData['info_supp'];
+        $dessert->status = $validatedData['status'];
        
 
         // Enregistrement de la photo
@@ -103,10 +106,16 @@ class DessertController extends Controller
         $this->authorize('update', Dessert::class);
 
         $dessert = Dessert::findOrFail($id);
+        $statusChecked = old('status', $dessert->status) ? 'checked' : '';
         $allergenes = Allergene::all();
         $dessertAllergenes = $dessert->allergenes->pluck('id')->toArray();
 
-        return view('admin.desserts.edit', compact('dessert', 'allergenes', 'dessertAllergenes'));
+        return view('admin.desserts.edit', compact(
+            'dessert', 
+            'allergenes', 
+            'dessertAllergenes',
+            'statusChecked'
+        ));
     }
 
     /**
@@ -122,11 +131,13 @@ class DessertController extends Controller
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'nullable',
             'allergenes' => 'array',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le nom du dessert est obligatoire.',
             'prix.required' => 'Le prix du dessert est obligatoire.',
             'prix.numeric' => 'Le prix du dessert doit être un nombre.',
             'prix.min' => 'Le prix du dessert ne peut pas être négatif.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'allergenes.array' => 'Les allergènes doivent être sélectionnés sous forme de tableau.',
         ]);
     
@@ -135,6 +146,7 @@ class DessertController extends Controller
         $dessert->description = $request->description;
         $dessert->prix = $request->prix;
         $dessert->info_supp = $request->info_supp;
+        $dessert->status = $request->status;
 
             // Gérer l'image
         if ($request->hasFile('photo')) {

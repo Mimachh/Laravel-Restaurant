@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Formule;
+use App\Models\Menu;
 
 class FormuleController extends Controller
 {
     public function index() {
 
         $this->authorize('viewAny', Formule::class);
-        // $menus = Menu::with('allergenes')->get();
 
         $formules = Formule::all();
 
@@ -22,8 +22,9 @@ class FormuleController extends Controller
 
     public function create() {
         $this->authorize('create', Formule::class);
+        $menus = Menu::where('status', 1)->get();
 
-        return view('admin.formules.create');
+        return view('admin.formules.create', compact('menus'));
     }
 
     public function store(Request $request) {
@@ -35,10 +36,12 @@ class FormuleController extends Controller
             'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'nullable',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.required' => 'Le prix du plat est obligatoire.',
             'prix.numeric' => 'Le prix du plat doit être un nombre.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'prix.min' => 'Le prix du plat ne peut pas être négatif.',
             'description.required' => 'Le champ "Description" est requis.',
             'info_supp.required' => 'Le champ "Informations supplémentaires" est requis.',
@@ -49,7 +52,13 @@ class FormuleController extends Controller
         $formule->description = $validatedData['description'];
         $formule->prix = $validatedData['prix'];
         $formule->info_supp = $validatedData['info_supp'];
+        $formule->status = $validatedData['status'];
         $formule->save();
+
+        $menus = $request->input('menus');
+        if(!empty($menus)) {
+            $formule->menus()->attach($menus);
+        }
 
         return redirect()->route('admin.formules.index')->with('success', 'Le formule a été créé avec succès.');
     }
@@ -58,9 +67,16 @@ class FormuleController extends Controller
         $this->authorize('update', Formule::class);
 
         $formule = Formule::findOrFail($id);
+        $menus = Menu::where('status', 1)->get();
+        $formuleMenus = $formule->menus->pluck('id')->toArray();
+        $statusChecked = old('status', $formule->status) ? 'checked' : '';
 
-
-        return view('admin.formules.edit', compact('formule'));
+        return view('admin.formules.edit', compact(
+            'formule', 
+            'menus', 
+            'formuleMenus',
+            'statusChecked'
+        ));
     }
 
     public function update(Request $request, $id) {
@@ -72,11 +88,13 @@ class FormuleController extends Controller
             'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'nullable',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.required' => 'Le prix du plat est obligatoire.',
             'prix.numeric' => 'Le prix du plat doit être un nombre.',
             'prix.min' => 'Le prix du plat ne peut pas être négatif.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'description.required' => 'Le champ "Description" est requis.',
             'info_supp.required' => 'Le champ "Informations supplémentaires" est requis.',
         ]);
@@ -86,7 +104,14 @@ class FormuleController extends Controller
         $formule->nom = $validatedData['nom'];
         $formule->description = $validatedData['description'];
         $formule->info_supp = $validatedData['info_supp'];
+        $formule->status = $request->status;
         $formule->save();
+
+        if ($request->filled('menus')) {
+            $formule->menus()->sync($request->input('menus'));
+        } else {
+            $formule->menus()->detach();
+        }
 
         return redirect()->route('admin.formules.index')->with('success', 'Le formule a été modifié avec succès.');
     }

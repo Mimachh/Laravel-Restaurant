@@ -19,6 +19,7 @@
                 <th>Nom</th>
                 <th>Allergènes</th>
                 <th>Prix</th>
+                <th>Statut</th>
                 <th>Action</th>
                 <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
             </tr>
@@ -30,6 +31,7 @@
                     <td>{{ $dessert->nom }}</td>
                     <td>{{ $dessert->allAllergenesNames }}</td>
                     <td>{{ $dessert->prix }}</td>
+                    <td>{{ $dessert->isOnline() }}</td>
                     <td>
                         <a href="{{ route('admin.desserts.edit', $dessert->id) }}" class="btn-edit">Éditer</a>
                     </td>

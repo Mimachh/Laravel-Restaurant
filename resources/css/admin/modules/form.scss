@@ -68,3 +68,46 @@
   gap: 5px;
 }
 
+.switch {
+  margin-top: 0.5rem;
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--danger);
+  cursor: pointer;
+}
+
+.switch label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--admin-light);
+  transition: transform 0.2s ease-in-out;
+}
+
+.switch input:checked + label {
+  background-color: var(--admin-highlight);
+}
+
+.switch input:checked + label:before {
+  transform: translateX(20px);
+}
+

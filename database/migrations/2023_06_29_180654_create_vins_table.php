@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('annee')->nullable();
             $table->decimal('prix', 8, 2)->nullable();
             $table->string('description')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

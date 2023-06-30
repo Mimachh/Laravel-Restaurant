@@ -55,12 +55,14 @@ class PlatController extends Controller
             'description' => 'nullable',
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'nullable',
-            'allergenes' => 'array'
+            'allergenes' => 'array',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le champ "Nom" est requis.',
             'prix.required' => 'Le champ "Prix" est requis.',
             'prix.numeric' => 'Le champ "Prix" doit être un nombre.',
             'prix.min' => 'Le champ "Prix" doit être supérieur ou égal à 0.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'allergenes.array' => 'Les allergènes doivent être de type tableau.'
         ]);
 
@@ -70,6 +72,7 @@ class PlatController extends Controller
         $plat->description = $validatedData['description'];
         $plat->prix = $validatedData['prix'];
         $plat->info_supp = $validatedData['info_supp'];
+        $plat->status = $validatedData['status'];
        
 
         // Enregistrement de la photo
@@ -113,10 +116,16 @@ class PlatController extends Controller
         $this->authorize('update', Plat::class);
 
         $plat = Plat::findOrFail($id);
+        $statusChecked = old('status', $plat->status) ? 'checked' : '';
         $allergenes = Allergene::all();
         $platAllergenes = $plat->allergenes->pluck('id')->toArray();
 
-        return view('admin.plats.edit', compact('plat', 'allergenes', 'platAllergenes'));
+        return view('admin.plats.edit', compact(
+            'plat', 
+            'allergenes', 
+            'platAllergenes',
+            'statusChecked'
+        ));
     }
 
     /**
@@ -132,12 +141,14 @@ class PlatController extends Controller
             'prix' => 'required|numeric|min:0',
             'info_supp' => 'required',
             'allergenes' => 'array',
+            'status' => 'nullable|numeric'
         ], [
             'nom.required' => 'Le nom du plat est obligatoire.',
             'description.required' => 'La description du plat est obligatoire.',
             'prix.required' => 'Le prix du plat est obligatoire.',
             'prix.numeric' => 'Le prix du plat doit être un nombre.',
             'prix.min' => 'Le prix du plat ne peut pas être négatif.',
+            'status.numeric' => 'Le statut doit être vrai ou faux',
             'info_supp.required' => 'Les informations supplémentaires du plat sont obligatoires.',
             'allergenes.array' => 'Les allergènes doivent être sélectionnés sous forme de tableau.',
         ]);
@@ -147,6 +158,7 @@ class PlatController extends Controller
         $plat->description = $request->description;
         $plat->prix = $request->prix;
         $plat->info_supp = $request->info_supp;
+        $plat->status = $request->status;
 
             // Gérer l'image
         if ($request->hasFile('photo')) {

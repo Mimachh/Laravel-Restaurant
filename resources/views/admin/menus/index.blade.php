@@ -17,7 +17,7 @@
             <tr>
                 <th>#</th>
                 <th>Nom</th>
-                <th>Formules</th>
+                <th>Statut</th>
                 <th>Action</th>
                 <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
             </tr>
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ $menu->id }}</td>
                     <td>{{ $menu->nom }}</td>
-                    <td>a mettre</td>
+                    <td>{{ $menu->isOnline() }}</td>
                     <td>
                         <a href="{{ route('admin.menus.edit', $menu->id) }}" class="btn-edit">Éditer</a>
                     </td>

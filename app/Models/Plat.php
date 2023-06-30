@@ -11,7 +11,15 @@ class Plat extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nom', 'description', 'prix', 'info_supp', 'photo_thumbnail', 'photo_portrait'];
+    protected $fillable = [
+    'nom', 
+    'description', 
+    'prix', 
+    'info_supp', 
+    'photo_thumbnail', 
+    'photo_portrait',
+    'status'
+    ];
 
 
     public function allergenes()
@@ -22,4 +30,18 @@ class Plat extends Model
     public function getAllAllergenesNamesAttribute() {
         return $this->allergenes->implode("nom", ', ' );
     }
+
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class);
+    }
+
+    public function isOnline() {
+        if($this->status == 1) {
+            return 'En ligne';
+        } else {
+            return 'Hors-ligne';
+        }
+    }
+
 }

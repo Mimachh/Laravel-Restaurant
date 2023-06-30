@@ -18,6 +18,8 @@
                 <th>#</th>
                 <th>Nom</th>
                 <th>Prix</th>
+                <th>Menus</th>
+                <th>Statut</th>
                 <th>Action</th>
                 <th class="checkbox-column"><input type="checkbox" id="select-all"></th>
             </tr>
@@ -28,6 +30,8 @@
                     <td>{{ $formule->id }}</td>
                     <td>{{ $formule->nom }}</td>
                     <td>{{ $formule->prix }}</td>
+                    <td>{{ $formule->allMenusNames }}</td>
+                    <td>{{ $formule->isOnline() }}</td>
                     <td>
                         <a href="{{ route('admin.formules.edit', $formule->id) }}" class="btn-edit">Éditer</a>
                     </td>
