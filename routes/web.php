@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\EntreeController;
 use App\Http\Controllers\Admin\DessertController;
 use App\Http\Controllers\Admin\AlcoolController;
 use App\Http\Controllers\Admin\SoftController;
+use App\Http\Controllers\Admin\CreneauhoraireController;
 
 /*
 |--------------------------------------------------------------------------
@@ -256,6 +257,38 @@ Route::group(["middleware" => ['auth', 'role:1,2,3'], "prefix" => "admin", "as" 
     });
 
 });
+
+// ROUTE POUR LES GESTIONNAIRES RESA
+
+Route::group(["middleware" => ['auth', 'role:1,2,4'], "prefix" => "admin", "as" => "admin."], function() {
+    
+    // JOURS
+    Route::group(["prefix" => "creneaux", "as" => "creneaux."], function() {
+        Route::get('/', [CreneauhoraireController::class, 'index'])->name('index');
+
+        // Create
+        // Route::get('/create', [PlatController::class, 'create'])->name('create');
+        // Route::post('/', [PlatController::class, 'store'])->name('store');
+
+        // Edit
+        // Route::get('/{id}/edit', [PlatController::class, 'edit'])->name('edit');
+        // Route::put('/{id}', [PlatController::class, 'update'])->name('update');
+        Route::get('/modifier_les_horaires', [CreneauhoraireController::class, 'edit'])->name('edit');
+        Route::put('/modifier_les_horaires', [CreneauhoraireController::class, 'update'])->name('update');
+         
+
+        // Système de suppression
+        // Route::delete('/destroy-multiple', [PlatController::class, 'destroyMultiple'])->name('destroy-multiple');
+        // Route::get('/trash', [PlatController::class, 'trash'])->name('trash');
+        // Route::delete('/force-destroy-multiple', [PlatController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
+
+        // Restore
+        // Route::post('/restore-multiple', [PlatController::class, 'restoreMultiple'])->name('restore-multiple');
+    });
+
+});
+
+
 
 Route::middleware(['auth', 'role:1'])->group(function () {
     

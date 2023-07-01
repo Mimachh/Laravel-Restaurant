@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - Admin Panel</title>
     <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+
+    <!-- TIMEPICKER -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     @yield('styles')
 </head>
 <body>
@@ -23,7 +28,7 @@
                     @endcan
 
                     <br>
-                    @can('viewEntreesInAdmin')
+                    @can('viewCarteInAdmin')
                     <li><span 
                     class="menu-button-carte
                     {{ 
@@ -106,18 +111,37 @@
                         <br>
                     </div>
 
-                    
-                    @can('viewHorairesInAdmin')
-                    <li><a href="">Horaires</a></li>
+                    @can('viewRestoInAdmin')
+                    <li><span 
+                    class="menu-button-resto
+                    {{ 
+                        setMenuOpen([
+                            'admin.creneaux.',
+                        ], 'open-links-div-resto') 
+                    }}
+                    "
+                    onclick="toggleMenuLinksResto()"
+                    ><span>Restaurant</span>
+                    <span class="toggleSpanPlusResto">+</span>
+                    <span class="toggleSpanMinusResto">-</span>
+                    </span>
                     @endcan
+                    </li>
+                    <div id="menuLinksContainerResto" class="menu-links-container-resto">
+                        @can('viewHorairesInAdmin')
+                        <li><a href="{{ route('admin.creneaux.index') }}"
+                        class="{{ setMenuClass('admin.creneaux.', 'active') }}"
+                        >Créneaux</a></li>
+                        @endcan
 
-                    @can('viewTablesCouvertsInAdmin')
-                    <li><a href="">Tables/Couverts</a></li>
-                    @endcan
+                        @can('viewTablesCouvertsInAdmin')
+                        <li><a href="">Tables/Couverts</a></li>
+                        @endcan
 
-                    @can('viewReservationsInAdmin')
-                    <li><a href="">Réservations</a></li>
-                    @endcan
+                        @can('viewReservationsInAdmin')
+                        <li><a href="">Réservations</a></li>
+                        @endcan
+                    </div>
 
                     <hr style="width: 70%;">
 

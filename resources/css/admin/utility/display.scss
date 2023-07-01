@@ -5,3 +5,21 @@
 .visible_flex {
     display: flex;
 }
+
+
+.flex {
+    display: flex;
+}
+
+.align-end {
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.justify-start {
+ justify-content: flex-start;
+}
+
+.my-4 {
+    margin: 16px 0;
+}

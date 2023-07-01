@@ -31,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // CARTE / AUTEUR
+        Gate::define('viewCarteInAdmin', function (User $user) {
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
+        });
+
         Gate::define('viewMenuInAdmin', function (User $user) {
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Auteur']);
         });
@@ -68,6 +72,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         // GESTION RESTAURANT
+        Gate::define('viewRestoInAdmin', function (User $user) {
+            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 4);
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Gestionnaire de réservation']);
+        });
+
         Gate::define('viewHorairesInAdmin', function (User $user) {
             // return $user->roles->contains('id', 2) || $user->roles->contains('id', 4);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Gestionnaire de réservation']);

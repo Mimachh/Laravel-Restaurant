@@ -4,11 +4,15 @@ Table "JourSemaine" :
 
 id (clé primaire) : Identifiant unique du jour de la semaine.
 nom : Nom du jour de la semaine (ex : lundi, mardi, etc).
+
+
 Table "CreneauHoraire" :
 
 id (clé primaire) : Identifiant unique du créneau horaire.
 heure_debut : Heure de début du créneau horaire.
 heure_fin : Heure de fin du créneau horaire.
+
+
 Table "HoraireRestaurant" :
 
 id (clé primaire) : Identifiant unique de l'horaire.
@@ -48,7 +52,9 @@ En utilisant cette structure, tu peux facilement gérer les horaires d'ouverture
 
 N'oublie pas de mettre à jour tes requêtes pour tenir compte de cette structure lors de l'affichage des horaires d'ouverture ou de la vérification de l'ouverture du restaurant.
 
-
+Un index qui récapitule tous les horaires sur tous les jours
+Le edit :
+Tous les horaires sont englobés dans une div qui s'affiche ou se cache en fonction du switch "fermer le resto". Le switch est désactivé par défaut. Si on l'active ça cache les horaires et ça ouvre une div avec un creneau de date + un texte à renseigner.  Une fois enregistré les horaires de chaque jours sont conservé comme ils étaient mais on enregistre quelque part le principe de la fermeture.
 
 
 // HORAIRES 

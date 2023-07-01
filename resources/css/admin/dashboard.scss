@@ -67,11 +67,14 @@
     }
 }
 
-.menu-button-carte {
+.menu-button-carte, 
+.menu-button-resto {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     color: var(--admin-light);
+    // background-color: var(--admin-light);
+    outline: 1px solid var(--admin-light);
     font-size: 1rem;
     font-weight: 600;
     padding: 0.3rem 0.3rem 0.3rem 0.3rem;
@@ -80,7 +83,9 @@
     
 }
 
-.open-links-div-carte {
+.open-links-div-carte,
+.open-links-div-resto {
+    outline: 1px solid var(--admin-highlight);
     color: var(--admin-dark);
     background-color: var(--admin-highlight);
 }

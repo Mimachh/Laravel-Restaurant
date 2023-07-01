@@ -31,7 +31,10 @@
   .admin-form-container input[type="password"],
   .admin-form-container button[type="submit"],
   .admin-form-container input[type="number"],
-  .admin-form-container textarea  {
+  .admin-form-container textarea,
+  .admin-form-container input[type="date"],
+  .admin-form-container input[type="time"],
+  .flatpickr-input {
     font-family: 'Roboto', sans-serif;
     width: 100%;
     padding: 10px;
@@ -82,7 +85,7 @@
 
 .switch label {
   position: absolute;
-  top: 0;
+  top: -4px;
   left: 0;
   width: 40px;
   height: 20px;
@@ -111,3 +114,27 @@
   transform: translateX(20px);
 }
 
+.flex-row-td {
+  max-width: 100px;
+}
+
+.time_div {
+  max-width: fit-content;
+}
+
+.fermeture-div {
+  background-color: var(--admin-light-creme);
+  color: var(--admin-dark);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  width: 100%;
+  border-radius: var(--border-radius);
+
+  .label-fermeture {
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+}
