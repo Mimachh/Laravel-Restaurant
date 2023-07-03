@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservationvalidation', function (Blueprint $table) {
+        Schema::create('validations', function (Blueprint $table) {
             $table->id();
             $table->boolean('is_online_booking')->nullable();
+            $table->boolean('is_booking_when_close')->nullable();
+            $table->boolean('is_contact_when_close')->nullable();
+            $table->boolean('is_email_confirmation')->nullable();
             $table->boolean('is_automatic_validation')->nullable();
             $table->boolean('is_add_manual_validation')->nullable();
             $table->integer('manual_limit_validation')->nullable();
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservationvalidation');
+        Schema::dropIfExists('validations');
     }
 };

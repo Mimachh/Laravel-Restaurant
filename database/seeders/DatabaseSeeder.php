@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SoftSeeder::class);
         $this->call(JourSeeder::class);
         $this->call(FermetureSeeder::class);
+        $this->call(ValidationsTableSeeder::class);
     }
 }

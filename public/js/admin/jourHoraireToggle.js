@@ -169,11 +169,11 @@
 
 
 
-
     function toggleFormSectionFactorised(switchElement, formSection) {
     if (switchElement.checked) {
         formSection.style.display = 'block';
     } else {
         formSection.style.display = 'none';
     }
+
 }

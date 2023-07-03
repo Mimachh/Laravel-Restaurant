@@ -117,6 +117,7 @@
                     {{ 
                         setMenuOpen([
                             'admin.creneaux.',
+                            'admin.options_reservation.',
                         ], 'open-links-div-resto') 
                     }}
                     "
@@ -138,8 +139,10 @@
                         <li><a href="">Tables/Couverts</a></li>
                         @endcan
 
-                        @can('viewReservationsInAdmin')
-                        <li><a href="">Réservations</a></li>
+                        @can('viewOptionsReservationsInAdmin')
+                        <li><a href="{{ route('admin.options_reservation.index') }}"
+                        class="{{ setMenuClass('admin.options_reservation.', 'active') }}"
+                        >Options de réservation</a></li>
                         @endcan
                     </div>
 

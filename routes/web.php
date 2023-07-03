@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DessertController;
 use App\Http\Controllers\Admin\AlcoolController;
 use App\Http\Controllers\Admin\SoftController;
 use App\Http\Controllers\Admin\CreneauhoraireController;
+use App\Http\Controllers\Admin\ValidationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -265,25 +266,15 @@ Route::group(["middleware" => ['auth', 'role:1,2,4'], "prefix" => "admin", "as" 
     // JOURS
     Route::group(["prefix" => "creneaux", "as" => "creneaux."], function() {
         Route::get('/', [CreneauhoraireController::class, 'index'])->name('index');
-
-        // Create
-        // Route::get('/create', [PlatController::class, 'create'])->name('create');
-        // Route::post('/', [PlatController::class, 'store'])->name('store');
-
-        // Edit
-        // Route::get('/{id}/edit', [PlatController::class, 'edit'])->name('edit');
-        // Route::put('/{id}', [PlatController::class, 'update'])->name('update');
         Route::get('/modifier_les_horaires', [CreneauhoraireController::class, 'edit'])->name('edit');
         Route::put('/modifier_les_horaires', [CreneauhoraireController::class, 'update'])->name('update');
-         
+    });
 
-        // Système de suppression
-        // Route::delete('/destroy-multiple', [PlatController::class, 'destroyMultiple'])->name('destroy-multiple');
-        // Route::get('/trash', [PlatController::class, 'trash'])->name('trash');
-        // Route::delete('/force-destroy-multiple', [PlatController::class, 'forceDestroyMultiple'])->name('force-destroy-multiple');
-
-        // Restore
-        // Route::post('/restore-multiple', [PlatController::class, 'restoreMultiple'])->name('restore-multiple');
+    // OPTIONS RESA
+    Route::group(["prefix" => "options_reservation", "as" => "options_reservation."], function() {
+        Route::get('/', [ValidationController::class, 'index'])->name('index');
+        Route::get('/options_de_reservation', [ValidationController::class, 'edit'])->name('edit');
+        Route::put('/options_de_reservation', [ValidationController::class, 'update'])->name('update');
     });
 
 });

@@ -3,11 +3,11 @@
     margin: 0 auto;
     margin-top: 1.5rem;
 
-    form {
-      div {
-        margin-bottom: 0.9rem;
-      }
-    }
+    // form {
+    //   div {
+    //     margin-bottom: 0.9rem;
+    //   }
+    // }
   }
   
   .admin-form-container h1 {
@@ -137,4 +137,86 @@
     font-size: 1.2rem;
     font-weight: 500;
   }
+}
+
+.switch-options {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+
+// FORM TABLE 
+.form-table {
+  margin-top: 1.5rem;
+  display: table;
+  width: 80%;
+  border-collapse: separate;
+  border-spacing: 0 0px; /* Espacement vertical entre les lignes */
+}
+
+
+.form-row {
+  display: table-row;
+  background-color: var(--admin-light-creme); /* Couleur de fond par défaut */
+
+}
+
+.form-row:nth-child(even) {
+  background-color: var(--admin-gray); /* Couleur de fond des lignes paires */
+}
+
+.form-label,
+.form-field {
+  display: table-cell;
+  padding: 1.5rem 10px;
+  border: 1px solid #ccc; /* Bordure de chaque cellule */
+  vertical-align: middle;
+
+}
+
+.form-field {
+  width: 9%;
+}
+
+.form-label {
+  color: var(--admin-dark);
+  font-weight: bold;
+}
+
+.form-error {
+  color: red;
+}
+
+.form-table input[type="text"],
+.form-table input[type="email"],
+.form-table input[type="password"],
+.form-table button[type="submit"],
+.form-table input[type="number"],
+.form-table textarea,
+.form-table input[type="date"],
+.form-table input[type="time"],
+.flatpickr-input {
+  font-family: 'Roboto', sans-serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.submit-options {
+  background-color: var(--success);
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  width: 140px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-top: 1.5rem;
+}
+
+.submit-options:hover {
+  background-color: var(--hover-success);
 }
