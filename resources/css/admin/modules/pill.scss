@@ -1,0 +1,17 @@
+.pill {
+    
+    &-actif {
+        color: var(--admin-light-creme);
+        background-color: var(--hover-success);
+        padding: 0.2rem 0.3rem;
+        border-radius: var(--border-radius);
+    }
+
+    &-inactif {
+        color: var(--admin-light-creme);
+        background-color: var(--hover-danger);
+        padding: 0.3rem 0.5rem;
+        border-radius: var(--border-radius);
+    }
+    
+}

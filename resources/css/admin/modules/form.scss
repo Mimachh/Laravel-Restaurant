@@ -163,6 +163,7 @@
 
 }
 
+
 .form-row:nth-child(even) {
   background-color: var(--admin-gray); /* Couleur de fond des lignes paires */
 }
@@ -177,7 +178,7 @@
 }
 
 .form-field {
-  width: 9%;
+  width: 12%;
 }
 
 .form-label {
@@ -201,7 +202,7 @@
   font-family: 'Roboto', sans-serif;
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 5px 0 ;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
@@ -219,4 +220,17 @@
 
 .submit-options:hover {
   background-color: var(--hover-success);
+}
+
+
+
+.label-interligne {
+  font-size: 1.1rem;
+  color: var(--admin-dark);
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem 0;
+  background-color: var(--admin-highlight);
+  padding: 0.8rem 0;
+  text-align: center;
+  border-radius: var(--border-radius);
 }

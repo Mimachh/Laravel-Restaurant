@@ -5,6 +5,7 @@ import '../../css/public/utility/buttons.scss';
 import '../../css/admin/modules/form.scss';
 import '../../css/admin/modules/alert.scss';
 import '../../css/admin/modules/togglePlus.scss';
+import '../../css/admin/modules/pill.scss';
 
 import '../../css/admin/baseline/variables.scss';
 

@@ -13,8 +13,8 @@ class FermetureSeeder extends Seeder
     public function run(): void
     {
         Fermeture::create([
-            'date_debut' => '2023-07-01',
-            'date_fin' => '2023-07-05',
+            'date_debut' => '01-07-2023',
+            'date_fin' => '09-07-2023',
             'raison' => 'Fermeture pour rénovation',
             'status' => 1,
         ]);

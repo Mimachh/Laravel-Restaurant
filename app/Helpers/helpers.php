@@ -69,3 +69,12 @@ function setMenuOpen($routes, $classe) {
 function contains($container, $contenu) {
     return Str::contains($container, $contenu);
 }
+
+
+function booleanOptionState($data) {
+    if($data == 1) {
+        return '<span class="pill-actif">Activé</span>';
+    } else {
+        return '<span class="pill-inactif">Désactivé</span>';
+    };
+}

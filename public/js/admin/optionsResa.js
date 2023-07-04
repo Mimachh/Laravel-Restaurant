@@ -3,6 +3,7 @@
     // OPEN RESA
     const is_online_booking = document.getElementById('is_online_booking');
     const options_if_resa_online_is_open = document.querySelectorAll('.options_if_resa_online_is_open');
+    const label_interligne_if_resa_online_is_open = document.querySelectorAll('.label-interligne')
     // VALIDATION
     const is_automatic_validation = document.getElementById('is_automatic_validation');
     const options_if_validation_auto_is_open = document.querySelectorAll('.options_if_validation_auto_is_open');
@@ -25,12 +26,15 @@
         
         function toggleAutomaticValidation() {
             options_if_validation_auto_is_open.forEach(function(options_if_validation_auto_is_open) {
+
+                // Validation auto
                 if(is_online_booking.checked && is_automatic_validation.checked) {
                     options_if_validation_auto_is_open.style.display = 'table-row';
                 } else {
                     options_if_validation_auto_is_open.style.display = "none";
                 }
 
+                // Ajout limite
                 if(is_add_manual_validation.checked && is_online_booking.checked && is_automatic_validation.checked) {
                     options_if_add_limit_is_open.style.display = 'table-row';
                 } else {
@@ -57,6 +61,13 @@
                 toggleAutomaticValidation();
             }
         });
+        label_interligne_if_resa_online_is_open.forEach(function(label_interligne_if_resa_online_is_open) {
+            if (is_online_booking.checked) {
+                label_interligne_if_resa_online_is_open.style.display = 'block';
+            } else {
+                label_interligne_if_resa_online_is_open.style.display = 'none';
+            }
+        });
     }
 
     toggleOptionsResa();
@@ -64,6 +75,7 @@
         toggleOptionsResa();
 
 
+        // Validation auto
         options_if_validation_auto_is_open.forEach(function(options_if_validation_auto_is_open) {
             if(is_online_booking.checked && is_automatic_validation.checked) {
                 options_if_validation_auto_is_open.style.display = 'table-row';
@@ -72,6 +84,8 @@
             }
         });
 
+
+        // Ajout de la limite
         if(is_add_manual_validation.checked && is_online_booking.checked && is_automatic_validation.checked) {
             options_if_add_limit_is_open.style.display = 'table-row';
         } else {

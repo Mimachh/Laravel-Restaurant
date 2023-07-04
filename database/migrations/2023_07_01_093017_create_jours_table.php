@@ -23,8 +23,8 @@ return new class extends Migration
             $table->boolean('is_open_midi')->nullable();
             $table->boolean('is_open_soir')->nullable();
 
-            $table->integer('couverts')->nullable();
-            
+            $table->integer('couverts_midi')->nullable();
+            $table->integer('couverts_soir')->nullable();
             $table->timestamps();
         });
     }

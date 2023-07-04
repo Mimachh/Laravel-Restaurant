@@ -50,6 +50,7 @@ class CreneauhoraireController extends Controller
     {
         $jours = Jour::all();
         $fermeture = Fermeture::first();
+      
         if(isset($fermeture->date_debut) && isset($fermeture->date_fin)) {
           $plageFermetureVacances = $fermeture->date_debut . ' to ' . $fermeture->date_fin;  
         } else {
@@ -99,7 +100,7 @@ class CreneauhoraireController extends Controller
 
         $data = $request->validate([
             'switch_fermeture' => 'nullable|numeric',
-            'plage_fermeture' => 'nullable|required_if:switch-fermeture,1|string',
+            'plage_fermeture' => 'nullable|required_if:switch_fermeture,1|string',
             'raison' => 'nullable|string',
 
             'switch_lundi_midi_ouverture' => 'nullable|numeric',
@@ -165,7 +166,13 @@ class CreneauhoraireController extends Controller
 
 
         // TABLE FERMETURE
+        // $debut_fermeture_vacances = null;
+        // $fin_fermeture_vacances = null;
+
         if(isset($request->plage_fermeture)) {
+            $plage_fermeture = $request->plage_fermeture;
+
+            if (strpos($plage_fermeture, ' to ') !== false) {
             list($debut_fermeture_vacances, $fin_fermeture_vacances) = explode(" to ", $request->plage_fermeture);
 
             $startDateTimestamp = strtotime($debut_fermeture_vacances);
@@ -174,6 +181,15 @@ class CreneauhoraireController extends Controller
             // Formater les timestamps en dates au format désiré
             $debut_fermeture_vacances = date('d-m-Y', $startDateTimestamp);
             $fin_fermeture_vacances = date('d-m-Y', $endDateTimestamp);
+            } else {
+                $startDateTimestamp = strtotime($plage_fermeture);
+   
+    
+                // Formater les timestamps en dates au format désiré
+                $debut_fermeture_vacances = date('d-m-Y', $startDateTimestamp);
+                $fin_fermeture_vacances = null;
+            }
+
         } else {
             $debut_fermeture_vacances = null;
             $fin_fermeture_vacances = null;
