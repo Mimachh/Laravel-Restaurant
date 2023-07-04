@@ -18,9 +18,10 @@
 - MDP oublié
 - Auth 2 facteurs
 
-##Ajouter le champs "laisser les utilisateurs reserver meme fermé"
-## Ajouter les options de reservations
+
+
 ## Ajouter le champs couverts sur chaque jours
+ - pour la logique si un champs couverts n'est pas renseigné faire en sorte que la réservation soit manuelle
 ## Mettre des slugs partouz
 
 

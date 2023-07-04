@@ -12,6 +12,9 @@ class ValidationController extends Controller
 {
     public function index() {
         $validation = Validation::first();
+
+        $fermeture = Fermeture::first();
+
         $lundi = Jour::find(1);
         $mardi = Jour::find(2);
         $mercredi = Jour::find(3);
@@ -19,6 +22,7 @@ class ValidationController extends Controller
         $vendredi = Jour::find(5);
         $samedi = Jour::find(6);
         $dimanche = Jour::find(7);
+
         return view('admin.reservation.options.index', compact(
             'validation',
             'lundi',
@@ -28,6 +32,7 @@ class ValidationController extends Controller
             'vendredi',
             'samedi',
             'dimanche',
+            'fermeture'
         ));
     }
 

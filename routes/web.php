@@ -16,6 +16,10 @@ use App\Http\Controllers\Admin\SoftController;
 use App\Http\Controllers\Admin\CreneauhoraireController;
 use App\Http\Controllers\Admin\ValidationController;
 
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +37,10 @@ Route::get('/', function () {
 
 Route::get('/home', function () {
     return view('home');
+});
+
+Route::get('/resa', function () {
+    return view('public.reservation');
 });
 
 
@@ -324,5 +332,6 @@ Route::group(['middleware' => 'auth'], function() {
     });
     
 });
+
 
 
