@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\CouvertsRestants;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -34,5 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call(JourSeeder::class);
         $this->call(FermetureSeeder::class);
         $this->call(ValidationsTableSeeder::class);
+        $this->call(CouvertsRestantsSeeder::class);
     }
 }

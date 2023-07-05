@@ -1,3 +1,144 @@
+<style>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--public-light-creme);
+  padding: 20px;
+  /* width: 100%;
+  height: 100%; */
+  display: block;
+  position: relative;
+}
+
+.page_1 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.ensemble_des_radios_buttons {
+  display: flex;
+}
+
+#closeModalButton {
+  background-color: red;
+  border: none;
+  outline: 1px solid var(--public-dark);
+  color: var(--public-dark);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 0.8rem;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-15%, 15%);
+
+  cursor: pointer;
+}
+
+.pagination_buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.radio_div {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  gap: 0.4rem;
+  padding: 1rem 0;
+  width: 100%;
+  height: fit-content;
+}
+
+/* Bouton radios */
+input[type="radio"] {
+  -webkit-appearance: none;
+}
+
+label.label-radio {
+  height: 60px;
+  width: 90px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--hover-info);
+  position: relative;
+  text-align: center;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+small {
+  display: inline-flex;
+  width: 120px;
+  text-align: center;
+}
+.sun, .moon {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  width: 40px !important;
+  height: auto;
+  /* background-color: red !important; */
+}
+
+input[type="radio"]:checked + label.label-radio {
+  background-color: var(--hover-info);
+  color: var(--public-light);
+  box-shadow: 0 15px 45px rgb(24,249,141,0.2);
+}
+
+.select_div_creneaux {
+    margin: 0.4rem 0;
+}
+
+.select_div_creneaux select,
+.guestDiv input[type="number"] {
+    width: 100%;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: var(--public-light);
+    border-radius: var(--border-radius);
+
+}
+
+.error-message {
+    margin: 0.5rem 0;
+    color: var(--public-light);
+    background-color: var(--danger);
+   text-align: center;
+   font-weight: 500;
+   padding: 0.4rem 0;
+}
+
+.success-message {
+    color: var(--public-light);
+    background-color: var(--success);
+   text-align: center;
+   font-weight: 500;
+   padding: 0.4rem 0;
+   margin: 0.5rem 0;
+}
+</style>
+
 <template>
     <div>
       <button @click="openModal">Ouvrir la fenêtre modale</button>
@@ -61,13 +202,48 @@
             </div>
 
             <!-- Page 3 -->
-            <div v-if="currentPage === 3" >
-                page 3
+            <div v-if="currentPage === 3">
+                <h3>Sélectionnez un créneau horaire :</h3>
+                <div class="select_div_creneaux">
+                    <select v-model="selectedCreneau">
+                        <option :value="null" disabled>Choisissez votre créneau</option>
+                        <option v-for="creneau in creneaux" :value="creneau" :key="creneau" :selected="creneaux.indexOf(creneau) === 0">{{ creneau }}</option>
+                    </select>
+                </div>
+
+                <div class="guestDiv">
+                    <label for="couverts">Nombre d'invités</label>
+                    <input 
+                    v-model="numberOfGuests" 
+                    name="couverts" 
+                    id="couverts" 
+                    type="number"
+                    @input="handleNumberChange"
+                    >
+                    <div v-if="errorCouvertsRestantsMessage" class="error-message">{{ errorCouvertsRestantsMessage }}</div>
+                    <div v-if="successCouvertsRestantsMessage" class="success-message">{{ successCouvertsRestantsMessage }}</div>
+                </div>
+            </div>
+
+            <!-- Page 4 -->
+            <div v-if="currentPage === 4">
+                <h3>Vos informations personnelles</h3>
+                <!-- Nom -->
+                <!-- Prénom -->
+                <!-- Mail -->
+                <!-- Téléphone -->
+                <!-- Textarea informations -->
+                <!-- Checkbox pour confirmer les conditions d'utilisation -->
+
             </div>
             <!-- Pagination -->
             <div class="pagination_buttons">
-                <button v-if="currentPage === 2 || currentPage === 3" @click="goToPage(currentPage - 1)">Précédent</button>
-                <button v-if="selectedDate && currentPage === 1 || selectedService && currentPage === 2" @click="goToPage(currentPage + 1)">Page suivante</button>
+                <button v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
+                <button 
+                v-if="selectedDate && currentPage === 1 
+                || selectedService && currentPage === 2
+                || selectedCreneau && numberOfGuests && currentPage === 3" 
+                @click="goToPage(currentPage + 1)">Continuer</button>
             </div>
           <button id="closeModalButton" @click="closeModal">X</button>
         </div>
@@ -85,6 +261,7 @@ import axios from 'axios';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import 'dayjs/locale/fr';
 
+
 dayjs.extend(isSameOrBefore);
 dayjs.locale('fr');
 
@@ -92,6 +269,9 @@ export default {
   components: { VueDatePicker },
   setup() {
     const showModal = ref(false);
+
+    const errorCouvertsRestantsMessage = ref('');
+    const successCouvertsRestantsMessage = ref('');
 
     // Gestion des pages
     const currentPage = ref(1);
@@ -127,8 +307,19 @@ export default {
 
     // Date selectionnée dans le date picker
     const selectedDate = ref(null);
+    // Formatage de ma date sélectionnée
+    const formattedDateToStore = ref(null);
 
+    // Tableau des creneaux
+    const creneaux = ref([]);
+    // Créneaux horaires sélectionnés
+    const selectedCreneau = ref(null);
 
+    // Nombre d'invité
+    const numberOfGuests = ref(1);
+
+    // Nom du service et de la date pour enregistrer le nombre de couverts
+    const serviceDateCouverts = ref(null);
 
     const openModal = () => {
       showModal.value = true;
@@ -144,6 +335,11 @@ export default {
       }
     };
 
+    // Fonction pour mettre à jour les créneaux
+    const updateCreneaux = (creneauxData) => {
+        creneaux.value = creneauxData;
+    };
+
     // BOUTONS SERVICE
     const handleRadioChange = async (event) => {
         selectedService.value = event.target.value;
@@ -157,35 +353,39 @@ export default {
             const end = subtractMinutes(openingHours.fermeture, 30);
 
             while (start <= end) {
-            creneaux.push(start);
-            // Ajouter 30 minutes à l'heure de début
+            creneaux.push(formatTime(start)); // Appel à la fonction formatTime pour formater l'horaire
             start = addMinutes(start, 30);
             }
 
             console.log(creneaux);
+            updateCreneaux(creneaux);
 
             if (selectedService.value === 'midi' || selectedService.value === 'soir') {
             setTimeout(() => {
                 goToPage(3);
-            }, 100); // Délai d'une seconde (1000 millisecondes)
+            }, 1000); // Délai d'une seconde (1000 millisecondes)
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des informations d'ouverture du restaurant", error);
         }
     };
 
+    const formatTime = (time) => {
+    return time.slice(0, 5);
+    };
+
     // Fonction pour ajouter des minutes à une heure donnée
     const addMinutes = (time, minutes) => {
-    const date = new Date(`1970-01-01T${time}`);
-    date.setMinutes(date.getMinutes() + minutes);
-    return date.toTimeString().slice(0, 5);
+        const date = new Date(`1970-01-01T${time}`);
+        date.setMinutes(date.getMinutes() + minutes);
+        return date.toTimeString().slice(0, 5);
     };
 
     // Fonction pour soustraire des minutes à une heure donnée
     const subtractMinutes = (time, minutes) => {
-    const date = new Date(`1970-01-01T${time}`);
-    date.setMinutes(date.getMinutes() - minutes);
-    return date.toTimeString().slice(0, 5);
+        const date = new Date(`1970-01-01T${time}`);
+        date.setMinutes(date.getMinutes() - minutes);
+        return date.toTimeString().slice(0, 5);
     };
 
     // Date picker
@@ -206,8 +406,6 @@ export default {
                     selectedChoice.value = "Le restaurant est ouvert pour le midi et le soir.";
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = true;
-
-                    console.log(openingHours.couverts_soir);
 
                     if(openingHours.couverts_midi !== null) {
                         nbCouvertsMidi.value = openingHours.couverts_midi;
@@ -262,6 +460,58 @@ export default {
                 console.error("Erreur lors de la récupération des informations d'ouverture du restaurant", error);
             });
         }
+        formattedDateToStore.value = dayjs(selectedDate.value).format('DD-MM-YYYY');
+
+
+    };
+
+    // Nombre d'invité
+    const handleNumberChange = async () => {
+        // Effectuez les actions souhaitées lorsque le nombre change
+        console.log('Nombre de couverts modifié :', numberOfGuests.value);
+        
+        try {
+            const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/couverts`);
+            console.log(response.data);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
+        }
+
+        // On cherche en base de données s'il reste des couverts
+        var prefix = "";
+        
+        if(selectedService.value === 'midi') {
+            prefix = "AM";
+        } else if(selectedService.value === 'soir') {
+            prefix = 'PM';
+        }
+
+        serviceDateCouverts.value = prefix + "+" + formattedDateToStore.value; 
+      
+
+      try {
+        const response = await axios.get(`api/jours/${serviceDateCouverts.value}/couverts_restants`);
+        console.log(response.data);
+
+        if(numberOfGuests.value > 1) {
+        if (response.data.message === "no exist") {
+            successCouvertsRestantsMessage.value = '';
+            errorCouvertsRestantsMessage.value = '';
+        } else if (response.data.couverts_restants >= numberOfGuests.value) {
+          errorCouvertsRestantsMessage.value = '';
+          successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
+        } else if (response.data.couverts_restants < numberOfGuests.value) {
+          errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${response.data.couverts_restants} places`;
+          successCouvertsRestantsMessage.value = '';
+          numberOfGuests.value = ''; // Nettoyer la valeur de l'input
+        }
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
+        errorCouvertsRestantsMessage.value = 'Une erreur s\'est produite. Veuillez réessayer.';
+        numberOfGuests.value = ''; // Nettoyer la valeur de l'input
+      }
+
     };
 
     // Changement de page
@@ -360,117 +610,19 @@ export default {
         handleRadioChange,
         selectedService,
         selectedDay, 
+        creneaux,
+        updateCreneaux,
+        selectedCreneau,
+        numberOfGuests,
+        handleNumberChange,
+        formattedDateToStore,
+        serviceDateCouverts,
+        errorCouvertsRestantsMessage,
+        successCouvertsRestantsMessage,
     };
   },
 };
   </script>
   
-  <style>
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    background-color: var(--public-light-creme);
-    padding: 20px;
-    /* width: 100%;
-    height: 100%; */
-    display: block;
-    position: relative;
-  }
 
-  .page_1 {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem 0.5rem;
-  }
-
-  .ensemble_des_radios_buttons {
-    display: flex;
-  }
-
-  #closeModalButton {
-    background-color: red;
-    border: none;
-    outline: 1px solid var(--public-dark);
-    color: var(--public-dark);
-    padding: 0.2rem 0.4rem;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    font-size: 0.8rem;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-15%, 15%);
-
-    cursor: pointer;
-  }
-
-  .pagination_buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-  }
-
-.radio_div {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; 
-    gap: 0.4rem;
-    padding: 1rem 0;
-    width: 100%;
-    height: fit-content;
-}
-
-  /* Bouton radios */
-  input[type="radio"] {
-    -webkit-appearance: none;
-  }
-
-  label.label-radio {
-    height: 60px;
-    width: 90px;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--hover-info);
-    position: relative;
-    text-align: center;
-    transition: 0.5s;
-    cursor: pointer;
-  }
-
-small {
-    display: inline-flex;
-    width: 120px;
-    text-align: center;
-}
-  .sun, .moon {
-    position: absolute !important;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -30%);
-    width: 40px !important;
-    height: auto;
-    /* background-color: red !important; */
-  }
-
-  input[type="radio"]:checked + label.label-radio {
-	background-color: var(--hover-info);
-	color: var(--public-light);
-	box-shadow: 0 15px 45px rgb(24,249,141,0.2);
-}
-
-  </style>
   

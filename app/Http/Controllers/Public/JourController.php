@@ -56,6 +56,24 @@ class JourController extends Controller
         // Si le jour n'existe pas, renvoyez une réponse appropriée (par exemple, 404 Not Found)
         return response()->json(['error' => 'Jour not found'], 404);
     }
+
+    public function calcGuestWithCouverts($id, $service) {
+        $jour = Jour::find($id);
+
+        if($jour && $service === 'midi') {
+            return response()->json([
+                'couverts' => $jour->couverts_midi,
+            ]);
+        } else if ($jour && $service === 'soir') {
+            return response()->json([
+                'couverts' => $jour->couverts_soir,
+            ]);
+        }
+
+
+        // Si le jour n'existe pas, renvoyez une réponse appropriée (par exemple, 404 Not Found)
+        return response()->json(['error' => 'Jour not found'], 404);
+    }
     /**
      * Store a newly created resource in storage.
      */
