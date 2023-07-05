@@ -27,7 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // ROUTE UTILISATEUR
 Route::middleware('api')->group(function () {
     Route::get('/jours', [JourController::class, 'index']);
-    
+    Route::get('/jours/{id}/opening-hours', [JourController::class, 'getOpeningHours']);
+
 
     Route::get('/fermeture', [FermetureController::class, 'index']);
 });

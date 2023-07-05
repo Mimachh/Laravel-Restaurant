@@ -27,7 +27,19 @@
 
 ## MAILING
 
-## Système de résa : proposer une validation manuelle à partir d'un certain moment
 
 
-## Factoriser les champs qui se répètent
+## Réservation : les jours sont bien désactivés. Maintenant il faut créer une logique inverse : quand l'utilisateur va sélectionner un jour il faut récupérer l'index du jour.
+Puis on lui propose midi ou soir (s'ils sont ouverts). puis après sélection requêter la base de données pour vérifier le jour et le moment de la journée.
+
+- Jour à transformer en index pour le traiter, mais il faut le sauvegarder quelque part  = écran 1 = obligatoire
+- Midi ou Soir (en affichant les couverts restants si pas d'informations alors rien affiché) = écran 2 = obligatoire
+- Creneau par demi heure = écran 2
+- Nombre de couverts = écran 2 = obligatoire = calcul si encore dispo = si pas d'information pour ce service, aucune limite
+- Nom / prenom / numéro / mail = écran 3
+- Validation = écran 3
+- En fonction de l'option de résa auto et validation manuelle à partir de : soit c'est validé = résa status = 1 soit c'est en attente et il est prévenu qu'il recevra un mail
+
+
+## Ajouter dans les options la possibilité de définir la durée des créneaux? 
+## Le nombre de couverts c'est pour un service complet ou c'est juste pour un créneaux?

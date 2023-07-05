@@ -18,6 +18,22 @@ class JourController extends Controller
         return response()->json($jours);
     }
 
+    public function getOpeningHours($id)
+    {
+        $jour = Jour::find($id);
+
+        // Vérifiez si le jour existe dans la table "jours"
+        if ($jour) {
+            // Renvoyez les informations d'ouverture du restaurant pour le jour spécifié
+            return response()->json([
+                'is_open_midi' => $jour->is_open_midi,
+                'is_open_soir' => $jour->is_open_soir,
+            ]);
+        }
+
+        // Si le jour n'existe pas, renvoyez une réponse appropriée (par exemple, 404 Not Found)
+        return response()->json(['error' => 'Jour not found'], 404);
+    }
     /**
      * Store a newly created resource in storage.
      */

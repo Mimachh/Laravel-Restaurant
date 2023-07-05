@@ -1,6 +1,5 @@
 <p class="test">coucou</p>
 
-<p>Ce paragraphe ne doit etre affiché que si fermeture->status == 1</p>
 <div id="app">
     <Counter />
 </div>
@@ -22,13 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(function(response) {
         console.log(response.data);
 
-        if (response.data.status == 1) {
-            // Afficher le paragraphe lorsque le statut est égal à 1
-            document.querySelector('.test').style.display = 'block';
-        } else {
-            // Masquer le paragraphe lorsque le statut est différent de 1
-            document.querySelector('.test').style.display = 'none';
-        }
     })
     .catch(function(error) {
         console.error('Erreur lors de la récupération des données de l\'API des jours', error);
