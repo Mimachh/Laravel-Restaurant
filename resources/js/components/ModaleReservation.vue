@@ -34,7 +34,7 @@
                             <span>Midi</span>
                             <svg id="icone" class="sun" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title/><path d="M276,170a106,106,0,0,0-84.28,170.28A106,106,0,0,0,340.28,191.72,105.53,105.53,0,0,0,276,170Z" fill="#f7ad1e"/><path d="M150.9,242.12A107.63,107.63,0,0,0,150,256a106,106,0,1,0,19.59-61.37" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><path d="M157.56,216.68c-.17.41-.34.81-.5,1.22" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="256" x2="256" y1="64" y2="123"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="256" x2="256" y1="389" y2="447.99"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="120.24" x2="161.96" y1="120.24" y2="161.95"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="350.04" x2="391.76" y1="350.04" y2="391.76"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="64" x2="123" y1="256" y2="256"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="389" x2="448" y1="256" y2="256"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="120.24" x2="161.96" y1="391.76" y2="350.04"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="350.04" x2="391.76" y1="161.95" y2="120.24"/></svg>
                         </label>
-                        <small>Nombre de couverts</small>
+                        <small>Couverts restants: {{ nbCouvertsMidi  }}</small>
                     </div>
                     <div class="radio_div" v-if="isRestaurantOpenSoir" >
                         <input type="radio" name="service" id="soir" value="soir">
@@ -42,7 +42,7 @@
                             <span>Soir</span>
                             <svg class="moon" id="icone" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title/><path d="M276.6,127.6A148.4,148.4,0,0,0,162.14,370.46,148.49,148.49,0,0,0,326.47,387a150.66,150.66,0,0,1-15.94-16.51,148.38,148.38,0,0,1,9.79-236.29A148.18,148.18,0,0,0,276.6,127.6Z" fill="#fff133"/><path d="M116.5,207c-.37,1.05-.73,2.11-1.07,3.17" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><path d="M109.77,234.43a148.43,148.43,0,0,0,221,150.11,148.44,148.44,0,0,1,0-257.08,148.46,148.46,0,0,0-204,56.62" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/></svg>
                         </label>
-                        <small>Nombre de couverts</small>
+                        <small>Couverts restants: {{ nbCouvertsSoir  }}</small>
                     </div>
                 </div>
                 
@@ -86,10 +86,12 @@ export default {
     // Trouver l'index du jour selectionné
     const selectedChoice = ref('');
 
-    // Vérifier si ouvert midi
+    // Vérifier si ouvert midi + couverts
     const isRestaurantOpenMidi = ref(false);
-    // Vérifier si ouvert soir
+    const nbCouvertsMidi = ref('');
+    // Vérifier si ouvert soir + couverts
     const isRestaurantOpenSoir = ref(false);
+    const nbCouvertsSoir = ref('');
 
     // Table jours
     const joursData = ref([]);
@@ -99,6 +101,9 @@ export default {
 
     // Dates désactivées
     const disabledDates = ref([]);
+
+    // Verify Couverts
+    // const verifyCouvertsMidi = ref('');
 
     // Date selectionnée dans le date picker
     const selectedDate = ref(null);
@@ -116,6 +121,8 @@ export default {
         closeModal();
       }
     };
+
+
 
     // Date picker
     const handleDateSelection = (value) => {
@@ -135,18 +142,54 @@ export default {
                     selectedChoice.value = "Le restaurant est ouvert pour le midi et le soir.";
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = true;
+
+                    console.log(openingHours.couverts_soir);
+
+                    if(openingHours.couverts_midi !== null) {
+                        nbCouvertsMidi.value = openingHours.couverts_midi;
+                    } else {
+                        nbCouvertsMidi.value = 'Non renseigné';
+                    }
+
+                    if(openingHours.couverts_soir !== null) {
+                        nbCouvertsSoir.value = openingHours.couverts_soir;
+                    } else {
+                        nbCouvertsSoir.value = 'Non renseigné';
+                    }
+                    
                 } else if (openingHours.is_open_midi === 1) {
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = false;
+
+                    // Vérification nb de couverts
+                    if(openingHours.couverts_midi !== null) {
+                        nbCouvertsMidi.value = openingHours.couverts_midi;
+                    } else {
+                        nbCouvertsMidi.value = 'Non renseigné';
+                    }
+                    nbCouvertsSoir.value = "";
+
                 selectedChoice.value = "Le restaurant est ouvert uniquement pour le midi.";
                 } else if (openingHours.is_open_soir === 1) {
                     selectedChoice.value = "Le restaurant est ouvert uniquement pour le soir.";
                     isRestaurantOpenSoir.value = true;
                     isRestaurantOpenMidi.value = false;
+
+                    // Vérification nb de couverts
+                    nbCouvertsMidi.value = "";
+
+                    if(openingHours.couverts_soir !== null) {
+                        nbCouvertsSoir.value = openingHours.couverts_soir;
+                    } else {
+                        nbCouvertsSoir.value = 'Non renseigné';
+                    }
                 } else {
                     selectedChoice.value = "Le restaurant est fermé ce jour-là.";
                     isRestaurantOpenMidi.value = false;
                     isRestaurantOpenSoir.value = false;
+
+                    nbCouvertsMidi.value = "";
+                    nbCouvertsSoir.value = "";
                 }
                 
                 goToPage(2);
@@ -194,43 +237,48 @@ export default {
 
     // GENERER LES JOURS A DESACTIVER
     const generateDisabledDates = () => {
-      const currentDate = dayjs();
-      const startOfWeek = currentDate.startOf('week');
-      const endOfWeek = currentDate.endOf('week');
-      const disabledDatesArray = [];
+  const currentDate = dayjs();
+  const startOfWeek = currentDate.startOf('week');
+  const endOfWeek = currentDate.endOf('week');
+  const disabledDatesArray = [];
 
-      // les ids des jours correspondent à leur index dans le datepicker
-      const idDayDisabled = [];
-      if (Array.isArray(joursData.value)) {
-        joursData.value.forEach((jour) => {
-
-          if(jour.is_open_midi != 1 && jour.is_open_soir != 1) {
-            idDayDisabled.push(jour.id);
-          }
-
-        });
+  // les ids des jours correspondent à leur index dans le datepicker
+  const idDayDisabled = [];
+  if (Array.isArray(joursData.value)) {
+    joursData.value.forEach((jour) => {
+      if (jour.is_open_midi != 1 && jour.is_open_soir != 1) {
+        idDayDisabled.push(jour.id);
       }
+    });
+  }
 
-        // Remplacer 7 par 0 si présent dans idDayDisabled car le Dimanche vaut 0
-        const index = idDayDisabled.indexOf(7);
-        if (index !== -1) {
-            idDayDisabled.splice(index, 1, 0);
-        }
+  // Remplacer 7 par 0 si présent dans idDayDisabled car le Dimanche vaut 0
+  const index = idDayDisabled.indexOf(7);
+  if (index !== -1) {
+    idDayDisabled.splice(index, 1, 0);
+  }
 
-          // Parcourir toutes les semaines
-        for (let i = 0; i < 52; i++) {
-            // Parcourir tous les jours de la semaine
-            for (let j = 0; j < 7; j++) {
-            const targetDate = startOfWeek.add(i, 'weeks').add(j, 'days');
-            // Vérifier si le jour est un mercredi
-            if (idDayDisabled.includes(targetDate.day())) {
-                disabledDatesArray.push(targetDate.toDate());
-            }
-            }
-        }
+  // Tableau des dates spécifiques à désactiver
+  const specificDatesDisabled = [
+    { month: 11, day: 26 }, // Exemple : 25 décembre
+    // Ajoutez d'autres dates ici au format { month: mois, day: jour }
+    { month: 11, day: 27 },
+  ];
 
-        disabledDates.value = disabledDatesArray;
-    };
+  // Parcourir toutes les semaines
+  for (let i = 0; i < 52; i++) {
+    // Parcourir tous les jours de la semaine
+    for (let j = 0; j < 7; j++) {
+      const targetDate = startOfWeek.add(i, 'weeks').add(j, 'days');
+      // Vérifier si le jour est désactivé ou fait partie des dates spécifiques à désactiver
+      if (idDayDisabled.includes(targetDate.day()) || specificDatesDisabled.some(date => date.month === targetDate.month() && date.day === targetDate.date())) {
+        disabledDatesArray.push(targetDate.toDate());
+      }
+    }
+  }
+
+  disabledDates.value = disabledDatesArray;
+};
 
     onMounted(() => {
       getJoursData();
@@ -251,7 +299,10 @@ export default {
         goToPage,
         selectedChoice,
         isRestaurantOpenMidi,
-        isRestaurantOpenSoir
+        isRestaurantOpenSoir,
+        nbCouvertsMidi,
+        nbCouvertsSoir,
+        
     };
   },
 };
@@ -322,7 +373,7 @@ export default {
     align-items: center;
     justify-content: center; 
     gap: 0.4rem;
-    padding: 1.5rem;
+    padding: 1rem 0;
     width: 100%;
     height: fit-content;
 }
@@ -343,7 +394,11 @@ export default {
     cursor: pointer;
   }
 
-
+small {
+    display: inline-flex;
+    width: 120px;
+    text-align: center;
+}
   .sun, .moon {
     position: absolute !important;
     top: 50%;

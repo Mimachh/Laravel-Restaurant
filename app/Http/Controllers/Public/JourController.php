@@ -28,6 +28,8 @@ class JourController extends Controller
             return response()->json([
                 'is_open_midi' => $jour->is_open_midi,
                 'is_open_soir' => $jour->is_open_soir,
+                'couverts_midi' => $jour->couverts_midi,
+                'couverts_soir' => $jour->couverts_soir,
             ]);
         }
 
