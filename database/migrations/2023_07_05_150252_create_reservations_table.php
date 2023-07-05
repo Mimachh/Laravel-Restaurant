@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->string('date');
+            $table->string('service');
+            $table->string('creneau');
+            $table->integer('convives');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('email');
+            $table->string('telephone')->nullable();
+            $table->text('informations')->nullable();
+            $table->boolean('regles');
+            $table->integer('status')->default(2);
             $table->timestamps();
         });
     }
