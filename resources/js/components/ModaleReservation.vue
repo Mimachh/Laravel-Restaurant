@@ -533,7 +533,7 @@ export default {
 
           console.log('soir', nombreRestantAprèsTestSoir);
 
-          }
+        }
         testSiDataCouvertsRestantsTableExistSoir();
         // FIN
 
@@ -636,9 +636,10 @@ export default {
         // Effectuez les actions souhaitées lorsque le nombre change
         console.log('Nombre de couverts modifié :', numberOfGuests.value);
         
+        // DATA DE BASE
         try {
             const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/couverts`);
-            console.log(response.data);
+            console.log('response de base', response.data);
             nombreDeCouvertsRestantsDeBase.value = response.data.couverts;
         } catch (error) {
             console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
@@ -655,10 +656,10 @@ export default {
 
         serviceDateCouverts.value = prefix + "+" + formattedDateToStore.value; 
       
-
+      // SI ENTREE DANS LA TABLE ON L'UTILISE
       try {
         const response = await axios.get(`api/jours/${serviceDateCouverts.value}/couverts_restants`);
-        console.log(response.data);
+        console.log('response ici si entree dans la table', response.data);
         serviceCouvertsRestants.value = response.data.couverts_restants;
         if(numberOfGuests.value > 1) {
         if (response.data.message === "no exist") {
@@ -681,6 +682,10 @@ export default {
         errorCouvertsRestantsMessage.value = 'Une erreur s\'est produite. Veuillez réessayer.';
         numberOfGuests.value = ''; // Nettoyer la valeur de l'input
       }
+
+
+
+      // Si entrée dans la table != no exist et différent de null alors on utilise, sinon on récupère la donnée de base.
 
     };
 
