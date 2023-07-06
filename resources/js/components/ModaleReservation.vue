@@ -171,6 +171,22 @@ input[type="radio"]:checked + label.label-radio {
   color: var(--public-dark);
 }
 
+.error-messages {
+  width: 100%;
+  background-color: var(--danger);
+  color: var(--public-dark);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.6rem 0;
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+}
+
+.error-messages ul li {
+  list-style: none;
+}
+
 </style>
 
 <template>
@@ -183,6 +199,21 @@ input[type="radio"]:checked + label.label-radio {
           <div class="modal-content">
             <!-- Contenu de la fenêtre modale -->
             <h2>Réserver une table</h2>
+            <div v-if="errorMessages.length > 0" class="error-messages">
+              <ul>
+                <li v-for="errorMessage in errorMessages" :key="errorMessage">
+                  {{ errorMessage }}
+                </li>
+              </ul>
+            </div>
+
+            <div v-if="successMessages.length > 0" class="success-messages">
+              <ul>
+                <li v-for="successMessage in successMessages" :key="successMessage">
+                  {{ successMessage }}
+                </li>
+              </ul>
+            </div>
               <!-- Page 1 -->
               <div v-if="currentPage === 1" class="page_1">
                   <p v-if="fermetureData.status == 1" >
@@ -196,6 +227,7 @@ input[type="radio"]:checked + label.label-radio {
                       :enable-time-picker="false"
                       teleport-center
                       @update:modelValue="handleDateSelection"
+                      
                   ></VueDatePicker>
               </div>
 
@@ -329,6 +361,8 @@ export default {
 
     const errorCouvertsRestantsMessage = ref('');
     const successCouvertsRestantsMessage = ref('');
+    const errorMessages = ref([]);
+    const successMessages = ref([]);
 
     // Gestion des pages
     const currentPage = ref(1);
@@ -428,7 +462,7 @@ export default {
             if (selectedService.value === 'midi' || selectedService.value === 'soir') {
             setTimeout(() => {
                 goToPage(3);
-            }, 1000); // Délai d'une seconde (1000 millisecondes)
+            }, 10); // Délai d'une seconde (1000 millisecondes)
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des informations d'ouverture du restaurant", error);
@@ -653,43 +687,66 @@ export default {
       disabledDates.value = disabledDatesArray;
     };
 
+    // CLEAN MES DONNEES
+    const isValidEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
+    const cleanFormData = () => {
+      const cleanedData = {
+        date: formattedDateToStore.value.trim(),
+        service: selectedService.value.trim(),
+        nom: nom.value.trim(),
+        prenom: prenom.value.trim(),
+        telephone: telephone.value.trim(),
+        informations: informations.value.trim(),
+        creneau: selectedCreneau.value.trim(),
+        mail: isValidEmail(mail.value.trim()) ? mail.value.trim() : '',
+        regles: conditionsUtilisation.value ? 1 : 0,
+        convives: parseInt(numberOfGuests.value, 10) || 0,
+        // Ajoutez d'autres champs du formulaire si nécessaire
+      };
+
+      return cleanedData;
+    };
+
 
     const submitForm = async () => {
       try {
-        console.log("Données du formulaire :", {
-          date: formattedDateToStore.value,
-          service: selectedService.value,
-          creneau: selectedCreneau.value,
-          convives: numberOfGuests.value,
-          nom: nom.value,
-          prenom: prenom.value,
-          email: mail.value,
-          telephone: telephone.value,
-          informations: informations.value,
-          regles: conditionsUtilisation.value
-          // Ajoutez d'autres champs du formulaire si nécessaire
-        });
+        errorMessages.value = [];
+        successMessages.value = [];
+        const cleanedData = cleanFormData();
 
-        const response = await axios.post('/api/reservation', {
-          // Données du formulaire à envoyer
-          date: formattedDateToStore.value,
-          service: selectedService.value,
-          creneau: selectedCreneau.value,
-          convive: numberOfGuests.value,
-          nom: nom.value,
-          prenom: prenom.value,
-          mail: mail.value,
-          telephone: telephone.value,
-          informations: informations.value,
-          regles: conditionsUtilisation.value
-          // Ajoutez d'autres champs du formulaire si nécessaire
+        console.log("Données du formulaire :", cleanedData);
+
+        const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
+        const response = await axios.post('/api/reservation', cleanedData, {
+          headers: {
+            'X-CSRF-TOKEN': csrfToken
+          }
         });
 
         console.log(response.data);
         // Traitez la réponse ou effectuez d'autres actions après la soumission réussie
       } catch (error) {
-        console.error("Erreur lors de la soumission du formulaire", error);
-        // Traitez les erreurs ou effectuez d'autres actions en cas d'erreur
+        if (error.response && error.response.status === 422) {
+          // Récupérer les erreurs de validation de la réponse
+          const validationErrors = error.response.data.errors;
+
+          // Réinitialiser les messages d'erreur
+          errorMessages.value = [];
+
+          // Parcourir les erreurs de validation et ajouter les messages appropriés
+          for (let field in validationErrors) {
+            // errorMessages.value.push(validationErrors[field][0]);
+            errorMessages.value = Object.values(validationErrors).flat();
+          }
+        } else {
+          console.error("Erreur lors de la soumission du formulaire", error);
+          // Traitez les autres erreurs ici
+        }
       }
     };
 
@@ -733,7 +790,9 @@ export default {
         telephone,
         informations,
         conditionsUtilisation,
-        submitForm
+        submitForm,
+        errorMessages,
+        successMessages,
     };
   },
 };
