@@ -323,8 +323,8 @@ input[type="radio"]:checked + label.label-radio {
               </div>
               <!-- Pagination -->
               <div class="pagination_buttons">
-                  <button v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
-                  <button 
+                  <button type="button" v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
+                  <button type="button" 
                   v-if="selectedDate && currentPage === 1 
                   || selectedService && currentPage === 2
                   || selectedCreneau && numberOfGuests && currentPage === 3" 
@@ -411,6 +411,9 @@ export default {
 
     // Nom du service et de la date pour enregistrer le nombre de couverts
     const serviceDateCouverts = ref(null);
+    // Nombre de couverts restants pour enregistrer en base de données
+    const serviceCouvertsRestants = ref(null);
+    const nombreDeCouvertsRestantsDeBase = ref(null);
 
     // Formulaire de fin
     const nom = ref(null);
@@ -490,6 +493,50 @@ export default {
     // Date picker
     const handleDateSelection = (value) => {
         selectedDate.value = value;
+        
+
+        // ICI JE REQUETE POUR VOIR SI UNE ENTREE EXISTE le MIDI OU LE SOIR
+        formattedDateToStore.value = dayjs(selectedDate.value).format('DD-MM-YYYY');
+        var nombreRestantAprèsTestMatin = "";
+        var nombreRestantAprèsTestSoir = "";
+
+        const testSiDataCouvertsRestantsTableExistMatin = async () => {
+          const testerLeMatin = "AM+" + formattedDateToStore.value;
+          try {
+            const response = await axios.get(`api/jours/${testerLeMatin}/couverts_restants`);
+            console.log('response', response.data);
+            nombreRestantAprèsTestMatin = response.data.couverts_restants;
+            if(response.data.message === "no exist") {
+              nombreRestantAprèsTestMatin = null;
+            }
+          } catch (error) {
+            console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
+          }
+          console.log('matin', nombreRestantAprèsTestMatin);
+
+        }
+        testSiDataCouvertsRestantsTableExistMatin();
+        
+        const testSiDataCouvertsRestantsTableExistSoir = async () => {
+          const testerLeSoir = "PM+" + formattedDateToStore.value;
+          try {
+            const response = await axios.get(`api/jours/${testerLeSoir}/couverts_restants`);
+            console.log(response.data);
+            nombreRestantAprèsTestSoir = response.data.couverts_restants;
+            if(response.data.message === "no exist") {
+              nombreRestantAprèsTestSoir = null;
+            }
+            
+          } catch (error) {
+            console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
+          }
+
+          console.log('soir', nombreRestantAprèsTestSoir);
+
+          }
+        testSiDataCouvertsRestantsTableExistSoir();
+        // FIN
+
         if (currentPage.value === 1 && selectedDate.value) {
             // Récupérer le jour de la semaine correspondant à la date sélectionnée
            selectedDay.value = dayjs(selectedDate.value).day();
@@ -505,28 +552,43 @@ export default {
                     selectedChoice.value = "Le restaurant est ouvert pour le midi et le soir.";
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = true;
+   
 
-                    if(openingHours.couverts_midi !== null) {
+                    if(nombreRestantAprèsTestMatin === null) {
+                      if(openingHours.couverts_midi !== null) {
                         nbCouvertsMidi.value = openingHours.couverts_midi;
+                      } else {
+                          nbCouvertsMidi.value = 'Non renseigné';
+                      }
                     } else {
-                        nbCouvertsMidi.value = 'Non renseigné';
+                      nbCouvertsMidi.value = nombreRestantAprèsTestMatin;
                     }
 
-                    if(openingHours.couverts_soir !== null) {
-                        nbCouvertsSoir.value = openingHours.couverts_soir;
+                    if(nombreRestantAprèsTestSoir == null) {
+                      console.log('ici')
+                        if(openingHours.couverts_soir !== null) {
+                          nbCouvertsSoir.value = openingHours.couverts_soir;
+                        } else {
+                          nbCouvertsSoir.value = 'Non renseigné';
+                        }
                     } else {
-                        nbCouvertsSoir.value = 'Non renseigné';
+                      nbCouvertsSoir.value = nombreRestantAprèsTestSoir;
                     }
+
                     
                 } else if (openingHours.is_open_midi === 1) {
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = false;
 
                     // Vérification nb de couverts
-                    if(openingHours.couverts_midi !== null) {
-                        nbCouvertsMidi.value = openingHours.couverts_midi;
+                    if(nombreRestantAprèsTestMatin) {
+                      nbCouvertsMidi.value = nombreRestantAprèsTestMatin;
                     } else {
-                        nbCouvertsMidi.value = 'Non renseigné';
+                      if(openingHours.couverts_midi !== null) {
+                        nbCouvertsMidi.value = openingHours.couverts_midi;
+                      } else {
+                          nbCouvertsMidi.value = 'Non renseigné';
+                      }  
                     }
                     nbCouvertsSoir.value = "";
 
@@ -535,14 +597,19 @@ export default {
                     selectedChoice.value = "Le restaurant est ouvert uniquement pour le soir.";
                     isRestaurantOpenSoir.value = true;
                     isRestaurantOpenMidi.value = false;
-
+                    console.log(nombreRestantAprèsTestSoir);
                     // Vérification nb de couverts
                     nbCouvertsMidi.value = "";
 
-                    if(openingHours.couverts_soir !== null) {
-                        nbCouvertsSoir.value = openingHours.couverts_soir;
+                    if(nombreRestantAprèsTestSoir) {
+                      nbCouvertsSoir.value = nombreRestantAprèsTestSoir;
+  
                     } else {
-                        nbCouvertsSoir.value = 'Non renseigné';
+                      if(openingHours.couverts_soir !== null) {
+                          nbCouvertsSoir.value = openingHours.couverts_soir;
+                        } else {
+                          nbCouvertsSoir.value = 'Non renseigné';
+                        }
                     }
                 } else {
                     selectedChoice.value = "Le restaurant est fermé ce jour-là.";
@@ -559,7 +626,7 @@ export default {
                 console.error("Erreur lors de la récupération des informations d'ouverture du restaurant", error);
             });
         }
-        formattedDateToStore.value = dayjs(selectedDate.value).format('DD-MM-YYYY');
+        
 
 
     };
@@ -572,6 +639,7 @@ export default {
         try {
             const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/couverts`);
             console.log(response.data);
+            nombreDeCouvertsRestantsDeBase.value = response.data.couverts;
         } catch (error) {
             console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
         }
@@ -591,7 +659,7 @@ export default {
       try {
         const response = await axios.get(`api/jours/${serviceDateCouverts.value}/couverts_restants`);
         console.log(response.data);
-
+        serviceCouvertsRestants.value = response.data.couverts_restants;
         if(numberOfGuests.value > 1) {
         if (response.data.message === "no exist") {
             successCouvertsRestantsMessage.value = '';
@@ -705,6 +773,8 @@ export default {
         mail: isValidEmail(mail.value.trim()) ? mail.value.trim() : '',
         regles: conditionsUtilisation.value ? 1 : 0,
         convives: parseInt(numberOfGuests.value, 10) || 0,
+        nomPourTableCouvertsRestants: serviceDateCouverts.value.trim(),
+        nombreCouvertsRestants: nombreDeCouvertsRestantsDeBase.value,
         // Ajoutez d'autres champs du formulaire si nécessaire
       };
 
@@ -793,6 +863,8 @@ export default {
         submitForm,
         errorMessages,
         successMessages,
+        serviceCouvertsRestants,
+        nombreDeCouvertsRestantsDeBase
     };
   },
 };

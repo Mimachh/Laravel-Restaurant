@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Reservation;
+
+use App\Models\Validation;
+use App\Models\Couvertsrestants;
+
 class ReservationController extends Controller
 {
     public function store(Request $request) {
@@ -14,9 +19,9 @@ class ReservationController extends Controller
             'service' => 'required|string|max:60',
             'creneau' => 'required|string|max:60',
             'convives' => 'required|integer|min:0',
-            'nom' => 'required|string|max:2',
-            'prenom' => 'required|string|max:2',
-            'mail' => 'required|email|max:2',
+            'nom' => 'required|string|max:60',
+            'prenom' => 'required|string|max:60',
+            'mail' => 'required|email|max:60',
             'telephone' => 'nullable|string|max:10',
             'informations' => 'nullable|string|max:255',
             'regles' => 'required|boolean',
@@ -28,14 +33,54 @@ class ReservationController extends Controller
             ], 422);
         }
         
-        $cleanedData = $validator->clean();
+        $cleanedData = $validator->validated();
+        
+        // $cleanedDate
+        // $cleanedService
+        // $cleanedConvives
+        // $cleanedNom = strip_tags(trim($validator['nom']));
+        // $cleanedPrenom
+        // $cleanedMail
+        // $cleanedTel
+        // $cleanedInformations
+        // $cleanedRegles
 
         // Tous les champs dans reservation
 
+        $validation = Validation::first();
+
         // Vérifier pour le mail
+        $validation_is_mail = $validation->is_email_confirmation;
+        if($validation_is_mail == '1') {
+            // envoyer un mail
+        } else {
+            // pas de mail
+        }
+
         // Vérifier si validation automatique ou non
-        // Vérifier le nombre de convive
-        // Date / Service / Convives doivent aller dans une table à part
+        $validation_auto = $validation->is_automatic_validation;
+        $validation_auto_status = "";
+        if($validation_auto === '1') {
+            $validation_auto_status = 1;
+        } else {
+            $validation_auto_status = 2;
+        }
+        $validation_is_add_manual_validation = $validation->is_add_manual_validation;
+        $number_limit_validation = 0;
+        if(isset($validation->manual_limit_validation)) {
+            $number_limit_validation = $validation->manual_limit_validation;
+        } else {
+            $number_limit_validation = 0;
+        }
+
+        if($validation_is_add_manual_validation == '1' && intval($cleanedData['convives']) >= intval($number_limit_validation) ) {
+            $validation_auto_status = 2;
+        } else {
+            $validation_auto_status = 1;
+        }
+        // Vérifier le nombre de convives
+
+        
 
         // ENREGISTREMENT RESERVATION
         $reservation = new Reservation();
@@ -49,7 +94,31 @@ class ReservationController extends Controller
         $reservation->telephone = $cleanedData['telephone'];
         $reservation->informations = $cleanedData['informations'];
         $reservation->regles = $cleanedData['regles'];
-        $reservation->status = 2; // Valeur par défaut a modifier en fonction du choix et du nombre
+        $reservation->status = $validation_auto_status; // Valeur par défaut a modifier en fonction du choix et du nombre
         $reservation->save();
+
+
+
+        // Date / Service / Convives doivent aller dans une table à part
+        $nomDeLaTableCouvertsRestants = $request->nomPourTableCouvertsRestants;
+
+        $couvertsRestantsTableExists = CouvertsRestants::where('nom', $nomDeLaTableCouvertsRestants)->first();
+        if($couvertsRestantsTableExists) {
+            // UPDATE
+        } else {
+            // ICI IL FAUT CREER LA TABLE EN INDIQUANT LE NOMBRE DE COUVERTS DE BASE
+            $nombreCouvertsRestantsApresCalcul = null;
+            if($request->nombreCouvertsRestants) {
+                $nombreCouvertsRestantsApresCalcul = $request->nombreCouvertsRestants - intval($cleanedData['convives']);
+            } else {
+                $nombreCouvertsRestantsApresCalcul = null;
+            }
+            
+            $calculCouvertsRestants = new Couvertsrestants();
+            $calculCouvertsRestants->nom = $request->nomPourTableCouvertsRestants;
+            $calculCouvertsRestants->couverts_restants = $nombreCouvertsRestantsApresCalcul;
+            $calculCouvertsRestants->save();
+        }
+
     }
 }
