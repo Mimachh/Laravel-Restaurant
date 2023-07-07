@@ -328,6 +328,13 @@ input[type="radio"]:checked + label.label-radio {
                   <label for="conditionsUtilisation">J'accepte les conditions d'utilisation *</label>
                 </div>
               </div>
+
+              <!-- Page 5 -->
+              <div v-if="currentPage === 5">
+                <div v-if="confirmationMessage" class="confirmation-messages">
+                      <p>{{ confirmationMessage }}</p>  
+                </div>
+              </div>
               <!-- Pagination -->
               <div class="pagination_buttons">
                   <button type="button" v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
@@ -371,6 +378,7 @@ export default {
     const errorMessages = ref([]);
     const successMessages = ref([]);
     const errorUnique = ref('');
+    const confirmationMessage = ref('');
     // Gestion des pages
     const currentPage = ref(1);
 
@@ -749,6 +757,24 @@ export default {
 
     };
 
+    const returnToPage1AndReset = () => {
+      closeModal();
+      currentPage.value = 1;
+      selectedDate.value = null;
+      formattedDateToStore.value = null;
+      selectedService.value = null;
+      nom.value = null;
+      prenom.value = null;
+      telephone.value = null;
+      informations.value = null;
+      selectedCreneau.value = null;
+      mail.value = null;
+      conditionsUtilisation.value = null;
+      numberOfGuests.value = null;
+      serviceDateCouverts.value = null;
+      nombreDeCouvertsRestantsDeBase.value = null;
+    };
+
     // Changement de page
     const goToPage = (page) => {
       currentPage.value = page;
@@ -873,7 +899,12 @@ export default {
           }
         });
 
-        console.log(response.data);
+        console.log(response.data.message);
+        confirmationMessage.value = response.data.message;
+        goToPage(5);
+        setTimeout(() => {
+          returnToPage1AndReset();
+        }, 3000); // Délai de 3 secondes (3000 millisecondes)
         // Traitez la réponse ou effectuez d'autres actions après la soumission réussie
       } catch (error) {
         console.log(error.response.data.error);
@@ -955,6 +986,7 @@ export default {
         nombreRestantAprèsTestMatin,
         nombreRestantAprèsTestSoir,
         errorUnique,
+        confirmationMessage,
     };
   },
 };

@@ -95,7 +95,6 @@ class ReservationController extends Controller
         $reservation->informations = $cleanedData['informations'];
         $reservation->regles = $cleanedData['regles'];
         $reservation->status = $validation_auto_status;
-        $reservation->save();
 
 
 
@@ -113,11 +112,25 @@ class ReservationController extends Controller
             if($nbCouvertsRestants >= 0) {
                 $couvertsRestantsTableExists->couverts_restants = $nbCouvertsRestants;
                 $couvertsRestantsTableExists->save();
+
+                $reservation->save();
+
+                if($validation_auto_status === 1) {
+                    return response()->json([
+                        'message' => 'Réservation enregistrée avec succès.'
+                    ], 200);
+                } else if ($validation_auto_status === 2) {
+                    return response()->json([
+                        'message' => 'Votre réservation à bien été reçu, nous vous répondrons au plus vite par mail.'
+                    ], 200);
+                }
+
             } else {
                 return response()->json([
                     'error' => 'Désolé nous n\'avons plus de place disponible.',
                 ], 422);
             }
+
 
 
         } else {
@@ -133,6 +146,17 @@ class ReservationController extends Controller
             $calculCouvertsRestants->nom = $request->nomPourTableCouvertsRestants;
             $calculCouvertsRestants->couverts_restants = $nombreCouvertsRestantsApresCalcul;
             $calculCouvertsRestants->save();
+
+            $reservation->save();
+            if($validation_auto_status === 1) {
+                return response()->json([
+                    'message' => 'Réservation enregistrée avec succès.'
+                ], 200);
+            } else if ($validation_auto_status === 2) {
+                return response()->json([
+                    'message' => 'Votre réservation à bien été reçu, nous vous répondrons au plus vite par mail.'
+                ], 200);
+            }
         }
 
     }

@@ -29,17 +29,22 @@
 
 
 
-## Réservation : les jours sont bien désactivés. Maintenant il faut créer une logique inverse : quand l'utilisateur va sélectionner un jour il faut récupérer l'index du jour.
-Puis on lui propose midi ou soir (s'ils sont ouverts). puis après sélection requêter la base de données pour vérifier le jour et le moment de la journée.
+## Réservation 
+Créer système de mailing :
+    -   mail de confirmation lorsque confirmation auto
+    -   mail de mise en attente si confirmation auto mais dépassement nombre limite
+    -   mail de mise en attente si pas de confirmation auto
+    -   mail informatif de confirmation lorsque manuel et accepté
+    -   mail informatif de refus lorsque manuel et refusé
+    -   possibilité d'éditer et de refuser ou accepter après coups
 
-<!-- - Jour à transformer en index pour le traiter, mais il faut le sauvegarder quelque part  = écran 1 = obligatoire -->
-<!-- - Midi ou Soir (en affichant les couverts restants si pas d'informations alors rien affiché) = écran 2 = obligatoire -->
-- Creneau par demi heure = écran 2
-- Nombre de couverts = écran 2 = obligatoire = calcul si encore dispo = si pas d'information pour ce service, aucune limite
-- Nom / prenom / numéro / mail = écran 3
-- Validation = écran 3
-- En fonction de l'option de résa auto et validation manuelle à partir de : soit c'est validé = résa status = 1 soit c'est en attente et il est prévenu qu'il recevra un mail
+    - Mail pour informer l'admin qu'une réservation est reçue.
 
+Créer l'espace de gestion de réservation
+    - La liste est sous forme de date à partir d'aujourd'hui? Trié par date puis on déroule pour voir midi ou soir, puis on clique pour accéder à la liste complète.
+    - Cette nouvelle liste avec la date, le créneau, le nombre de couvert, le status + possibilité d'éditer le status + possibilité de voir en détail
+
+    - Même système pour l'historique 
 
 ## Ajouter dans les options la possibilité de définir la durée des créneaux? 
 ## Le nombre de couverts c'est pour un service complet ou c'est juste pour un créneaux?
