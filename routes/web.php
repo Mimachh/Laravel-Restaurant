@@ -297,14 +297,15 @@ Route::group(["middleware" => ['auth', 'role:1,2,4'], "prefix" => "admin", "as" 
         Route::get('/{date}/{service}/{status}', [ReservationController::class, 'date_service_status'])->name('date.service.reservation.status');
         
         // Résa show
-        Route::get('/voir/{id}/{date}/{service}', [ReservationController::class, 'show'])->name('a_venir.show');
-        Route::get('/{id}/edit/{date}/{service}', [ReservationController::class, 'edit'])->name('a_venir.edit');
-        Route::put('/{id}/{date}/{service}', [ReservationController::class, 'update'])->name('update');
+        Route::get('/voir/{id}', [ReservationController::class, 'show'])->name('a_venir.show');
+        // Resa edit avec info pour redirection
+        Route::get('/{id}/edit', [ReservationController::class, 'edit'])->name('a_venir.edit');
+        Route::put('/{id}', [ReservationController::class, 'update'])->name('update');
 
         // HISTORIQUE
-        Route::get('/historique', [ReservationController::class, 'index'])->name('historique.index');
+        Route::get('/historique', [ReservationController::class, 'historique'])->name('historique');
         // Résa à venir pour un jour en particulier
-        Route::get('/historique/{id}', [ReservationController::class, 'a_venir'])->name('historique.date');
+        // Route::get('/historique/{id}', [ReservationController::class, 'a_venir'])->name('historique.date');
     });
 
 });

@@ -9,14 +9,17 @@
     @foreach ($paginatedGroupedReservations as $date => $groupedServices)
       @php
         $dateObj = DateTime::createFromFormat('d-m-Y', $date);
+        
         $today = new DateTime();
       @endphp
 
-      @if ($dateObj >= $today)
+
+      @if ($dateObj->format('d-m-Y') >= $today->format('d-m-Y'))
+
         <li class="reservations-item">
           <h2 class="reservations-date">{{ $date }}</h2>
           <ul class="services-list">
-            @foreach ($groupedServices->reverse() as $service => $reservations)
+            @foreach ($groupedServices->sortKeys() as $service => $reservations)
               <li class="service-item service-item-{{$service}}">
                 <a href="{{ route('admin.reservations.date.service', ['date' => $date, 'service' => $service]) }}" class="service-link">
                   {{ $service }}

@@ -43,6 +43,38 @@ class ReservationController extends Controller
         return view('admin.reservation.index', compact('paginatedGroupedReservations'));
     }
 
+    public function historique()
+    {
+        $reservations = Reservation::orderByDesc('date')
+            ->whereDate('date', '<', now()->toDateString())
+            ->get();
+    
+        $groupedReservations = $reservations->groupBy('date')->sort(function ($reservationsA, $reservationsB) {
+            $dateA = DateTime::createFromFormat('d-m-Y', $reservationsA->first()->date);
+            $dateB = DateTime::createFromFormat('d-m-Y', $reservationsB->first()->date);
+    
+            return $dateA <=> $dateB;
+        });
+    
+        // Trier les réservations par service pour chaque date
+        foreach ($groupedReservations as $date => $reservations) {
+            $groupedReservations[$date] = $reservations->groupBy('service');
+        }
+    
+        $currentPage = Request::get('page') ?: 1;
+        $perPage = 10;
+    
+        $paginatedGroupedReservations = new LengthAwarePaginator(
+            $groupedReservations->forPage($currentPage, $perPage),
+            $groupedReservations->count(),
+            $perPage,
+            $currentPage,
+            ['path' => Request::url()]
+        );
+    
+        return view('admin.reservation.historique', compact('paginatedGroupedReservations'));
+    }
+
     public function a_venir($date, $service) {
         $reservations = Reservation::where('date', $date)->where('service', $service)->get();
         $status = 1;
@@ -65,25 +97,25 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function show(string $id, $date, $service) {
+    public function show(string $id) {
         $reservation = Reservation::find($id);
 
-        return view('admin.reservation.show', compact('reservation', 'date', 'service'));
+        return view('admin.reservation.show', compact('reservation'));
     }
 
-    public function edit(string $id, $date, $service) {
+    public function edit(string $id) {
 
         $reservation = Reservation::findOrFail($id);
-        return view('admin.reservation.edit', compact('reservation', 'date', 'service'));
+        return view('admin.reservation.edit', compact('reservation'));
     }
 
-    public function update(Request2 $request, $id, $date, $service) {
+    public function update(Request2 $request, $id) {
         // dd($id, $date, $service);
         $reservation = Reservation::findOrFail($id);
 
         $reservation->status = $request->status;
         $reservation->save();
 
-        return redirect()->route('admin.reservations.date.service', ['date' => $date, 'service' => $service])->with('success', 'Le statut à bien été changé.');
+        return redirect()->route('admin.reservations.date.service', ['date' => $reservation->date, 'service' => $reservation->service])->with('success', 'Le statut à bien été changé.');
     }
 }

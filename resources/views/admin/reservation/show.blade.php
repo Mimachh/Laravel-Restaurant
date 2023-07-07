@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="reservation-card-footer">
-        <a href="{{ route('admin.reservations.a_venir.edit', [$reservation->id, $date, $service]) }}" class="btn-edit">Changer le statut</a>
+        <a href="{{ route('admin.reservations.a_venir.edit', $reservation->id) }}" class="btn-edit">Changer le statut</a>
     </div>
 </div>
 

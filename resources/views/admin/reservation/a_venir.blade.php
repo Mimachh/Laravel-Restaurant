@@ -41,7 +41,7 @@
                     <td>{{ $reservation->informations }}</td>
                     <td>{{ $reservation->getStatus() }}</td>
                     <td>
-                        <a href="{{ route('admin.reservations.a_venir.show', [$reservation->id, $date, $service]) }}" class="btn-create">Voir</a>
+                        <a href="{{ route('admin.reservations.a_venir.show', $reservation->id,) }}" class="btn-create">Voir</a>
                         <a href="{{ route('admin.reservations.a_venir.edit', [$reservation->id, $date, $service]) }}" class="btn-edit">Changer le statut</a>
                     </td>
                 </tr>

@@ -3,9 +3,9 @@
 @extends('layout.admin')
 
 @section('content')
-<h1>Réservation lolilol de {{ $reservation->userName() }}</h1>
+<h1>Modifier la réservation de {{ $reservation->userName() }}</h1>
 
-<form action="{{ route('admin.reservations.update', [$reservation->id, $date, $service]) }}" method="post">
+<form action="{{ route('admin.reservations.update', $reservation->id) }}" method="post">
     @csrf
     @method('PUT')
 <div class="reservation-card">
