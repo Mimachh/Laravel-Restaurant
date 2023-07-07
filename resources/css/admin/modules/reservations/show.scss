@@ -1,0 +1,60 @@
+.reservation-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin: 0 auto;
+}
+
+.reservation-card-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--admin-secondary);
+}
+
+.reservation-card-body {
+  margin-bottom: 10px;
+}
+
+.reservation-card-row {
+  margin-bottom: 10px;
+}
+
+.reservation-card-label {
+  font-weight: bold;
+}
+
+.reservation-card-value {
+  display: block;
+  margin-top: 0.3rem;
+  padding-bottom: 0.6rem;
+}
+
+.reservation-card-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-edit {
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: var(--admin-highlight);
+  color: var(--admin-light);
+  border-radius: 4px;
+}
+
+.btn-edit:hover {
+  background-color: #f57c00;
+}
+
+.btn-edit:active {
+  background-color: #e65100;
+}

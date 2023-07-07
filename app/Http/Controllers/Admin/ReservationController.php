@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request as Request2;
 use App\Models\Reservation;
 use DateTime;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -45,11 +45,12 @@ class ReservationController extends Controller
 
     public function a_venir($date, $service) {
         $reservations = Reservation::where('date', $date)->where('service', $service)->get();
-
+        $status = 1;
         return view('admin.reservation.a_venir', [
             'reservations' => $reservations,
             'date' => $date,
-            'service' => $service
+            'service' => $service,
+            'status' => $status
         ]);
     }
 
@@ -62,5 +63,27 @@ class ReservationController extends Controller
             'service' => $service,
             'status' => $status
         ]);
+    }
+
+    public function show(string $id, $date, $service) {
+        $reservation = Reservation::find($id);
+
+        return view('admin.reservation.show', compact('reservation', 'date', 'service'));
+    }
+
+    public function edit(string $id, $date, $service) {
+
+        $reservation = Reservation::findOrFail($id);
+        return view('admin.reservation.edit', compact('reservation', 'date', 'service'));
+    }
+
+    public function update(Request2 $request, $id, $date, $service) {
+        // dd($id, $date, $service);
+        $reservation = Reservation::findOrFail($id);
+
+        $reservation->status = $request->status;
+        $reservation->save();
+
+        return redirect()->route('admin.reservations.date.service', ['date' => $date, 'service' => $service])->with('success', 'Le statut à bien été changé.');
     }
 }

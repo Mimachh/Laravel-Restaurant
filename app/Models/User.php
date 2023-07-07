@@ -78,4 +78,6 @@ class User extends Authenticatable
         return $this->roles->implode("name", ', ' );
     }
 
+
+
 }

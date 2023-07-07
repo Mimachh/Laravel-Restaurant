@@ -32,15 +32,20 @@
 ## Réservation 
 EN CAS DE MANUEL IL FAUT BIEN PENSER A INTEGRER LE CALCUL DANS LA TABLE COUVERTS RESTANTS
 EN CAS DE REFUS D'UNE INVIT DEJA ACCEPTE EN AUTO OU MANUEL IL FAUT DECREMENTER LE COUVERTSRESTANTS
+
 Créer système de mailing :
     -   mail de confirmation lorsque confirmation auto
     -   mail de mise en attente si confirmation auto mais dépassement nombre limite
+
     -   mail de mise en attente si pas de confirmation auto
     -   mail informatif de confirmation lorsque manuel et accepté
     -   mail informatif de refus lorsque manuel et refusé
+
     -   possibilité d'éditer et de refuser ou accepter après coups
 
     - Mail pour informer l'admin qu'une réservation est reçue.
+
+
 
 Créer l'espace de gestion de réservation
     - La liste est sous forme de date à partir d'aujourd'hui? Trié par date puis on déroule pour voir midi ou soir, puis on clique pour accéder à la liste complète.
@@ -57,6 +62,7 @@ Créer l'espace de gestion de réservation
 
     -   Pareil pour l'historique
 
+Quand tout le système admin sera opérationnel, changer le design de pagination : liste des dates à venir
 
 ## Ajouter dans les options la possibilité de définir la durée des créneaux? 
 ## Le nombre de couverts c'est pour un service complet ou c'est juste pour un créneaux?
