@@ -78,7 +78,7 @@ class ReservationController extends Controller
         } else {
             $validation_auto_status = 1;
         }
-        // Vérifier le nombre de convives
+       
 
         
 
@@ -94,17 +94,32 @@ class ReservationController extends Controller
         $reservation->telephone = $cleanedData['telephone'];
         $reservation->informations = $cleanedData['informations'];
         $reservation->regles = $cleanedData['regles'];
-        $reservation->status = $validation_auto_status; // Valeur par défaut a modifier en fonction du choix et du nombre
+        $reservation->status = $validation_auto_status;
         $reservation->save();
 
 
 
-        // Date / Service / Convives doivent aller dans une table à part
+        // Verifier si déjà une entrée dans la table de calcul de couverts restants
         $nomDeLaTableCouvertsRestants = $request->nomPourTableCouvertsRestants;
 
         $couvertsRestantsTableExists = CouvertsRestants::where('nom', $nomDeLaTableCouvertsRestants)->first();
         if($couvertsRestantsTableExists) {
             // UPDATE
+            $nbCouvertsRestants = $couvertsRestantsTableExists->couverts_restants;
+            if($nbCouvertsRestants) {
+                $nbCouvertsRestants -= intval($cleanedData['convives']);
+            } 
+
+            if($nbCouvertsRestants >= 0) {
+                $couvertsRestantsTableExists->couverts_restants = $nbCouvertsRestants;
+                $couvertsRestantsTableExists->save();
+            } else {
+                return response()->json([
+                    'error' => 'Désolé nous n\'avons plus de place disponible.',
+                ], 422);
+            }
+
+
         } else {
             // ICI IL FAUT CREER LA TABLE EN INDIQUANT LE NOMBRE DE COUVERTS DE BASE
             $nombreCouvertsRestantsApresCalcul = null;

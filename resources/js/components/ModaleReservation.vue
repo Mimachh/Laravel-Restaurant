@@ -214,6 +214,13 @@ input[type="radio"]:checked + label.label-radio {
                 </li>
               </ul>
             </div>
+            <!-- Ajouter le nouvel élément pour l'erreur unique -->
+            <div v-if="errorUnique" class="error-messages">
+              <ul>
+                <li>{{ errorUnique }}</li>
+              </ul>
+            </div>
+
               <!-- Page 1 -->
               <div v-if="currentPage === 1" class="page_1">
                   <p v-if="fermetureData.status == 1" >
@@ -363,7 +370,7 @@ export default {
     const successCouvertsRestantsMessage = ref('');
     const errorMessages = ref([]);
     const successMessages = ref([]);
-
+    const errorUnique = ref('');
     // Gestion des pages
     const currentPage = ref(1);
 
@@ -407,13 +414,17 @@ export default {
     const selectedCreneau = ref(null);
 
     // Nombre d'invité
-    const numberOfGuests = ref(1);
+    const numberOfGuests = ref(null);
 
     // Nom du service et de la date pour enregistrer le nombre de couverts
     const serviceDateCouverts = ref(null);
     // Nombre de couverts restants pour enregistrer en base de données
     const serviceCouvertsRestants = ref(null);
     const nombreDeCouvertsRestantsDeBase = ref(null);
+
+    // Vérification si couvertsrestantstable existe
+    const nombreRestantAprèsTestMatin = ref(null);
+    const nombreRestantAprèsTestSoir = ref(null);
 
     // Formulaire de fin
     const nom = ref(null);
@@ -429,6 +440,8 @@ export default {
 
     const closeModal = () => {
       showModal.value = false;
+      successCouvertsRestantsMessage.value = '';
+      errorCouvertsRestantsMessage.value = '';
     };
 
     const closeModalOutside = (event) => {
@@ -493,26 +506,24 @@ export default {
     // Date picker
     const handleDateSelection = (value) => {
         selectedDate.value = value;
-        
+        errorUnique.value = "";
 
         // ICI JE REQUETE POUR VOIR SI UNE ENTREE EXISTE le MIDI OU LE SOIR
         formattedDateToStore.value = dayjs(selectedDate.value).format('DD-MM-YYYY');
-        var nombreRestantAprèsTestMatin = "";
-        var nombreRestantAprèsTestSoir = "";
 
         const testSiDataCouvertsRestantsTableExistMatin = async () => {
           const testerLeMatin = "AM+" + formattedDateToStore.value;
           try {
             const response = await axios.get(`api/jours/${testerLeMatin}/couverts_restants`);
             console.log('response', response.data);
-            nombreRestantAprèsTestMatin = response.data.couverts_restants;
+            nombreRestantAprèsTestMatin.value = response.data.couverts_restants;
             if(response.data.message === "no exist") {
-              nombreRestantAprèsTestMatin = null;
+              nombreRestantAprèsTestMatin.value = null;
             }
           } catch (error) {
             console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
           }
-          console.log('matin', nombreRestantAprèsTestMatin);
+          console.log('matin', nombreRestantAprèsTestMatin.value);
 
         }
         testSiDataCouvertsRestantsTableExistMatin();
@@ -522,16 +533,16 @@ export default {
           try {
             const response = await axios.get(`api/jours/${testerLeSoir}/couverts_restants`);
             console.log(response.data);
-            nombreRestantAprèsTestSoir = response.data.couverts_restants;
+            nombreRestantAprèsTestSoir.value = response.data.couverts_restants;
             if(response.data.message === "no exist") {
-              nombreRestantAprèsTestSoir = null;
+              nombreRestantAprèsTestSoir.value = null;
             }
             
           } catch (error) {
             console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
           }
 
-          console.log('soir', nombreRestantAprèsTestSoir);
+          console.log('soir', nombreRestantAprèsTestSoir.value);
 
         }
         testSiDataCouvertsRestantsTableExistSoir();
@@ -541,9 +552,6 @@ export default {
             // Récupérer le jour de la semaine correspondant à la date sélectionnée
            selectedDay.value = dayjs(selectedDate.value).day();
             
-            // Assigner l'index du jour sélectionné dans la semaine à selectedChoice
-            // selectedChoice.value = selectedDay;
-
             // Effectuer la requête vers le point de terminaison Laravel avec l'ID du jour sélectionné
             axios.get(`api/jours/${selectedDay.value}/opening-hours`)
             .then((response) => {
@@ -554,17 +562,17 @@ export default {
                     isRestaurantOpenSoir.value = true;
    
 
-                    if(nombreRestantAprèsTestMatin === null) {
+                    if(nombreRestantAprèsTestMatin.value === null) {
                       if(openingHours.couverts_midi !== null) {
                         nbCouvertsMidi.value = openingHours.couverts_midi;
                       } else {
                           nbCouvertsMidi.value = 'Non renseigné';
                       }
                     } else {
-                      nbCouvertsMidi.value = nombreRestantAprèsTestMatin;
+                      nbCouvertsMidi.value = nombreRestantAprèsTestMatin.value;
                     }
 
-                    if(nombreRestantAprèsTestSoir == null) {
+                    if(nombreRestantAprèsTestSoir.value == null) {
                       console.log('ici')
                         if(openingHours.couverts_soir !== null) {
                           nbCouvertsSoir.value = openingHours.couverts_soir;
@@ -572,7 +580,7 @@ export default {
                           nbCouvertsSoir.value = 'Non renseigné';
                         }
                     } else {
-                      nbCouvertsSoir.value = nombreRestantAprèsTestSoir;
+                      nbCouvertsSoir.value = nombreRestantAprèsTestSoir.value;
                     }
 
                     
@@ -581,8 +589,8 @@ export default {
                     isRestaurantOpenSoir.value = false;
 
                     // Vérification nb de couverts
-                    if(nombreRestantAprèsTestMatin) {
-                      nbCouvertsMidi.value = nombreRestantAprèsTestMatin;
+                    if(nombreRestantAprèsTestMatin.value) {
+                      nbCouvertsMidi.value = nombreRestantAprèsTestMatin.value;
                     } else {
                       if(openingHours.couverts_midi !== null) {
                         nbCouvertsMidi.value = openingHours.couverts_midi;
@@ -597,12 +605,12 @@ export default {
                     selectedChoice.value = "Le restaurant est ouvert uniquement pour le soir.";
                     isRestaurantOpenSoir.value = true;
                     isRestaurantOpenMidi.value = false;
-                    console.log(nombreRestantAprèsTestSoir);
+                    console.log(nombreRestantAprèsTestSoir.value);
                     // Vérification nb de couverts
                     nbCouvertsMidi.value = "";
 
-                    if(nombreRestantAprèsTestSoir) {
-                      nbCouvertsSoir.value = nombreRestantAprèsTestSoir;
+                    if(nombreRestantAprèsTestSoir.value) {
+                      nbCouvertsSoir.value = nombreRestantAprèsTestSoir.value;
   
                     } else {
                       if(openingHours.couverts_soir !== null) {
@@ -634,17 +642,7 @@ export default {
     // Nombre d'invité
     const handleNumberChange = async () => {
         // Effectuez les actions souhaitées lorsque le nombre change
-        console.log('Nombre de couverts modifié :', numberOfGuests.value);
-        
-        // DATA DE BASE
-        try {
-            const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/couverts`);
-            console.log('response de base', response.data);
-            nombreDeCouvertsRestantsDeBase.value = response.data.couverts;
-        } catch (error) {
-            console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
-        }
-
+        errorUnique.value = "";
         // On cherche en base de données s'il reste des couverts
         var prefix = "";
         
@@ -657,31 +655,93 @@ export default {
         serviceDateCouverts.value = prefix + "+" + formattedDateToStore.value; 
       
       // SI ENTREE DANS LA TABLE ON L'UTILISE
-      try {
-        const response = await axios.get(`api/jours/${serviceDateCouverts.value}/couverts_restants`);
-        console.log('response ici si entree dans la table', response.data);
-        serviceCouvertsRestants.value = response.data.couverts_restants;
-        if(numberOfGuests.value > 1) {
-        if (response.data.message === "no exist") {
-            successCouvertsRestantsMessage.value = '';
-            errorCouvertsRestantsMessage.value = '';
-        } else if (response.data.couverts_restants >= numberOfGuests.value) {
-          errorCouvertsRestantsMessage.value = '';
-          successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
-        } else if (response.data.couverts_restants < numberOfGuests.value) {
-          errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${response.data.couverts_restants} places`;
-          successCouvertsRestantsMessage.value = '';
-          numberOfGuests.value = ''; // Nettoyer la valeur de l'input
-        }
-        } else {
-            successCouvertsRestantsMessage.value = '';
-            errorCouvertsRestantsMessage.value = '';
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
-        errorCouvertsRestantsMessage.value = 'Une erreur s\'est produite. Veuillez réessayer.';
-        numberOfGuests.value = ''; // Nettoyer la valeur de l'input
+      var nbApresTest = null;
+      if(selectedService.value === 'midi' && nombreRestantAprèsTestMatin.value !== null) {
+        nbApresTest = nombreRestantAprèsTestMatin.value;
+      } else if (selectedService.value === 'midi' && nombreRestantAprèsTestMatin.value === null) {
+        nbApresTest = null;
       }
+
+      if(selectedService.value === 'soir' && nombreRestantAprèsTestSoir.value !== null) {
+        nbApresTest = nombreRestantAprèsTestSoir.value;
+      } else {
+        nbApresTest = null;
+      }
+      
+    
+      if(nbApresTest !== null) {
+        if(numberOfGuests.value > 1) {
+          if (nbApresTest >= numberOfGuests.value) {
+            errorCouvertsRestantsMessage.value = '';
+            successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
+          } else if (nbApresTest < numberOfGuests.value) {
+            errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${nbApresTest} places`;
+            successCouvertsRestantsMessage.value = '';
+            numberOfGuests.value = '';
+          }
+        } else {
+            // successCouvertsRestantsMessage.value = '';
+            // errorCouvertsRestantsMessage.value = '';
+        }
+      }
+      // if(nombreRestantAprèsTestMatin.value || nombreRestantAprèsTestSoir.value) {
+
+      // }
+      // try {
+      //   const response = await axios.get(`api/jours/${serviceDateCouverts.value}/couverts_restants`);
+        
+      //   console.log('response ici si entree dans la table', response.data);
+      //   serviceCouvertsRestants.value = response.data.couverts_restants;
+      //   if(numberOfGuests.value > 1) {
+      //     if (response.data.message === "no exist") {
+      //         successCouvertsRestantsMessage.value = '';
+      //         errorCouvertsRestantsMessage.value = '';
+      //         isDataAlreadyExist = false;
+      //     } else if (response.data.couverts_restants >= numberOfGuests.value) {
+      //       errorCouvertsRestantsMessage.value = '';
+      //       successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
+      //       isDataAlreadyExist = true;
+      //     } else if (response.data.couverts_restants < numberOfGuests.value) {
+      //       errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${response.data.couverts_restants} places`;
+      //       successCouvertsRestantsMessage.value = '';
+      //       numberOfGuests.value = '';
+      //       isDataAlreadyExist = true;
+      //   }
+      //   } else {
+      //       successCouvertsRestantsMessage.value = '';
+      //       errorCouvertsRestantsMessage.value = '';
+      //   }
+      // } catch (error) {
+      //   console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
+      //   errorCouvertsRestantsMessage.value = 'Une erreur s\'est produite. Veuillez réessayer.';
+      //   numberOfGuests.value = ''; 
+      // }
+        if(nbApresTest == null) {
+          // DATA DE BASE
+          try {
+              const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/couverts`);
+              // console.log('response de base', response.data);
+              nombreDeCouvertsRestantsDeBase.value = response.data.couverts;
+              serviceCouvertsRestants.value = response.data.couverts;
+              if(numberOfGuests.value > 1) {
+                if (serviceCouvertsRestants.value >= numberOfGuests.value) {
+                  errorCouvertsRestantsMessage.value = '';
+                  successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
+                } else if (serviceCouvertsRestants.value < numberOfGuests.value) {
+                  errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${serviceCouvertsRestants.value} places`;
+                  successCouvertsRestantsMessage.value = '';
+                  numberOfGuests.value = '';
+                }
+              } else {
+                  // successCouvertsRestantsMessage.value = '';
+                  // errorCouvertsRestantsMessage.value = '';
+              }
+              // REMETTRE ICI LES CONDITIONS
+
+          } catch (error) {
+              console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
+          }
+        }
 
 
 
@@ -767,18 +827,28 @@ export default {
     };
 
     const cleanFormData = () => {
+      // var infoIfExistClean = "";
+      // var telIfExistClean = "";
+      // if(informations.value) {
+      //   infoIfExistClean = informations.value.trim();
+      // }
+
+      // if(telephone.value) {
+      //   telIfExistClean = telephone.value.trim();
+      // }
+
       const cleanedData = {
         date: formattedDateToStore.value.trim(),
         service: selectedService.value.trim(),
         nom: nom.value.trim(),
         prenom: prenom.value.trim(),
-        telephone: telephone.value.trim(),
-        informations: informations.value.trim(),
+        telephone: telephone.value,
+        informations: informations.value,
         creneau: selectedCreneau.value.trim(),
         mail: isValidEmail(mail.value.trim()) ? mail.value.trim() : '',
         regles: conditionsUtilisation.value ? 1 : 0,
         convives: parseInt(numberOfGuests.value, 10) || 0,
-        nomPourTableCouvertsRestants: serviceDateCouverts.value.trim(),
+        nomPourTableCouvertsRestants: serviceDateCouverts.value,
         nombreCouvertsRestants: nombreDeCouvertsRestantsDeBase.value,
         // Ajoutez d'autres champs du formulaire si nécessaire
       };
@@ -806,10 +876,11 @@ export default {
         console.log(response.data);
         // Traitez la réponse ou effectuez d'autres actions après la soumission réussie
       } catch (error) {
-        if (error.response && error.response.status === 422) {
+        console.log(error.response.data.error);
+        if (error.response && error.response.status === 422 && error.response.data.errors) {
           // Récupérer les erreurs de validation de la réponse
           const validationErrors = error.response.data.errors;
-
+          errorUnique.value = "";
           // Réinitialiser les messages d'erreur
           errorMessages.value = [];
 
@@ -818,6 +889,17 @@ export default {
             // errorMessages.value.push(validationErrors[field][0]);
             errorMessages.value = Object.values(validationErrors).flat();
           }
+          console.log('erreurs')
+          
+        } else if (error.response.data.error === 'Désolé nous n\'avons plus de place disponible.') {
+          // Réinitialiser les messages d'erreur
+          errorMessages.value = [];
+          console.log('erreur')
+          // Récupérer l'erreur unique de la réponse
+          const uniqueError = error.response.data.error;
+
+          // Assigner l'erreur unique à la propriété error
+          errorUnique.value = uniqueError;
         } else {
           console.error("Erreur lors de la soumission du formulaire", error);
           // Traitez les autres erreurs ici
@@ -869,7 +951,10 @@ export default {
         errorMessages,
         successMessages,
         serviceCouvertsRestants,
-        nombreDeCouvertsRestantsDeBase
+        nombreDeCouvertsRestantsDeBase,
+        nombreRestantAprèsTestMatin,
+        nombreRestantAprèsTestSoir,
+        errorUnique,
     };
   },
 };
