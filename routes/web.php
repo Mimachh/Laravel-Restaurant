@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AlcoolController;
 use App\Http\Controllers\Admin\SoftController;
 use App\Http\Controllers\Admin\CreneauhoraireController;
 use App\Http\Controllers\Admin\ValidationController;
+use App\Http\Controllers\Admin\ReservationController;
 
 
 
@@ -283,6 +284,25 @@ Route::group(["middleware" => ['auth', 'role:1,2,4'], "prefix" => "admin", "as" 
         Route::get('/', [ValidationController::class, 'index'])->name('index');
         Route::get('/options_de_reservation', [ValidationController::class, 'edit'])->name('edit');
         Route::put('/options_de_reservation', [ValidationController::class, 'update'])->name('update');
+    });
+
+    // LISTE RESA
+    Route::group(["prefix" => "reservations", "as" => "reservations."], function() {
+        // Résa trié par jour
+        Route::get('/', [ReservationController::class, 'index'])->name('index');
+        // Résa à venir pour un jour en particulier
+        Route::get('/{date}/{service}', [ReservationController::class, 'a_venir'])->name('date.service');
+        Route::get('/{date}/{service}/{status}', [ReservationController::class, 'date_service_status'])->name('date.service.reservation.status');
+        
+        // Résa show
+        Route::get('/{id}', [ReservationController::class, 'show'])->name('a_venir.show');
+        Route::get('/{id}/edit', [ReservationController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [ReservationController::class, 'update'])->name('update');
+
+        // HISTORIQUE
+        Route::get('/historique', [ReservationController::class, 'index'])->name('historique.index');
+        // Résa à venir pour un jour en particulier
+        Route::get('/historique/{id}', [ReservationController::class, 'a_venir'])->name('historique.date');
     });
 
 });

@@ -60,11 +60,7 @@ class ReservationController extends Controller
         // Vérifier si validation automatique ou non
         $validation_auto = $validation->is_automatic_validation;
         $validation_auto_status = "";
-        if($validation_auto === '1') {
-            $validation_auto_status = 1;
-        } else {
-            $validation_auto_status = 2;
-        }
+
         $validation_is_add_manual_validation = $validation->is_add_manual_validation;
         $number_limit_validation = 0;
         if(isset($validation->manual_limit_validation)) {
@@ -73,11 +69,17 @@ class ReservationController extends Controller
             $number_limit_validation = 0;
         }
 
-        if($validation_is_add_manual_validation == '1' && intval($cleanedData['convives']) >= intval($number_limit_validation) ) {
-            $validation_auto_status = 2;
+        if($validation_auto == '1') {
+            if($validation_is_add_manual_validation == '1' && intval($cleanedData['convives']) >= intval($number_limit_validation) ) {
+                $validation_auto_status = 2;
+            } else {
+                $validation_auto_status = 1;
+            }
         } else {
-            $validation_auto_status = 1;
+            $validation_auto_status = 2;
         }
+
+
        
 
         
@@ -110,12 +112,14 @@ class ReservationController extends Controller
             } 
 
             if($nbCouvertsRestants >= 0) {
-                $couvertsRestantsTableExists->couverts_restants = $nbCouvertsRestants;
-                $couvertsRestantsTableExists->save();
+
 
                 $reservation->save();
 
                 if($validation_auto_status === 1) {
+                    $couvertsRestantsTableExists->couverts_restants = $nbCouvertsRestants;
+                    $couvertsRestantsTableExists->save();
+
                     return response()->json([
                         'message' => 'Réservation enregistrée avec succès.'
                     ], 200);
@@ -135,6 +139,7 @@ class ReservationController extends Controller
 
         } else {
             // ICI IL FAUT CREER LA TABLE EN INDIQUANT LE NOMBRE DE COUVERTS DE BASE
+            // Calcul du nombre de couverts restant
             $nombreCouvertsRestantsApresCalcul = null;
             if($request->nombreCouvertsRestants) {
                 $nombreCouvertsRestantsApresCalcul = $request->nombreCouvertsRestants - intval($cleanedData['convives']);
@@ -142,13 +147,16 @@ class ReservationController extends Controller
                 $nombreCouvertsRestantsApresCalcul = null;
             }
             
-            $calculCouvertsRestants = new Couvertsrestants();
-            $calculCouvertsRestants->nom = $request->nomPourTableCouvertsRestants;
-            $calculCouvertsRestants->couverts_restants = $nombreCouvertsRestantsApresCalcul;
-            $calculCouvertsRestants->save();
-
             $reservation->save();
+
+            // En fonction de la validation auto (1) ou manuelle (2)
             if($validation_auto_status === 1) {
+
+                $calculCouvertsRestants = new Couvertsrestants();
+                $calculCouvertsRestants->nom = $request->nomPourTableCouvertsRestants;
+                $calculCouvertsRestants->couverts_restants = $nombreCouvertsRestantsApresCalcul;
+                $calculCouvertsRestants->save();
+
                 return response()->json([
                     'message' => 'Réservation enregistrée avec succès.'
                 ], 200);

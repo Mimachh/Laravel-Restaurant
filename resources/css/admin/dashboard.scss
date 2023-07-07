@@ -68,7 +68,8 @@
 }
 
 .menu-button-carte, 
-.menu-button-resto {
+.menu-button-resto,
+.menu-button-resa {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -84,7 +85,8 @@
 }
 
 .open-links-div-carte,
-.open-links-div-resto {
+.open-links-div-resto,
+.open-links-div-resa {
     outline: 1px solid var(--admin-highlight);
     color: var(--admin-dark);
     background-color: var(--admin-highlight);

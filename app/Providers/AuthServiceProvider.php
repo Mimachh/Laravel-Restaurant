@@ -82,7 +82,12 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Gestionnaire de réservation']);
         });
 
-        Gate::define('viewTablesCouvertsInAdmin', function (User $user) {
+        Gate::define('viewReservationsInAdmin', function (User $user) {
+            // return $user->roles->contains('id', 2) || $user->roles->contains('id', 4);
+            return $user->hasAnyRole(['Super Admin', 'Admin', 'Gestionnaire de réservation']);
+        });
+
+        Gate::define('viewHandleReservationsInAdmin', function (User $user) {
             // return $user->roles->contains('id', 2) || $user->roles->contains('id', 4);
             return $user->hasAnyRole(['Super Admin', 'Admin', 'Gestionnaire de réservation']);
         });

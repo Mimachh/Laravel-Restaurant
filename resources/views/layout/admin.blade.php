@@ -125,18 +125,14 @@
                     ><span>Restaurant</span>
                     <span class="toggleSpanPlusResto">+</span>
                     <span class="toggleSpanMinusResto">-</span>
-                    </span>
-                    @endcan
+                    </span>  
                     </li>
+                    @endcan
                     <div id="menuLinksContainerResto" class="menu-links-container-resto">
                         @can('viewHorairesInAdmin')
                         <li><a href="{{ route('admin.creneaux.index') }}"
                         class="{{ setMenuClass('admin.creneaux.', 'active') }}"
                         >Créneaux</a></li>
-                        @endcan
-
-                        @can('viewTablesCouvertsInAdmin')
-                        <li><a href="">Tables/Couverts</a></li>
                         @endcan
 
                         @can('viewOptionsReservationsInAdmin')
@@ -146,6 +142,38 @@
                         @endcan
                     </div>
 
+                    @can('viewReservationsInAdmin')
+                        <li><span 
+                        class="menu-button-resa
+                        {{ 
+                            setMenuOpen([
+                                'admin.reservations.',
+                                'admin.options_reservation.',
+                            ], 'open-links-div-resa') 
+                        }}
+                        "
+                        onclick="toggleMenuLinksResa()"
+                        ><span>Réservations</span>
+                        <span class="toggleSpanPlusResa">+</span>
+                        <span class="toggleSpanMinusResa">-</span>
+                        </span>
+                        </li>
+                        
+                        <div id="menuLinksContainerResa" class="menu-links-container-resa">
+                            @can('viewHandleReservationsInAdmin')
+                            <li><a href="{{ route('admin.reservations.index') }}"
+                            class="{{ setMenuClass('admin.reservations.', 'active') }}"
+                            >Réservations à venir</a></li>
+                            @endcan
+
+                            @can('viewHandleReservationsInAdmin')
+                            <li><a href="{{ route('admin.options_reservation.index') }}"
+                            class="{{ setMenuClass('admin.options_reservation.', 'active') }}"
+                            >Historique</a></li>
+                            @endcan
+                        </div>
+
+                    @endcan
                     <hr style="width: 70%;">
 
                     <li><a href="">Mon Profil</a></li>
