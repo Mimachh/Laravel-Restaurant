@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\SoftController;
 use App\Http\Controllers\Admin\CreneauhoraireController;
 use App\Http\Controllers\Admin\ValidationController;
 use App\Http\Controllers\Admin\ReservationController;
+use App\Http\Controllers\Admin\HistoriqueReservation;
 
 
 
@@ -301,14 +302,22 @@ Route::group(["middleware" => ['auth', 'role:1,2,4'], "prefix" => "admin", "as" 
         // Resa edit avec info pour redirection
         Route::get('/{id}/edit', [ReservationController::class, 'edit'])->name('a_venir.edit');
         Route::put('/{id}', [ReservationController::class, 'update'])->name('update');
-
-        // HISTORIQUE
-        Route::get('/historique', [ReservationController::class, 'historique'])->name('historique');
-        // Résa à venir pour un jour en particulier
-        // Route::get('/historique/{id}', [ReservationController::class, 'a_venir'])->name('historique.date');
     });
 
+        // LISTE RESA
+        Route::group(["prefix" => "historique", "as" => "historique."], function() {
+
+            // HISTORIQUE
+            Route::get('/', [HistoriqueReservation::class, 'historique'])->name('index');
+            // Résa passée pour un jour en particulier
+            Route::get('/{id}', [HistoriqueReservation::class, 'showHistorique'])->name('show');
+            // Liste des resa passées
+            Route::get('/{date}/{service}', [HistoriqueReservation::class, 'showByDateHistorique'])->name('showByDate');
+        });
+
 });
+
+
 
 
 

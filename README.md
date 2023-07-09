@@ -30,8 +30,6 @@
 
 
 ## Réservation 
-EN CAS DE MANUEL IL FAUT BIEN PENSER A INTEGRER LE CALCUL DANS LA TABLE COUVERTS RESTANTS
-EN CAS DE REFUS D'UNE INVIT DEJA ACCEPTE EN AUTO OU MANUEL IL FAUT DECREMENTER LE COUVERTSRESTANTS
 
 Créer système de mailing :
     -   mail de confirmation lorsque confirmation auto
@@ -48,19 +46,8 @@ Créer système de mailing :
 
 
 Créer l'espace de gestion de réservation
-    - La liste est sous forme de date à partir d'aujourd'hui? Trié par date puis on déroule pour voir midi ou soir, puis on clique pour accéder à la liste complète.
-    - Cette nouvelle liste avec la date, le créneau, le nombre de couvert, le status + possibilité d'éditer le status + possibilité de voir en détail
 
-    - Même système pour l'historique 
-
-    Total des pages :
-    -   Liste a venir par date 
-    -   Liste à venir sur une date précise + midi (infos à mettre, le nombre de couverts de base, le nombre restant)
-    -   Liste à venir sur une date précise + soir
-    -   Show d'une réservation
-    -   Edit d'une réservation
-
-    -   Pareil pour l'historique
+Ajouter un encart pour calculer le nb de réservations depuis le début
 
 Quand tout le système admin sera opérationnel, changer le design de pagination : liste des dates à venir
 

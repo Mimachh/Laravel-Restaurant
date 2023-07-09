@@ -8,13 +8,15 @@
   <ul class="reservations-list">
     @foreach ($paginatedGroupedReservations as $date => $groupedServices)
       @php
-        $dateObj = DateTime::createFromFormat('d-m-Y', $date);
-        
-        $today = new DateTime();
+          $dateObj = DateTime::createFromFormat('d-m-Y', $date);
+          $timestamp = $dateObj->getTimestamp();
+
+          $today = new DateTime();
+          $todayTimestamp = $today->getTimestamp();
       @endphp
 
 
-      @if ($dateObj->format('d-m-Y') >= $today->format('d-m-Y'))
+      @if ($timestamp >= $todayTimestamp)
 
         <li class="reservations-item">
           <h2 class="reservations-date">{{ $date }}</h2>

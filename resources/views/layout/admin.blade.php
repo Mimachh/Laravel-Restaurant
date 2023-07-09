@@ -148,6 +148,7 @@
                         {{ 
                             setMenuOpen([
                                 'admin.reservations.',
+                                'admin.historique.',
                                 'admin.options_reservation.',
                             ], 'open-links-div-resa') 
                         }}
@@ -167,8 +168,8 @@
                             @endcan
 
                             @can('viewHandleReservationsInAdmin')
-                            <li><a href="{{ route('admin.options_reservation.index') }}"
-                            class="{{ setMenuClass('admin.options_reservation.', 'active') }}"
+                            <li><a href="{{ route('admin.historique.index') }}"
+                            class="{{ setMenuClass('admin.historique.', 'active') }}"
                             >Historique</a></li>
                             @endcan
                         </div>

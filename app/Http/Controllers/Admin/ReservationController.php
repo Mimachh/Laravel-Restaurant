@@ -3,17 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Couvertsrestants;
 use Illuminate\Http\Request as Request2;
 use App\Models\Reservation;
+use App\Models\Jour;
 use DateTime;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
     public function index()
     {
+        $this->authorize('view', Reservation::class);
+
         $reservations = Reservation::orderBy('date')->get();
 
         $groupedReservations = $reservations->groupBy('date')->sort(function ($reservationsA, $reservationsB) {
@@ -43,39 +48,13 @@ class ReservationController extends Controller
         return view('admin.reservation.index', compact('paginatedGroupedReservations'));
     }
 
-    public function historique()
-    {
-        $reservations = Reservation::orderByDesc('date')
-            ->whereDate('date', '<', now()->toDateString())
-            ->get();
-    
-        $groupedReservations = $reservations->groupBy('date')->sort(function ($reservationsA, $reservationsB) {
-            $dateA = DateTime::createFromFormat('d-m-Y', $reservationsA->first()->date);
-            $dateB = DateTime::createFromFormat('d-m-Y', $reservationsB->first()->date);
-    
-            return $dateA <=> $dateB;
-        });
-    
-        // Trier les réservations par service pour chaque date
-        foreach ($groupedReservations as $date => $reservations) {
-            $groupedReservations[$date] = $reservations->groupBy('service');
-        }
-    
-        $currentPage = Request::get('page') ?: 1;
-        $perPage = 10;
-    
-        $paginatedGroupedReservations = new LengthAwarePaginator(
-            $groupedReservations->forPage($currentPage, $perPage),
-            $groupedReservations->count(),
-            $perPage,
-            $currentPage,
-            ['path' => Request::url()]
-        );
-    
-        return view('admin.reservation.historique', compact('paginatedGroupedReservations'));
-    }
+
+
 
     public function a_venir($date, $service) {
+
+        $this->authorize('view', Reservation::class);
+
         $reservations = Reservation::where('date', $date)->where('service', $service)->get();
         $status = 1;
         return view('admin.reservation.a_venir', [
@@ -87,6 +66,9 @@ class ReservationController extends Controller
     }
 
     public function date_service_status($date, $service, $status) {
+
+        $this->authorize('view', Reservation::class);
+
         $reservations = Reservation::where('date', $date)->where('service', $service)->where('status', $status)->get();
 
         return view('admin.reservation.a_venir', [
@@ -98,6 +80,9 @@ class ReservationController extends Controller
     }
 
     public function show(string $id) {
+
+        $this->authorize('view', Reservation::class);
+
         $reservation = Reservation::find($id);
 
         return view('admin.reservation.show', compact('reservation'));
@@ -105,17 +90,105 @@ class ReservationController extends Controller
 
     public function edit(string $id) {
 
+        $this->authorize('update', Reservation::class);
+
         $reservation = Reservation::findOrFail($id);
+
+  
         return view('admin.reservation.edit', compact('reservation'));
     }
 
     public function update(Request2 $request, $id) {
-        // dd($id, $date, $service);
+
+        $this->authorize('update', Reservation::class);
+
+
+        // Implémenter la logique pour incrémenter ou décrémenter le nombre de couverts
         $reservation = Reservation::findOrFail($id);
+        $erreurPasAssezDeCouverts = null; 
+        // Soit on passe de 2 ou 3 à 1 et il faut décrementer la table (la créer si elle n'existe pas)
+        // Soit on passe de 1 à 2 ou 3 et il faut incrémenter la table qui existe forcément et si c'était la seule entrée il faut supprimer la ligne
 
-        $reservation->status = $request->status;
-        $reservation->save();
+        // Savoir si la table existe
+            // Prefix+date
+            $prefix = "";
+            if($reservation->service === "midi") {
+                $prefix = "AM";
+            } else if($reservation->service === "soir") {
+                $prefix = "PM";
+            }
+            $nomAvecPrefix = $prefix . "+" . $reservation->date;
 
-        return redirect()->route('admin.reservations.date.service', ['date' => $reservation->date, 'service' => $reservation->service])->with('success', 'Le statut à bien été changé.');
+            $dataCouvertsRestants = Couvertsrestants::where('nom', $nomAvecPrefix)->first();
+
+            if($dataCouvertsRestants) {
+                // Soit on passe de 2 ou 3 à 1 et il faut décrementer la table + api pour calculer en live le nombre restant + refuser si plus petit que 0.
+                if(($reservation->status == 2 || $reservation->status == 3) && $request->status == 1) {
+                    $nouveauResultat = $dataCouvertsRestants->couverts_restants - $reservation->convives;
+                    if($nouveauResultat < 0) {
+                        $erreurPasAssezDeCouverts = 1;
+                        return redirect()->back()->with('error', 'Il n\'y a pas assez de place disponible.');
+                    }
+
+                    if($erreurPasAssezDeCouverts != 1) {
+                        $dataCouvertsRestants->couverts_restants = $nouveauResultat;
+                        $dataCouvertsRestants->save();
+                    }
+
+                    
+                }
+                // Soit on passe de 1 à 2 ou 3 et il faut incrémenter la table qui existe forcément et si c'était la seule entrée il faut supprimer la ligne
+                if($reservation->status == 1 && $request->status == 2) {
+                    $nouveauResultat = $dataCouvertsRestants->couverts_restants + $reservation->convives;
+                    $dataCouvertsRestants->couverts_restants = $nouveauResultat;
+                    $dataCouvertsRestants->save();
+
+                } else if($reservation->status == 1 && $request->status == 3) {
+                    $nouveauResultat = $dataCouvertsRestants->couverts_restants + $reservation->convives;
+                    $dataCouvertsRestants->couverts_restants = $nouveauResultat;
+                    $dataCouvertsRestants->save();
+                }
+                // Mail
+            } else {
+   
+                if($reservation->status != 1) {
+                    $date = Carbon::createFromFormat('d-m-Y', $reservation->date);
+                    $jourIndex = $date->format('w');
+                    if($jourIndex === "0") {
+                        $jourIndex = "7";
+                    }
+                    $jour = Jour::where('id', $jourIndex)->first();
+                    $couvertsRestantsDeBase = "";
+                    if($reservation->service === "midi") {
+                        $couvertsRestantsDeBase = $jour->couverts_midi;
+                    } else if ($reservation->service === 'soir') {
+                        $couvertsRestantsDeBase = $jour->couverts_soir;
+                    }
+                    $nouvelleEntree = new Couvertsrestants();
+                    $nouvelleEntree->nom = $nomAvecPrefix;
+                    $nouvelleEntree->couverts_restants = $couvertsRestantsDeBase - $reservation->convives; 
+
+                    if($nouvelleEntree->couverts_restants < 0) {
+                        $erreurPasAssezDeCouverts = 1;
+                        return redirect()->back()->with('error', 'Il n\'y a pas assez de place disponible.');
+                    } 
+                    $nouvelleEntree->save();
+
+                    // Mail
+                }
+            }
+        if($erreurPasAssezDeCouverts == 1) {
+            return redirect()->back()->with('error', 'Il n\'y a pas assez de place disponible.');
+        } else if($erreurPasAssezDeCouverts == 0) {
+            $reservation->status = $request->status;
+            $reservation->save();
+    
+            return redirect()->route('admin.reservations.date.service', ['date' => $reservation->date, 'service' => $reservation->service])->with('success', 'Le statut à bien été changé.');
+        }
+
     }
+
+
+
+
 }
