@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DateTime;
+
+use App\Models\Couvertsrestants;
+use App\Models\Jour;
+use Carbon\Carbon;
 class Reservation extends Model
 {
     use HasFactory;
@@ -33,4 +37,6 @@ class Reservation extends Model
 
        return $status;
     }
+
+
 }

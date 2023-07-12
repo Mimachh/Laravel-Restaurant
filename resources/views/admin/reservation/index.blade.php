@@ -27,15 +27,22 @@
                   {{ $service }}
 
                 </a> :
+                <div class="my-4">
+                    @php
+                        $totalConvives = $reservations->where('status', 1)->sum('convives');
+                    @endphp
+                        <p class="pill-places-restantes">Total des places réservées : {{ $totalConvives }}</p>
+                        <p class="pill-couverts-restants">Nombre de couverts restants {{ getCouvertsRestants($reservations, $service, $date) }}</p>
+                </div>
                 <ul class="reservation-info">
                   <li class="info-item info-item-total">
-                    <span class="info-text-total">{{ count($reservations) }} réservation(s) au total 
+                    <span class="info-text-total">{{ count($reservations) }} réservation(s) validée(s) 
                       @if(count($reservations) > 0 )
                       <a class="info-link" href="{{ route('admin.reservations.date.service', ['date' => $date, 'service' => $service]) }}">Voir</a>
                       @endif
                     </span>
                   </li>
-                  <li class="info-item">
+                  <!-- <li class="info-item">
                     <span class="info-text">{{ $reservations->where('status', 1)->count() }} réservation(s) validée</span>
                     @if($reservations->where('status', 1)->count() > 0)
                     <a href="{{ route('admin.reservations.date.service.reservation.status', ['date' => $date, 'service' => $service, 'status' => '1']) }}" class="info-link">Voir</a>
@@ -52,7 +59,7 @@
                     @if($reservations->where('status', 3)->count() > 0)
                     <a href="{{ route('admin.reservations.date.service.reservation.status', ['date' => $date, 'service' => $service, 'status' => '3']) }}" class="info-link">Voir</a>
                     @endif
-                  </li>
+                  </li> -->
                 </ul>
               </li>
             @endforeach

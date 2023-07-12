@@ -17,10 +17,7 @@ use App\Http\Controllers\Admin\CreneauhoraireController;
 use App\Http\Controllers\Admin\ValidationController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\HistoriqueReservation;
-
-
-
-
+use App\Http\Controllers\Admin\ReservationEnAttenteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -304,16 +301,24 @@ Route::group(["middleware" => ['auth', 'role:1,2,4'], "prefix" => "admin", "as" 
         Route::put('/{id}', [ReservationController::class, 'update'])->name('update');
     });
 
-        // LISTE RESA
-        Route::group(["prefix" => "historique", "as" => "historique."], function() {
+    // LISTE RESA
+    Route::group(["prefix" => "historique", "as" => "historique."], function() {
 
-            // HISTORIQUE
-            Route::get('/', [HistoriqueReservation::class, 'historique'])->name('index');
-            // Résa passée pour un jour en particulier
-            Route::get('/{id}', [HistoriqueReservation::class, 'showHistorique'])->name('show');
-            // Liste des resa passées
-            Route::get('/{date}/{service}', [HistoriqueReservation::class, 'showByDateHistorique'])->name('showByDate');
-        });
+        // HISTORIQUE
+        Route::get('/', [HistoriqueReservation::class, 'historique'])->name('index');
+        // Résa passée pour un jour en particulier
+        Route::get('/{id}', [HistoriqueReservation::class, 'showHistorique'])->name('show');
+        // Liste des resa passées
+        Route::get('/{date}/{service}', [HistoriqueReservation::class, 'showByDateHistorique'])->name('showByDate');
+    });
+
+    // Resa en attente
+    Route::group(["prefix" => "attente", "as" => "attente."], function() {
+        Route::get('/', [ReservationEnAttenteController::class, 'index'])->name('index');
+        // Résa passée pour un jour en particulier
+        Route::get('/{id}', [ReservationEnAttenteController::class, 'show'])->name('show');
+        Route::get('/{date}/{service}', [ReservationEnAttenteController::class, 'byDate'])->name('byDate');
+    });
 
 });
 

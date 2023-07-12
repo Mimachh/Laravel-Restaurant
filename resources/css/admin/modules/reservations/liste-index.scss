@@ -80,6 +80,7 @@
 
         .service-item-midi {
             background-color: var(--hover-info);
+            
             .info-item {
                 .info-link {
                     color: var(--admin-light);
@@ -142,3 +143,21 @@
     }
   }
   
+
+.pill-couverts-restants {
+  display: inline-block;
+  padding: 0.3rem 0.4rem;
+  border-radius: 40px;
+  border: none;
+  background-color: var(--hover-info);
+  color: var(--admin-light);
+}
+
+.pill-places-restantes {
+  display: inline-block;
+  padding: 0.3rem 0.4rem;
+  border-radius: 40px;
+  border: none;
+  background-color: var(--hover-success);
+  color: var(--admin-light);
+}

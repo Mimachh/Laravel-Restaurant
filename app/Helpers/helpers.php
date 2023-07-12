@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Str;
+use App\Models\Couvertsrestants;
+use App\Models\Jour;
+use Carbon\Carbon;
 
 function userName() {
     return auth()->user()->name;
@@ -77,4 +80,38 @@ function booleanOptionState($data) {
     } else {
         return '<span class="pill-inactif">Désactivé</span>';
     };
+}
+
+
+function getCouvertsRestants($reservation, $service, $date) {
+
+    $prefix = "";
+    if($service === "midi") {
+        $prefix = "AM";
+    } else if($service === "soir") {
+        $prefix = "PM";
+    }
+    $nomAvecPrefix = $prefix . "+" . $date;
+
+    $dataCouvertsRestants = Couvertsrestants::where('nom', $nomAvecPrefix)->first();
+
+    $couvertsRestants = "";
+    if($dataCouvertsRestants) {
+       $couvertsRestants = $dataCouvertsRestants->couverts_restants;
+    } else {
+        $date = Carbon::createFromFormat('d-m-Y', $date);
+        $jourIndex = $date->format('w');
+        if($jourIndex === "0") {
+            $jourIndex = "7";
+        }
+        $jour = Jour::where('id', $jourIndex)->first();
+        if($service === "midi") {
+            $couvertsRestants = $jour->couverts_midi;
+        } else if ($service === 'soir') {
+            $couvertsRestants = $jour->couverts_soir;
+        }
+
+    }
+
+    return $couvertsRestants;
 }

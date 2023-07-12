@@ -12,6 +12,10 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+
 
 class ReservationController extends Controller
 {
@@ -57,6 +61,8 @@ class ReservationController extends Controller
 
         $reservations = Reservation::where('date', $date)->where('service', $service)->get();
         $status = 1;
+
+
         return view('admin.reservation.a_venir', [
             'reservations' => $reservations,
             'date' => $date,
@@ -93,24 +99,22 @@ class ReservationController extends Controller
         $this->authorize('update', Reservation::class);
 
         $reservation = Reservation::findOrFail($id);
+        $reservations = Reservation::all();
 
   
-        return view('admin.reservation.edit', compact('reservation'));
+        return view('admin.reservation.edit', compact('reservation', 'reservations'));
     }
 
     public function update(Request2 $request, $id) {
 
         $this->authorize('update', Reservation::class);
 
-
-        // Implémenter la logique pour incrémenter ou décrémenter le nombre de couverts
         $reservation = Reservation::findOrFail($id);
         $erreurPasAssezDeCouverts = null; 
-        // Soit on passe de 2 ou 3 à 1 et il faut décrementer la table (la créer si elle n'existe pas)
-        // Soit on passe de 1 à 2 ou 3 et il faut incrémenter la table qui existe forcément et si c'était la seule entrée il faut supprimer la ligne
 
+
+        
         // Savoir si la table existe
-            // Prefix+date
             $prefix = "";
             if($reservation->service === "midi") {
                 $prefix = "AM";
@@ -134,7 +138,7 @@ class ReservationController extends Controller
                         $dataCouvertsRestants->couverts_restants = $nouveauResultat;
                         $dataCouvertsRestants->save();
                     }
-
+                    // Mail
                     
                 }
                 // Soit on passe de 1 à 2 ou 3 et il faut incrémenter la table qui existe forcément et si c'était la seule entrée il faut supprimer la ligne
@@ -142,13 +146,15 @@ class ReservationController extends Controller
                     $nouveauResultat = $dataCouvertsRestants->couverts_restants + $reservation->convives;
                     $dataCouvertsRestants->couverts_restants = $nouveauResultat;
                     $dataCouvertsRestants->save();
+                    // Mail
 
                 } else if($reservation->status == 1 && $request->status == 3) {
                     $nouveauResultat = $dataCouvertsRestants->couverts_restants + $reservation->convives;
                     $dataCouvertsRestants->couverts_restants = $nouveauResultat;
                     $dataCouvertsRestants->save();
+                    // Mail
                 }
-                // Mail
+                
             } else {
    
                 if($reservation->status != 1) {
@@ -177,13 +183,40 @@ class ReservationController extends Controller
                     // Mail
                 }
             }
+
+
+
+
+
         if($erreurPasAssezDeCouverts == 1) {
+            
             return redirect()->back()->with('error', 'Il n\'y a pas assez de place disponible.');
+
         } else if($erreurPasAssezDeCouverts == 0) {
+            
             $reservation->status = $request->status;
             $reservation->save();
     
+            $previousUrl = $request->input('previous_url');
+            $cleanedPreviousUrl = URL::to($previousUrl);
+    
+            if ($cleanedPreviousUrl === route('admin.attente.index') || 
+            $cleanedPreviousUrl === route('admin.attente.show', $id) ||
+            $cleanedPreviousUrl === route('admin.attente.byDate', ['date' => $reservation->date, 'service' => $reservation->service])) {
+
+                return redirect()->route('admin.attente.index')->with('success', 'Le statut à bien été changé.');
+
+            } elseif ($cleanedPreviousUrl === route('admin.reservations.a_venir.show', $id) || 
+            $cleanedPreviousUrl === route('admin.reservations.date.service', 
+            ['date' => $reservation->date, 'service' => $reservation->service])) {
+
+                return redirect()->route('admin.reservations.date.service', ['date' => $reservation->date, 'service' => $reservation->service])->with('success', 'Le statut à bien été changé.');
+            
+            }
+
             return redirect()->route('admin.reservations.date.service', ['date' => $reservation->date, 'service' => $reservation->service])->with('success', 'Le statut à bien été changé.');
+        
+        
         }
 
     }

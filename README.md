@@ -19,9 +19,6 @@
 - Auth 2 facteurs
 
 
-
-## Ajouter le champs couverts sur chaque jours
- - pour la logique si un champs couverts n'est pas renseigné faire en sorte que la réservation soit manuelle
 ## Mettre des slugs partouz
 
 
@@ -49,7 +46,11 @@ Créer l'espace de gestion de réservation
 
 Ajouter un encart pour calculer le nb de réservations depuis le début
 
-Quand tout le système admin sera opérationnel, changer le design de pagination : liste des dates à venir
+Quand tout le système admin sera opérationnel, changer le design de pagination : liste des dates à venir / liste des resa en attente / byDate / index
+
 
 ## Ajouter dans les options la possibilité de définir la durée des créneaux? 
 ## Le nombre de couverts c'est pour un service complet ou c'est juste pour un créneaux?
+
+
+## revoir le routing : je vais séparér réservations validées/en attente/annulées/réalisées

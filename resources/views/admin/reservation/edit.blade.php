@@ -4,10 +4,18 @@
 
 @section('content')
 <h1>Modifier la réservation de {{ $reservation->userName() }}</h1>
+<div class="my-4">
+    @php
+        $totalConvives = $reservations->where('status', 1)->sum('convives');
+    @endphp
+    <p class="pill-places-restantes">Total des places réservées : {{ $totalConvives }}</p>
+    <p class="pill-couverts-restants">Nombre de couverts restants {{ getCouvertsRestants($reservations, $reservation->service, $reservation->date) }}</p>
+</div>
 
 <form action="{{ route('admin.reservations.update', $reservation->id) }}" method="post">
     @csrf
     @method('PUT')
+    <input type="hidden" name="previous_url" value="{{ URL::previous() }}">
 <div class="reservation-card">
     <div class="reservation-card-header">
         Réservation # {{ $reservation->id }}

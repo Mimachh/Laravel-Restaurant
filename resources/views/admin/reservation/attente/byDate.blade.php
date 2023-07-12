@@ -8,18 +8,13 @@
     <p>Aucune réservation pour cette date.</p>
 @else
 
-@if($status == 1)
     <div class="my-4">
         @php
             $totalConvives = $reservations->where('status', 1)->sum('convives');
         @endphp
-            <p class="pill-places-restantes">Total des places réservées : {{ $totalConvives }}</p>
-            <p class="pill-couverts-restants">Nombre de couverts restants {{ getCouvertsRestants($reservations, $service, $date) }}</p>
+        <p class="pill-places-restantes">Total des places réservées : {{ $totalConvives }}</p>
+        <p class="pill-couverts-restants">Nombre de couverts restants {{ getCouvertsRestants($reservations, $service, $date) }}</p>
     </div>
-@endif
-
-
-
 
     <table class="user-table my-4">
         <thead>
@@ -36,7 +31,6 @@
         </thead>
         <tbody>
             @foreach($reservations as $reservation)
-        
                 <tr>
                     <td>{{ $reservation->id }}</td>
                     <td>{{ $reservation->userName() }}</td>
@@ -46,7 +40,7 @@
                     <td>{{ $reservation->informations }}</td>
                     <td>{{ $reservation->getStatus() }}</td>
                     <td>
-                        <a href="{{ route('admin.reservations.a_venir.show', $reservation->id,) }}" class="btn-create">Voir</a>
+                        <a href="{{ route('admin.attente.show', $reservation->id,) }}" class="btn-create">Voir</a>
                         <a href="{{ route('admin.reservations.a_venir.edit', [$reservation->id, $date, $service]) }}" class="btn-edit">Changer le statut</a>
                     </td>
                 </tr>

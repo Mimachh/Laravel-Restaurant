@@ -150,6 +150,7 @@
                                 'admin.reservations.',
                                 'admin.historique.',
                                 'admin.options_reservation.',
+                                'admin.attente.',
                             ], 'open-links-div-resa') 
                         }}
                         "
@@ -162,15 +163,21 @@
                         
                         <div id="menuLinksContainerResa" class="menu-links-container-resa">
                             @can('viewHandleReservationsInAdmin')
+                            <li><a href="{{ route('admin.attente.index') }}"
+                            class="{{ setMenuClass('admin.attente.', 'active') }}"
+                            >Réservations en attente</a></li>
+                            @endcan
+
+                            @can('viewHandleReservationsInAdmin')
                             <li><a href="{{ route('admin.reservations.index') }}"
                             class="{{ setMenuClass('admin.reservations.', 'active') }}"
-                            >Réservations à venir</a></li>
+                            >Réservations validées</a></li>
                             @endcan
 
                             @can('viewHandleReservationsInAdmin')
                             <li><a href="{{ route('admin.historique.index') }}"
                             class="{{ setMenuClass('admin.historique.', 'active') }}"
-                            >Historique</a></li>
+                            >Réservations passées</a></li>
                             @endcan
                         </div>
 

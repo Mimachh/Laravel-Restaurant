@@ -31,6 +31,48 @@
   display: flex;
 }
 
+.btn {
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}
+
+.btn-prev {
+  outline: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+.btn-prev:hover {
+  outline: 1px solid var(--danger);
+  color: var(--public-light);
+  background-color: var(--danger);
+}
+
+.btn-next {
+  outline: 1px solid var(--success);
+  color: var(--success);
+}
+
+.btn-next:hover {
+  outline: 1px solid var(--success);
+  color: var(--public-light);
+  background-color: var(--success);
+}
+
+.btn-save {
+  outline: 1px solid var(--info);
+  color: var(--public-light);
+  background-color: var(--info);
+}
+
+.btn-save:hover {
+  outline: 1px solid var(--info);
+  color: var(--info);
+  background-color: var(--public-light);
+}
+
 #closeModalButton {
   background-color: red;
   border: none;
@@ -337,15 +379,17 @@ input[type="radio"]:checked + label.label-radio {
               </div>
               <!-- Pagination -->
               <div class="pagination_buttons">
-                  <button type="button" v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
-                  <button type="button" 
+                  <button type="button" class="btn btn-prev" v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
+                  <button type="button" class="btn btn-next"
                   v-if="selectedDate && currentPage === 1 
                   || selectedService && currentPage === 2
                   || selectedCreneau && numberOfGuests && currentPage === 3" 
                   @click="goToPage(currentPage + 1)">Continuer</button>
 
                   <button  v-if="selectedDate && selectedService && selectedCreneau && numberOfGuests && currentPage === 4"
-                  type="submit">Soumettre</button>
+                  type="submit"
+                  class="btn btn-save"
+                  >Soumettre</button>
               </div>
             <button id="closeModalButton" @click="closeModal">X</button>
           </div>
@@ -484,9 +528,10 @@ export default {
             updateCreneaux(creneaux);
 
             if (selectedService.value === 'midi' || selectedService.value === 'soir') {
-            setTimeout(() => {
-                goToPage(3);
-            }, 10); // Délai d'une seconde (1000 millisecondes)
+            // setTimeout(() => {
+            //     goToPage(3);
+            // }, 10);
+              goToPage(3);
             }
         } catch (error) {
             console.error("Erreur lors de la récupération des informations d'ouverture du restaurant", error);
@@ -523,7 +568,7 @@ export default {
           const testerLeMatin = "AM+" + formattedDateToStore.value;
           try {
             const response = await axios.get(`api/jours/${testerLeMatin}/couverts_restants`);
-            console.log('response', response.data);
+            // console.log('response', response.data);
             nombreRestantAprèsTestMatin.value = response.data.couverts_restants;
             if(response.data.message === "no exist") {
               nombreRestantAprèsTestMatin.value = null;
@@ -531,7 +576,7 @@ export default {
           } catch (error) {
             console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
           }
-          console.log('matin', nombreRestantAprèsTestMatin.value);
+          // console.log('matin', nombreRestantAprèsTestMatin.value);
 
         }
         testSiDataCouvertsRestantsTableExistMatin();
@@ -540,7 +585,7 @@ export default {
           const testerLeSoir = "PM+" + formattedDateToStore.value;
           try {
             const response = await axios.get(`api/jours/${testerLeSoir}/couverts_restants`);
-            console.log(response.data);
+            // console.log(response.data);
             nombreRestantAprèsTestSoir.value = response.data.couverts_restants;
             if(response.data.message === "no exist") {
               nombreRestantAprèsTestSoir.value = null;
@@ -550,7 +595,7 @@ export default {
             console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
           }
 
-          console.log('soir', nombreRestantAprèsTestSoir.value);
+          // console.log('soir', nombreRestantAprèsTestSoir.value);
 
         }
         testSiDataCouvertsRestantsTableExistSoir();
@@ -581,7 +626,7 @@ export default {
                     }
 
                     if(nombreRestantAprèsTestSoir.value == null) {
-                      console.log('ici')
+                  
                         if(openingHours.couverts_soir !== null) {
                           nbCouvertsSoir.value = openingHours.couverts_soir;
                         } else {
@@ -608,9 +653,9 @@ export default {
                     }
                     nbCouvertsSoir.value = "";
 
-                selectedChoice.value = "Le restaurant est ouvert uniquement pour le midi.";
+                selectedChoice.value = "Le restaurant est ouvert uniquement le midi.";
                 } else if (openingHours.is_open_soir === 1) {
-                    selectedChoice.value = "Le restaurant est ouvert uniquement pour le soir.";
+                    selectedChoice.value = "Le restaurant est ouvert uniquement le soir.";
                     isRestaurantOpenSoir.value = true;
                     isRestaurantOpenMidi.value = false;
                     console.log(nombreRestantAprèsTestSoir.value);
