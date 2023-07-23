@@ -5,7 +5,7 @@
         <x-section-title 
         title="La carte"
         subtitle="La meilleure street food du coin"
-        class="py-4 md:py-8
+        class="pt-16 pb-4
         text-primary
         "
         />

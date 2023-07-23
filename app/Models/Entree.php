@@ -33,4 +33,12 @@ class Entree extends Model
             return 'Hors-ligne';
         }
     }
+
+    public function formatPrice() {
+        return $this->prix . " €";
+    }
+
+    public function getImageAttribute() {
+        return asset('storage/entrees/portraits/'.$this->photo_portrait);
+    }
 }

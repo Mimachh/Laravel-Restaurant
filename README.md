@@ -49,3 +49,9 @@ Quand tout le système admin sera opérationnel, changer le design de pagination
 
 
 ## revoir le routing : je vais séparér réservations validées/en attente/annulées/réalisées
+
+
+
+##Dans le design : ajouter les accompagnements en admin / en controller et en appel api pour la carte
+Revoir aussi l'histoire des formules
+Ajouter photo pour tester

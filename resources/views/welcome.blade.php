@@ -45,17 +45,11 @@
             <x-carte.formules />
 
             <x-carte.carte />
+
+            <x-team.liste />
         </main>
 
 
-
-
-
-        <section class="bg-light text-primary">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Section 4 team</p>
-            </div>
-        </section>
 
         <section class="bg-gold text-primary">
             <div class="max-w-[1400px] mx-auto">
@@ -82,6 +76,9 @@
         </section>
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
+        <script>
+             window.APP_URL = "{{ env('APP_URL') }}";
+        </script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     </body>
 </html>

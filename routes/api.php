@@ -6,6 +6,12 @@ use App\Http\Controllers\Public\JourController;
 use App\Http\Controllers\Public\FermetureController;
 use App\Http\Controllers\Api\CouvertsrestantsController;
 use App\Http\Controllers\Api\ReservationController;
+use App\Http\Controllers\Public\AlcoolController;
+use App\Http\Controllers\Public\DessertController;
+use App\Http\Controllers\Public\EntreeController;
+use App\Http\Controllers\Public\PlatController;
+use App\Http\Controllers\Public\SoftController;
+use App\Http\Controllers\Public\VinController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +51,15 @@ Route::middleware('api')->group(function () {
 
     // Post du formulaire
     Route::post('/reservation', [ReservationController::class, 'store']);
+
+
+
+    // Route pour afficher les différents plats dans la section carte
+    Route::get('/entrees', [EntreeController::class, 'index']);
+    Route::get('/plats', [PlatController::class, 'index']);
+    Route::get('/desserts', [DessertController::class, 'index']);
+    Route::get('/alcools', [AlcoolController::class, 'index']);
+    Route::get('/softs', [SoftController::class, 'index']);
+    Route::get('/vins', [VinController::class, 'index']);
 });
 
