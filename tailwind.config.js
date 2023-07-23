@@ -13,11 +13,13 @@ export default {
       gold: "rgba(228,185,91,0.85)",
       primary: "#20202f", // 240,86,199
       primaryDark: "#e4b95b", // 80,230,217
-      creme: "rgb(244, 242, 237)"
+      creme: "rgb(244, 242, 237)",
+      nav: "#383848"
     },
     fontFamily: {
       'figtree': ['Figtree', 'sans-serif'],
       'poppins': ['Poppins', 'sans-serif'],
+      'quicksand': ['Quicksand', 'sans-serif']
     }
   },
   plugins: [],

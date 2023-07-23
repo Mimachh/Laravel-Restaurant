@@ -5,9 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
+        <link
+        rel="stylesheet"
+        href="https://unpkg.com/swiper/swiper-bundle.min.css"
+        />
 
     </head>
-    <body class="">
+    <body>
         <div class="font-poppins">
             @if (Route::has('login'))
                 <div class="">
@@ -31,26 +35,21 @@
             @endif
         </div>
  
-        <x-header />
+        <main class="">
+            <x-header />
 
-        <section class="w-full ">
-            <div class="text-center">
-                <p class="">Section 1 Slider avec Titre</p>
-            </div>
-           
-        </section>
+            <x-slider />       
 
-        <section class="bg-creme">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Section 2 description du resto</p>
-            </div>
-        </section>
+            <x-about.resto />
 
-        <section class="bg-dark text-primaryDark">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Section 3 menus</p>
-            </div>
-        </section>
+            <x-carte.formules />
+
+            <x-carte.carte />
+        </main>
+
+
+
+
 
         <section class="bg-light text-primary">
             <div class="max-w-[1400px] mx-auto">
@@ -70,6 +69,12 @@
             </div>
         </section>
 
+        <section class="bg-dark text-primaryDark">
+            <div class="max-w-[1400px] mx-auto">
+                <p class="">Contact</p>
+            </div>
+        </section>
+
         <section class="bg-primary text-primaryDark">
             <div class="max-w-[1400px] mx-auto">
                 <p class="">Footer</p>
@@ -77,5 +82,6 @@
         </section>
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     </body>
 </html>

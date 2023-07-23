@@ -1,0 +1,41 @@
+.social-icon {
+    width: 18px;
+    height: 18px;
+}
+#div-nav-bar {
+    transition-duration: 0.8s;
+    nav {
+        padding-top: 20px ;
+        padding-bottom: 20px ;
+        transition: all 0.3s ease-in;
+    }
+
+    img {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 12px);
+        scale: 1.1;
+        // transform: translateY(12px);
+        transition: all 0.3s ease-in;
+    }
+}
+#div-nav-bar.sticky-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    nav {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    img {
+        position: absolute;
+        left: 50%;
+        scale: 0.8;
+        transform: translate(-50%, 30px);
+        transition: all 0.3s ease-in;
+    }
+}
+

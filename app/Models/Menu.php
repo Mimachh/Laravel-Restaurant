@@ -58,4 +58,37 @@ class Menu extends Model
         }
     }
 
+    public function getEntrees() {
+        $menu = "";
+            if($this->entrees) { 
+                foreach($this->entrees as $entree) {
+                    $menu .= $entree->nom;
+                }
+            }
+
+        return $menu;
+    }
+
+    public function getPlats() {
+        $plats = "";
+        if($this->plats) { 
+            foreach($this->plats as $plat) {
+                $plats .= $plat->nom;
+            }
+        }
+
+        return $plats;
+    }
+
+    public function getDesserts() {
+        $desserts = "";
+        if($this->desserts) { 
+            foreach($this->desserts as $dessert) {
+                $desserts .= $dessert->nom;
+            }
+        }
+
+        return $desserts;
+    }
+
 }

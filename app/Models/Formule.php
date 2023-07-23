@@ -29,4 +29,8 @@ class Formule extends Model
             return 'Hors-ligne';
         }
     }
+
+    public function formatPrice() {
+        return $this->prix . " €";
+    }
 }
