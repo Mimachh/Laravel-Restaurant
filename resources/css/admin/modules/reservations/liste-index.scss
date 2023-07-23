@@ -23,7 +23,7 @@
           margin-bottom: 10px;
           padding: 1rem 0.5rem;
           border-radius: var(--border-radius);
-
+          background-color: var(--admin-light-creme);
 
   
           .service-link {
@@ -57,7 +57,7 @@
   
               .info-link {
                 text-decoration: none;
-  
+                color: var(--info);
                 &:hover {
                   text-decoration: underline;
                 }
@@ -78,31 +78,33 @@
 
         }
 
-        .service-item-midi {
-            background-color: var(--hover-info);
+        // .service-item-midi {
+     
+        //     background-color: var(--admin-light-creme);
             
-            .info-item {
-                .info-link {
-                    color: var(--admin-light);
-                  &:hover {
-                    text-decoration: underline;
-                  }
-                }
-            }
+        //     .info-item {
+        //         .info-link {
+        //             color: var(--admin-light);
+        //           &:hover {
+        //             text-decoration: underline;
+        //           }
+        //         }
+        //     }
 
-        }
+        // }
   
-        .service-item-soir {
-            background-color: var(--admin-highlight);
-            .info-item {
-                .info-link {
-                    color: var(--info);
-                  &:hover {
-                    text-decoration: underline;
-                  }
-                }
-            }
-        }
+        // .service-item-soir {
+        //     background-color: var(--admin-light-creme);
+     
+        //     .info-item {
+        //         .info-link {
+        //             color: var(--info);
+        //           &:hover {
+        //             text-decoration: underline;
+        //           }
+        //         }
+        //     }
+        // }
       }
     }
   }

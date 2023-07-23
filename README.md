@@ -21,11 +21,6 @@
 
 ## Mettre des slugs partouz
 
-
-## MAILING
-
-
-
 ## Réservation 
 
 Créer système de mailing :

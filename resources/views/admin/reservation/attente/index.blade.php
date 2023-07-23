@@ -20,12 +20,12 @@
 
               </a> :
               <div class="my-4">
-                    @php
-                        $totalConvives = $reservations->where('status', 1)->sum('convives');
-                    @endphp
-                        <p class="pill-places-restantes">Total des places réservées : {{ $totalConvives }}</p>
-                        <p class="pill-couverts-restants">Nombre de couverts restants {{ getCouvertsRestants($reservations, $service, $date) }}</p>
-                </div>
+                @php
+                  $totalConvives = $reservations->where('status', 1)->sum('convives');
+                @endphp
+                  <p class="pill-places-restantes">Total des places réservées : {{ $totalConvives }}</p>
+                  <p class="pill-couverts-restants">Nombre de couverts restants {{ getCouvertsRestants($reservations, $service, $date) }}</p>
+              </div>
               <ul class="reservation-info">
                 <li class="info-item info-item-total">
                   <span class="info-text-total">{{ count($reservations) }} réservation(s) en attente 

@@ -9,15 +9,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+}
+
+#modalForm {
+  width: 400px;
 }
 
 .modal-content {
   background-color: var(--public-light-creme);
   padding: 20px;
+  /* width: 400px; */
+  max-width: 300px;
+  margin: 0 auto;
   /* width: 100%;
   height: 100%; */
   display: block;
   position: relative;
+}
+
+@media (max-width: 700px) {
+  .modal-content {
+    max-width: 80%;
+    margin: 0 auto;
+  }
 }
 
 .page_1 {
@@ -237,7 +252,7 @@ input[type="radio"]:checked + label.label-radio {
   
       <!-- Fenêtre modale -->
       <div v-if="showModal" class="modal" @click="closeModalOutside">
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitForm" id="modalForm">
           <div class="modal-content">
             <!-- Contenu de la fenêtre modale -->
             <h2>Réserver une table</h2>
