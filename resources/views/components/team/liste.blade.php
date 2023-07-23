@@ -34,7 +34,7 @@
 
 
                         <div class="hidden rounded-md
-                        group-hover:block absolute top-0  translate-y-[-48%] left-[-3px] right-[-3px]
+                        group-hover:block absolute top-0  translate-y-[-50%] left-[-3px] right-[-3px]
                         bg-primary
                         ">
                             <h3 class="text-lg font-quicksand font-bold px-6 pt-2
@@ -45,7 +45,23 @@
                             ">Poste dans le restaurant</p>
 
                             <div class="text-light py-3">
-                                RS
+                                <ul class="flex gap-2 justify-center items-center">
+                                    <li>
+                                        <a href="">
+                                            <x-jam-facebook class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <x-jam-instagram  class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <x-jam-twitter class="social-icon text-light hover:text-light transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -74,7 +90,7 @@
 
 
                         <div class="hidden rounded-md
-                        group-hover:block absolute top-0  translate-y-[-48%] left-[-3px] right-[-3px]
+                        group-hover:block absolute top-0  translate-y-[-50%] left-[-3px] right-[-3px]
                         bg-primary
                         ">
                             <h3 class="text-lg font-quicksand font-bold px-6 pt-2
@@ -85,7 +101,23 @@
                             ">Poste dans le restaurant</p>
 
                             <div class="text-light py-3">
-                                RS
+                                <ul class="flex gap-2 justify-center items-center">
+                                    <li>
+                                        <a href="">
+                                            <x-jam-facebook class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <x-jam-instagram  class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <x-jam-twitter class="social-icon text-light hover:text-light transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -114,7 +146,7 @@
 
 
                         <div class="hidden rounded-md
-                        group-hover:block absolute top-0  translate-y-[-48%] left-[-3px] right-[-3px]
+                        group-hover:block absolute top-0  translate-y-[-50%] left-[-3px] right-[-3px]
                         bg-primary
                         ">
                             <h3 class="text-lg font-quicksand font-bold px-6 pt-2
@@ -125,7 +157,23 @@
                             ">Poste dans le restaurant</p>
 
                             <div class="text-light py-3">
-                                RS
+                                <ul class="flex gap-2 justify-center items-center">
+                                    <li>
+                                        <a href="">
+                                            <x-jam-facebook class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <x-jam-instagram  class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            <x-jam-twitter class="social-icon text-light hover:text-light transition-colors duration-100 ease"/>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
