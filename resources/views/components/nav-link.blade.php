@@ -6,10 +6,11 @@ $currentRoute = request()->routeIs($route) ? 'text-gold' : '';
 @endphp
 
 <li>
-    <a href="{{ route($route) }}" 
-    class="transition-colors duration-75 ease-linear hover:text-gold {{ $currentRoute }}
+    <a href="#{{ $route }}" 
+    class="transition-colors duration-75 ease-linear hover:text-gold  navbar-link 
     font-figtree
     "
+    data-section-id="{{ $route }}"
     >
         {{$title}}
     </a>

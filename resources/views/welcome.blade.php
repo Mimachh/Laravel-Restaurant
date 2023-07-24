@@ -35,7 +35,12 @@
             @endif
         </div>
  
-        <main class="">
+        <main class="relative">
+        @if (session('success'))
+            <div id="success-alert" class="z-50 fixed top-[50%] translate-y-[-50%] left-0 right-0 bg-[#B2D8B2] text-[#22543D] p-4 mb-4 rounded text-center">
+                <p>{{ session('success') }}</p>
+            </div>
+        @endif
             <x-header />
 
             <x-slider />       
@@ -46,39 +51,30 @@
 
             <x-carte.carte />
 
+
+
             <x-team.liste />
+
+            <x-horaire />
+
+            <x-reservation />
+
+            <x-contact />
+
+            <x-footer />
+
+            <x-to-top />
         </main>
 
 
 
-        <section class="bg-gold text-primary">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Horaire</p>
-            </div>
-        </section>
 
-        <section class="bg-dark text-primaryDark">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Reservation ou autre</p>
-            </div>
-        </section>
-
-        <section class="bg-dark text-primaryDark">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Contact</p>
-            </div>
-        </section>
-
-        <section class="bg-primary text-primaryDark">
-            <div class="max-w-[1400px] mx-auto">
-                <p class="">Footer</p>
-            </div>
-        </section>
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
         <script>
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     </body>
 </html>

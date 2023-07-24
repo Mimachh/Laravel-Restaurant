@@ -12,7 +12,7 @@
         <div class="w-full px-0 md:px-4 ">
             <div class="flex justify-between  separator">
                 <h3 class="text-lg font-bold font-quicksand text-primary">{{ item.nom }}</h3>
-                <p class="text-gold font-bold text-lg font-quicksand">{{ item.prix }} €</p>
+                <p class="text-primaryDark font-bold text-lg font-quicksand">{{ item.prix }} €</p>
             </div>
             <p class="pt-2">{{ item.description }}</p>
         </div>

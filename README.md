@@ -35,6 +35,7 @@ Créer système de mailing :
 
     - Mail pour informer l'admin qu'une réservation est reçue.
 
+    - Mail contact form directement à l'admin
 
 
 Créer l'espace de gestion de réservation
@@ -44,7 +45,6 @@ Ajouter un encart pour calculer le nb de réservations depuis le début
 Quand tout le système admin sera opérationnel, changer le design de pagination : liste des dates à venir / liste des resa en attente / byDate / index
 
 
-## Ajouter dans les options la possibilité de définir la durée des créneaux? 
 ## Le nombre de couverts c'est pour un service complet ou c'est juste pour un créneaux?
 
 
@@ -54,4 +54,6 @@ Quand tout le système admin sera opérationnel, changer le design de pagination
 
 ##Dans le design : ajouter les accompagnements en admin / en controller et en appel api pour la carte
 Revoir aussi l'histoire des formules
-Ajouter photo pour tester
+
+
+Modales

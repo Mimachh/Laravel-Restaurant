@@ -45,4 +45,5 @@ class Jour extends Model
 
         return $horaire;
     }
+
 }

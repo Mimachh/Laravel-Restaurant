@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ValidationController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\HistoriqueReservation;
 use App\Http\Controllers\Admin\ReservationEnAttenteController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 Route::get('/home', function () {
     return view('home');
 });
@@ -41,6 +45,7 @@ Route::get('/home', function () {
 Route::get('/resa', function () {
     return view('public.reservation');
 });
+
 
 
 Route::get('redirects', 'App\Http\Controllers\HomeController@index');

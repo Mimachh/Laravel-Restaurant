@@ -1,4 +1,4 @@
-<section class="bg-light text-primary">
+<section class="bg-light text-primary" id="team">
     <div class="max-w-[1400px] mx-auto">
 
 
@@ -12,8 +12,8 @@
         />
 
         <div class="py-16 md:py-32 px-12 space-y-24 md:space-y-0 flex flex-col md:flex-row justify-center items-center md:gap-2 lg:gap-8">
-            <div class="group w-fit z-10">
-                <div class="outline outline-creme relative rounded-md
+            <div class="group w-fit z-10 opacity-0" id="teamImage1">
+                <div class="outline outline-creme relative rounded-xl
                 w-64 h-[350px] flex flex-col justify-end cursor-pointer
                 
                 group-hover:outline-primary
@@ -33,7 +33,7 @@
                         ">Poste dans le restaurant</p>
 
 
-                        <div class="hidden rounded-md
+                        <div class="hidden rounded-b-xl
                         group-hover:block absolute top-0  translate-y-[-50%] left-[-3px] right-[-3px]
                         bg-primary
                         ">
@@ -68,8 +68,8 @@
                 </div>
             </div>
 
-            <div class="group w-fit z-20">
-                <div class="outline outline-creme relative rounded-md
+            <div class="group w-fit z-20 opacity-0" id="teamImage2">
+                <div class="outline outline-creme relative rounded-xl
                 w-64 h-[350px] flex flex-col justify-end cursor-pointer
                 
                 group-hover:outline-primary
@@ -89,7 +89,7 @@
                         ">Poste dans le restaurant</p>
 
 
-                        <div class="hidden rounded-md
+                        <div class="hidden rounded-b-xl
                         group-hover:block absolute top-0  translate-y-[-50%] left-[-3px] right-[-3px]
                         bg-primary
                         ">
@@ -124,8 +124,8 @@
                 </div>
             </div>
 
-            <div class="group w-fit z-30">
-                <div class="outline outline-creme relative rounded-md
+            <div class="group w-fit z-30 opacity-0" id="teamImage3">
+                <div class="outline outline-creme relative rounded-xl
                 w-64 h-[350px] flex flex-col justify-end cursor-pointer
                 
                 group-hover:outline-primary
@@ -145,7 +145,7 @@
                         ">Poste dans le restaurant</p>
 
 
-                        <div class="hidden rounded-md
+                        <div class="hidden rounded-b-xl
                         group-hover:block absolute top-0  translate-y-[-50%] left-[-3px] right-[-3px]
                         bg-primary
                         ">

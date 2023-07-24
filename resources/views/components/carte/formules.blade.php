@@ -1,5 +1,5 @@
-<section class="bg-primary md:py-32 py-16">
-    <div class="max-w-[1400px] mx-auto">
+<section class="bg-ardoise md:py-32 py-16" id="menu">
+    <div class="max-w-[1400px] mx-auto relative z-10">
 
 
         <x-section-title 

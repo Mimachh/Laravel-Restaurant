@@ -14,7 +14,8 @@ export default {
       primary: "#20202f", // 240,86,199
       primaryDark: "#e4b95b", // 80,230,217
       creme: "rgb(244, 242, 237)",
-      nav: "#383848"
+      nav: "#383848",
+      error: "#FF0000",
     },
     fontFamily: {
       'figtree': ['Figtree', 'sans-serif'],

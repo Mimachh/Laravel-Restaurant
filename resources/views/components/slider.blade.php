@@ -1,4 +1,4 @@
-<div class="swiper mySwiper relative">
+<section class="swiper mySwiper relative" id="welcome">
         <div class="swiper-wrapper ">
             @php
                 $sliders = [
@@ -37,20 +37,23 @@
             backdrop-filter bg-primary/70 
             ">
                 <div class="text-center space-y-6">
-                    <h1 class="md:text-7xl text-xl font-semibold font-poppins">
+                    <h1 class="md:text-7xl text-xl font-semibold font-quicksand opacity-0" id="main-title">
                         <span class="text-light">BIENVENUE SUR</span> 
-                        <span class="text-gold ">LABOOM</span>
+                        <span class="text-primaryDark">LABOOM</span>
                     </h1>
-                    <p class="text-md md:text-xl text-light">Cuisine traditionnelle</p>
+                    <p class="text-md md:text-xl text-light opacity-0" id="subtitle">Cuisine traditionnelle</p>
 
                     <x-button 
-                    title="Voir les recettes"
+                    title="Voir la carte"
                     class="text-light hover:bg-gold 
                     hover:border-gold hover:text-primary
                     border-2 border-light
                     "
+                    targetId="menu"
+                    type="scroll"
                     />
 
                 </div>
             </div>
-      </div>
+</section>
+

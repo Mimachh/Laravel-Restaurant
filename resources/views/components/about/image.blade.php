@@ -1,8 +1,13 @@
-@props(['src' => "images/salade.jpg", "class" => "", "backdrop" => "backdrop-filter bg-primary/70"])
-<div class="relative">
+@props([
+'src' => "images/salade.jpg", 
+"class" => "", 
+"backdrop" => "backdrop-filter bg-primary/70",
+"id" => ""])
+
+<div class="relative {{$class}}" id="{{ $id }}">
 <img src="{{ asset($src) }}" 
     width="100%" height="auto" alt="Image"
-    class="mx-auto rounded-xl {{$class}}
+    class="mx-auto rounded-xl 
     
     "
 >
