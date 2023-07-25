@@ -1,79 +1,6 @@
 <style>
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-}
-
-#modalForm {
-  width: 400px;
-}
-
-.modal-content {
-  background-color: var(--public-light-creme);
-  padding: 20px;
-  /* width: 400px; */
-  max-width: 300px;
-  margin: 0 auto;
-  /* width: 100%;
-  height: 100%; */
-  display: block;
-  position: relative;
-}
-
-@media (max-width: 700px) {
-  .modal-content {
-    max-width: 80%;
-    margin: 0 auto;
-  }
-}
-
-.page_1 {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 0.5rem;
-}
-
 .ensemble_des_radios_buttons {
   display: flex;
-}
-
-.btn {
-  padding: 0.5rem 0.8rem;
-  border: none;
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  transition: all 0.2s ease-in;
-}
-
-.btn-prev {
-  outline: 1px solid var(--danger);
-  color: var(--danger);
-}
-
-.btn-prev:hover {
-  outline: 1px solid var(--danger);
-  color: var(--public-light);
-  background-color: var(--danger);
-}
-
-.btn-next {
-  outline: 1px solid var(--success);
-  color: var(--success);
-}
-
-.btn-next:hover {
-  outline: 1px solid var(--success);
-  color: var(--public-light);
-  background-color: var(--success);
 }
 
 .btn-save {
@@ -88,31 +15,6 @@
   background-color: var(--public-light);
 }
 
-#closeModalButton {
-  background-color: red;
-  border: none;
-  outline: 1px solid var(--public-dark);
-  color: var(--public-light);
-  padding: 0.2rem 0.4rem;
-  border-radius: var(--border-radius);
-  font-weight: 600;
-  font-size: 0.8rem;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(-15%, 15%);
-
-  cursor: pointer;
-}
-
-.pagination_buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
 .radio_div {
 
   display: flex;
@@ -121,7 +23,6 @@
   justify-content: center; 
   gap: 0.4rem;
   padding: 1rem 0;
-  width: 100%;
   height: fit-content;
 }
 
@@ -131,27 +32,22 @@ input[type="radio"] {
 }
 
 label.label-radio {
-  height: 60px;
-  width: 90px;
+  height: 80px;
+  width: 140px;
   border-radius: var(--border-radius);
-  border: 2px solid var(--hover-info);
+  /* border: 2px solid var(--hover-info); */
   position: relative;
   text-align: center;
   transition: 0.5s;
   cursor: pointer;
 }
 
-small {
-  display: inline-flex;
-  width: 120px;
-  text-align: center;
-}
 .sun, .moon {
   position: absolute !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -30%);
-  width: 40px !important;
+  width: 50px !important;
   height: auto;
   /* background-color: red !important; */
 }
@@ -162,144 +58,184 @@ input[type="radio"]:checked + label.label-radio {
   box-shadow: 0 15px 45px rgb(24,249,141,0.2);
 }
 
-.select_div_creneaux {
-    margin: 0.4rem 0;
+dialog {
+  display: none;
+}
+dialog[open] {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.text-muted {
+  color: gray;
 }
 
-.select_div_creneaux select,
-.guestDiv input[type="number"] {
-    width: 100%;
-    height: 30px;
-    border: none;
-    outline: none;
-    background-color: var(--public-light);
-    border-radius: var(--border-radius);
-
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
 }
-
-.error-message {
-    margin: 0.5rem 0;
-    color: var(--public-light);
-    background-color: var(--danger);
-   text-align: center;
-   font-weight: 500;
-   padding: 0.4rem 0;
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #20202f;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #20202f transparent transparent transparent;
 }
-
-.success-message {
-    color: var(--public-light);
-    background-color: var(--success);
-   text-align: center;
-   font-weight: 500;
-   padding: 0.4rem 0;
-   margin: 0.5rem 0;
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
 }
-
-.page_4 {
-  padding: 0.8rem;
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
 }
-.page_4 input[type="text"],
-.page_4 input[type="email"],
-.page_4 input[type="tel"] {
-  width: 100%;
-  height: 40px;
-  border-radius: var(--border-radius);
-  border: none;
-  font-size: 1rem;
-  padding: 0 0 0 0.2rem;
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
 }
-
-.page_4 textarea {
-  resize: none;
-  width: 100%;
-  border-radius: var(--border-radius);
-  border: none;
-  font-size: 1rem;
-  padding: 0 0 0 0.2rem;
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
-.form-group {
-  margin: 0.3rem 0;
-}
-
-.form-group label {
-  font-weight: 500;
-  font-size: 1.1rem;
-  color: var(--public-dark);
-}
-
-.error-messages {
-  width: 100%;
-  background-color: var(--danger);
-  color: var(--public-dark);
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 0.6rem 0;
-  border-radius: var(--border-radius);
-  display: flex;
-  justify-content: center;
-}
-
-.error-messages ul li {
-  list-style: none;
-}
-
 </style>
 
 <template>
-    <div>
-      <button @click="openModal">Ouvrir la fenêtre modale</button>
-  
-      <!-- Fenêtre modale -->
-      <div v-if="showModal" class="modal" @click="closeModalOutside">
-        <form @submit.prevent="submitForm" id="modalForm">
-          <div class="modal-content">
-            <!-- Contenu de la fenêtre modale -->
-            <h2>Réserver une table</h2>
-            <div v-if="errorMessages.length > 0" class="error-messages">
-              <ul>
+    <!-- <button @click="openDialog" id="openModalBtn" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1">Ouvrir la fenêtre modale</button> -->
+    <dialog id="modalResa" ref="modalResa" class="w-[85%] xl:w-[60%] min-h-[60%] rounded-md modalResa" @click="closeDialogOutside">
+      <form @submit.prevent="submitForm" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1">
+        <div>
+            <h2 class="text-center font-bold text-xl md:text-3xl mt-4 md:mt-8">Réserver une table</h2>
+            
+            <!-- NAVIGATION -->
+            <div class="my-8">
+              <ul class="flex flex-wrap justify-between lg:w-[60%] w-full mx-auto
+              bg-creme  rounded-full text-sm md:text-md
+              ">
+              
+              <!-- DATE -->
+                <li class="rounded-full"
+                
+                ><button 
+                @click="goToPage(1)"
+                class="py-3 px-3 md:px-8  hover:bg-primary hover:text-light rounded-full"
+                :class="{ 'bg-primary text-light': currentPage === 1}" 
+                type="button">Date</button></li>
+
+              <!-- SERVICE -->
+                <li class="rounded-full relative"
+                :class="{
+                
+                 }"
+                ><button 
+                @click="goToPage(2)"
+                type="button"
+                class="py-3 px-3 md:px-8 rounded-full"
+                :class="{ 
+                  'bg-primary text-light': currentPage === 2,
+                  'text-muted cursor-not-allowed': !selectedDate && currentPage === 1,
+                  'hover:bg-primary hover:text-light' : selectedDate
+                }"
+                >Service</button>
+              <div v-if="!selectedDate && currentPage === 1" class="absolute inset-0 cursor-not-allowed"></div>
+              </li>
+
+              <!-- HEURE -->
+                <li class="rounded-full relative"
+                ><button 
+                @click="goToPage(3)"
+                type="button"
+                class="py-3 px-3 md:px-8 rounded-full"
+                :class="{ 
+                  'bg-primary text-light': currentPage === 3,
+                  'text-muted cursor-not-allowed': !selectedService,
+                  'hover:bg-primary hover:text-light' : selectedService
+                }"
+                >Heure</button>
+                <div v-if="!selectedService" class="absolute inset-0 cursor-not-allowed"></div>
+                </li>
+
+                
+              <!-- INFOS -->
+                <li class="rounded-full relative"
+                ><button 
+                @click="goToPage(4)"
+                type="button"
+                class="py-3 px-3 md:px-8 rounded-full"
+                :class="{ 
+                  'bg-primary text-light': currentPage === 4,
+                  'text-muted cursor-not-allowed': !selectedCreneau,
+                  'text-muted cursor-not-allowed':  !numberOfGuests,
+                  'hover:bg-primary hover:text-light' : selectedCreneau && numberOfGuests
+                }"
+                >Informations</button>
+                <div v-if="!selectedCreneau && !numberOfGuests" class="absolute inset-0 cursor-not-allowed"></div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Messages d'erreur -->
+            <div v-if="errorMessages.length > 0" class="text-center">
+              <ul class="space-y-1 bg-error">
                 <li v-for="errorMessage in errorMessages" :key="errorMessage">
                   {{ errorMessage }}
                 </li>
               </ul>
             </div>
-
+            <!-- Message success -->
             <div v-if="successMessages.length > 0" class="success-messages">
-              <ul>
+              <ul class="bg-successBG text-center text-success">
                 <li v-for="successMessage in successMessages" :key="successMessage">
                   {{ successMessage }}
                 </li>
               </ul>
             </div>
             <!-- Ajouter le nouvel élément pour l'erreur unique -->
-            <div v-if="errorUnique" class="error-messages">
-              <ul>
+            <div v-if="errorUnique">
+              <ul class="text-center bg-error">
                 <li>{{ errorUnique }}</li>
               </ul>
             </div>
 
-              <!-- Page 1 -->
-              <div v-if="currentPage === 1" class="page_1">
-                  <p v-if="fermetureData.status == 1" >
-                      Ce paragraphe ne doit être affiché que si fermeture->status == 1
-                  </p>
-          
-                  <label for="reservationDate">Date de réservation :</label>
-                  <VueDatePicker
-                      v-model="selectedDate"
-                      :disabled-dates="disabledDates"
-                      :enable-time-picker="false"
-                      teleport-center
-                      @update:modelValue="handleDateSelection"
-                      
-                  ></VueDatePicker>
-              </div>
+            <!-- LOADING -->
+            <div v-if="loading" class="flex justify-center py-16">
+              <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+              <!-- <p>Loading...</p> -->
+            </div>
+            <!-- PAGE 1 -->
+            <div v-if="currentPage === 1 && loading == false" class="pt-4 pb-6">          
+              <label for="reservationDate" 
+              class="block py-2 text-primary font-medium text-lg md:text-2xl"
+              >Date de réservation :</label>
+              <VueDatePicker
+                  v-model="selectedDate"
+                  :disabled-dates="disabledDates"
+                  :enable-time-picker="false"
+                  teleport-center
+                  @update:modelValue="handleDateSelection"
+              ></VueDatePicker>
+            </div>
 
-              <!-- Page 2 -->
-              <div v-if="currentPage === 2" >
-                  <p>{{ selectedChoice }}</p>
+            <!-- PAGE 2 -->
+            <div v-if="currentPage === 2 && loading == false" >
+                  
                   <!-- Choix du service -->
-                  <div class="ensemble_des_radios_buttons">
+                  <h3 class="text-center font-medium text-lg md:text-2xl">Choisissez votre service</h3>
+                  <p class="text-center font-normal text-md">{{ selectedChoice }}</p>
+                  <div class="ensemble_des_radios_buttons justify-center gap-8 md:gap-24">
                       <div class="radio_div" v-if="isRestaurantOpenMidi">
                           <input type="radio" 
                           name="service" 
@@ -308,11 +244,11 @@ input[type="radio"]:checked + label.label-radio {
                           @change="handleRadioChange"
                           v-model="selectedService"
                           >
-                          <label class="label-radio" for="midi">
-                              <span>Midi</span>
+                          <label class="label-radio border border-primary" for="midi">
+                              <span class="font-medium">Midi</span>
                               <svg id="icone" class="sun" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title/><path d="M276,170a106,106,0,0,0-84.28,170.28A106,106,0,0,0,340.28,191.72,105.53,105.53,0,0,0,276,170Z" fill="#f7ad1e"/><path d="M150.9,242.12A107.63,107.63,0,0,0,150,256a106,106,0,1,0,19.59-61.37" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><path d="M157.56,216.68c-.17.41-.34.81-.5,1.22" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="256" x2="256" y1="64" y2="123"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="256" x2="256" y1="389" y2="447.99"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="120.24" x2="161.96" y1="120.24" y2="161.95"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="350.04" x2="391.76" y1="350.04" y2="391.76"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="64" x2="123" y1="256" y2="256"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="389" x2="448" y1="256" y2="256"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="120.24" x2="161.96" y1="391.76" y2="350.04"/><line fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" x1="350.04" x2="391.76" y1="161.95" y2="120.24"/></svg>
                           </label>
-                          <small>Couverts restants: {{ nbCouvertsMidi  }}</small>
+                          <small class="font-normal text-primary text-md">Couverts restants: {{ nbCouvertsMidi  }}</small>
                       </div>
                       <div class="radio_div" v-if="isRestaurantOpenSoir" >
                           <input type="radio" 
@@ -322,95 +258,116 @@ input[type="radio"]:checked + label.label-radio {
                           @change="handleRadioChange"
                           v-model="selectedService"
                           >
-                          <label class="label-radio" for="soir">
-                              <span>Soir</span>
+                          <label class="label-radio  border border-primary" for="soir">
+                              <span class="font-medium">Soir</span>
                               <svg class="moon" id="icone" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title/><path d="M276.6,127.6A148.4,148.4,0,0,0,162.14,370.46,148.49,148.49,0,0,0,326.47,387a150.66,150.66,0,0,1-15.94-16.51,148.38,148.38,0,0,1,9.79-236.29A148.18,148.18,0,0,0,276.6,127.6Z" fill="#fff133"/><path d="M116.5,207c-.37,1.05-.73,2.11-1.07,3.17" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/><path d="M109.77,234.43a148.43,148.43,0,0,0,221,150.11,148.44,148.44,0,0,1,0-257.08,148.46,148.46,0,0,0-204,56.62" fill="none" stroke="#02005c" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/></svg>
                           </label>
-                          <small>Couverts restants: {{ nbCouvertsSoir  }}</small>
+                          <small class="font-normal text-primary text-md">Couverts restants: {{ nbCouvertsSoir  }}</small>
                       </div>
                   </div>
                   
+            </div>
+
+            <!-- PAGE 3 -->
+            <div v-if="currentPage === 3 && loading == false" class="w-[80%] md:w-[60%] mx-auto">
+              <h3 class="text-center font-medium text-lg md:text-2xl">Sélectionnez un créneau horaire :</h3>
+              <div class="w-full py-4 md:py-8">
+                  <select v-model="selectedCreneau" 
+                  class="border border-primary w-full py-2 rounded-md text-center font-normal md:font-medium text-md md:text-lg
+                  focus:outline-none focus:visible-none
+                  ">
+                      <option :value="null" disabled>Choisissez votre créneau</option>
+                      <option v-for="creneau in creneaux" :value="creneau" :key="creneau" :selected="creneaux.indexOf(creneau) === 0">{{ creneau }}</option>
+                  </select>
               </div>
 
-              <!-- Page 3 -->
-              <div v-if="currentPage === 3">
-                  <h3>Sélectionnez un créneau horaire :</h3>
-                  <div class="select_div_creneaux">
-                      <select v-model="selectedCreneau">
-                          <option :value="null" disabled>Choisissez votre créneau</option>
-                          <option v-for="creneau in creneaux" :value="creneau" :key="creneau" :selected="creneaux.indexOf(creneau) === 0">{{ creneau }}</option>
-                      </select>
-                  </div>
+              <h3 class="text-center font-medium text-lg md:text-2xl">Nombre d'invités : </h3>
+              <div class="w-full py-4 md:py-8">
+                  <input
+                  class="border border-primary rounded-md w-full py-2 
+                  text-center md:font-medium text-md md:text-lg
+                  focus:outline-none focus:visible-none
+                  " 
+                  v-model.lazy="numberOfGuests" 
+                  name="couverts" 
+                  id="couverts" 
+                  type="number"
+                  @change="handleNumberChange"
+                  >
+                  <div v-if="errorCouvertsRestantsMessage" 
+                  class="w-full text-center bg-error py-3 my-4 md:my-8 text-light font-normal text-md md:text-lg rounded-md"
+                  >{{ errorCouvertsRestantsMessage }}</div>
 
-                  <div class="guestDiv">
-                      <label for="couverts">Nombre d'invités</label>
-                      <input 
-                      v-model="numberOfGuests" 
-                      name="couverts" 
-                      id="couverts" 
-                      type="number"
-                      @input="handleNumberChange"
-                      >
-                      <div v-if="errorCouvertsRestantsMessage" class="error-message">{{ errorCouvertsRestantsMessage }}</div>
-                      <div v-if="successCouvertsRestantsMessage" class="success-message">{{ successCouvertsRestantsMessage }}</div>
-                  </div>
+                  <div v-if="successCouvertsRestantsMessage" 
+                  class="w-full text-center bg-successBG py-3 my-4 md:my-8 text-success font-normal text-md md:text-lg rounded-md"
+                  >{{ successCouvertsRestantsMessage }}</div>
+              </div>
+            </div>
+
+            <!-- PAGE 4 -->
+            <div v-if="currentPage === 4 && loading == false" class="w-[90%] md:w-[80%] lg:w-[60%] mx-auto">
+              <h3 class="text-center font-medium text-lg md:text-2xl">Vos informations personnelles</h3>
+              <div class="w-full flex flex-col gap-2 py-1 md:py-3">
+                <label for="nom" class="font-medium text-md md:text-lg">Nom *</label>
+                <input 
+                class="border border-primary rounded-md py-2 pl-4 focus:visible-none focus:outline-none"
+                v-model="nom" name="nom" id="nom" type="text" placeholder="Votre nom" required>
+              </div>
+              
+              <div class="w-full flex flex-col gap-2 py-1 md:py-3">
+                <label for="prenom" class="font-medium text-md md:text-lg">Prénom *</label>
+                <input 
+                class="border border-primary rounded-md py-2 pl-4 focus:visible-none focus:outline-none"
+                v-model="prenom" name="prenom" id="prenom" type="text" placeholder="Votre prénom" required>
               </div>
 
-              <!-- Page 4 -->
-              <div v-if="currentPage === 4" class="page_4">
-                <h3>Vos informations personnelles</h3>
-                <div class="form-group">
-                  <label for="nom">Nom *</label>
-                  <input v-model="nom" name="nom" id="nom" type="text" placeholder="nom" required>
-                </div>
-                <div class="form-group">
-                  <label for="prenom">Prénom *</label>
-                  <input v-model="prenom" name="prenom" id="prenom" type="text" required>
-                </div>
-                <div class="form-group">
-                  <label for="mail">Mail *</label>
-                  <input v-model="mail" name="mail" id="mail" type="email" required>
-                </div>
-                <div class="form-group">
-                  <label for="telephone">Téléphone</label>
-                  <input v-model="telephone" name="telephone" id="telephone" type="tel">
-                </div>
-                <div class="form-group">
-                  <label for="informations">Informations supplémentaires (allergies, demandes particulières)</label>
-                  <textarea rows="8" v-model="informations" name="informations" id="informations"></textarea>
-                </div>
-                <div class="form-group">
-                  <input v-model="conditionsUtilisation" name="conditionsUtilisation" id="conditionsUtilisation" type="checkbox" required
-                  value="1">
-                  <label for="conditionsUtilisation">J'accepte les conditions d'utilisation *</label>
-                </div>
+              <div class="w-full flex flex-col gap-2 py-1 md:py-3">
+                <label for="mail" class="font-medium text-md md:text-lg">Mail *</label>
+                <input 
+                class="border border-primary rounded-md py-2 pl-4 focus:visible-none focus:outline-none"
+                v-model="mail" name="mail" id="mail" placeholder="Votre mail" type="email" required>
               </div>
+
+              <div class="w-full flex flex-col gap-2 py-1 md:py-3">
+                <label for="telephone" class="font-medium text-md md:text-lg">Téléphone</label>
+                <input 
+                class="border border-primary rounded-md py-2 pl-4 focus:visible-none focus:outline-none"
+                v-model="telephone" placeholder="Votre téléphone" name="telephone" id="telephone" type="tel">
+              </div>
+
+              <div class="w-full flex flex-col gap-2 py-1 md:py-3">
+                <label for="informations" class="font-medium text-md md:text-lg">Informations supplémentaires (allergies, demandes particulières)</label>
+                <textarea 
+                class="border border-primary rounded-md py-2 pl-4 focus:visible-none focus:outline-none"
+                rows="4" v-model="informations" name="informations" id="informations"></textarea>
+              </div>
+
+              <div class="w-full flex items-center gap-4 py-1 md:py-3">
+                <input 
+                v-model="conditionsUtilisation" name="conditionsUtilisation" id="conditionsUtilisation" type="checkbox" required
+                value="1">
+                <label for="conditionsUtilisation" class="font-normal">J'accepte les conditions d'utilisation *</label>
+              </div>
+            </div>
 
               <!-- Page 5 -->
               <div v-if="currentPage === 5">
                 <div v-if="confirmationMessage" class="confirmation-messages">
-                      <p>{{ confirmationMessage }}</p>  
+                      <p class="text-center">{{ confirmationMessage }}</p>  
                 </div>
               </div>
-              <!-- Pagination -->
-              <div class="pagination_buttons">
-                  <button type="button" class="btn btn-prev" v-if="currentPage === 2 || currentPage === 3 || currentPage === 4" @click="goToPage(currentPage - 1)">Revenir</button>
-                  <button type="button" class="btn btn-next"
-                  v-if="selectedDate && currentPage === 1 
-                  || selectedService && currentPage === 2
-                  || selectedCreneau && numberOfGuests && currentPage === 3" 
-                  @click="goToPage(currentPage + 1)">Continuer</button>
 
-                  <button  v-if="selectedDate && selectedService && selectedCreneau && numberOfGuests && currentPage === 4"
-                  type="submit"
-                  class="btn btn-save"
-                  >Soumettre</button>
-              </div>
-            <button id="closeModalButton" @click="closeModal">X</button>
-          </div>
-        </form>
-      </div>
-    </div>
+              <button  v-if="selectedDate && selectedService && selectedCreneau && numberOfGuests && currentPage === 4"
+                type="submit"
+                class="btn btn-save"
+              >Soumettre</button>
+
+            <button type="button" class="bg-error px-3 py-1 rounded-xl font-bold font-quicksand absolute top-0 right-0 mr-2 mt-2"  @click="closeDialog">X</button>
+        </div>
+      </form>  
+      <p v-if="fermetureData.status == 1 || resaOnlineActive.is_online_booking !== 1">Les réservations ne sont pas disponibles pour l'instant</p>
+ 
+    </dialog>
   </template>
   
   <script>
@@ -430,8 +387,9 @@ dayjs.locale('fr');
 export default {
   components: { VueDatePicker },
   setup() {
+   const modalResa = ref(null);
     const showModal = ref(false);
-
+    const loading = ref(false);
     const errorCouvertsRestantsMessage = ref('');
     const successCouvertsRestantsMessage = ref('');
     const errorMessages = ref([]);
@@ -463,7 +421,7 @@ export default {
 
     // Table fermeture
     const fermetureData = ref({});
-
+    const resaOnlineActive = ref({});
     // Dates désactivées
     const disabledDates = ref([]);
 
@@ -501,21 +459,29 @@ export default {
     const informations = ref(null);
     const conditionsUtilisation = ref(false);
 
-    const openModal = () => {
-      showModal.value = true;
-    };
 
-    const closeModal = () => {
-      showModal.value = false;
+    const openDialog = () => {
+      modalResa.value.showModal();
+ 
+    }
+
+    const closeDialogOutside = (event) => {
+      if (event.target.classList.contains('modalResa')) {
+        // closeModal();
+        modalResa.value.close();
+      }
+      
       successCouvertsRestantsMessage.value = '';
       errorCouvertsRestantsMessage.value = '';
-    };
+    }
 
-    const closeModalOutside = (event) => {
-      if (event.target.classList.contains('modal')) {
-        closeModal();
-      }
-    };
+    const closeDialog = () => {
+      modalResa.value.close();
+      successCouvertsRestantsMessage.value = '';
+      errorCouvertsRestantsMessage.value = '';
+    }
+
+
 
     // Fonction pour mettre à jour les créneaux
     const updateCreneaux = (creneauxData) => {
@@ -525,8 +491,9 @@ export default {
     // BOUTONS SERVICE
     const handleRadioChange = async (event) => {
         selectedService.value = event.target.value;
-
+  
         try {
+            loading.value = true;
             const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/creneaux`);
             const openingHours = response.data;
 
@@ -551,6 +518,7 @@ export default {
         } catch (error) {
             console.error("Erreur lors de la récupération des informations d'ouverture du restaurant", error);
         }
+        loading.value = false;
     };
 
     const formatTime = (time) => {
@@ -575,13 +543,14 @@ export default {
     const handleDateSelection = (value) => {
         selectedDate.value = value;
         errorUnique.value = "";
-
+  
         // ICI JE REQUETE POUR VOIR SI UNE ENTREE EXISTE le MIDI OU LE SOIR
         formattedDateToStore.value = dayjs(selectedDate.value).format('DD-MM-YYYY');
 
         const testSiDataCouvertsRestantsTableExistMatin = async () => {
           const testerLeMatin = "AM+" + formattedDateToStore.value;
           try {
+            loading.value = true;
             const response = await axios.get(`api/jours/${testerLeMatin}/couverts_restants`);
             // console.log('response', response.data);
             nombreRestantAprèsTestMatin.value = response.data.couverts_restants;
@@ -599,6 +568,7 @@ export default {
         const testSiDataCouvertsRestantsTableExistSoir = async () => {
           const testerLeSoir = "PM+" + formattedDateToStore.value;
           try {
+            loading.value = true;
             const response = await axios.get(`api/jours/${testerLeSoir}/couverts_restants`);
             // console.log(response.data);
             nombreRestantAprèsTestSoir.value = response.data.couverts_restants;
@@ -617,6 +587,7 @@ export default {
         // FIN
 
         if (currentPage.value === 1 && selectedDate.value) {
+       
             // Récupérer le jour de la semaine correspondant à la date sélectionnée
            selectedDay.value = dayjs(selectedDate.value).day();
             
@@ -695,7 +666,7 @@ export default {
                     nbCouvertsMidi.value = "";
                     nbCouvertsSoir.value = "";
                 }
-                
+                loading.value = false;
                 goToPage(2);
             })
             .catch((error) => {
@@ -703,7 +674,7 @@ export default {
             });
         }
         
-
+        
 
     };
 
@@ -713,6 +684,8 @@ export default {
         errorUnique.value = "";
         // On cherche en base de données s'il reste des couverts
         var prefix = "";
+
+        var verifPourPasserPageSuivante = "";
         
         if(selectedService.value === 'midi') {
             prefix = "AM";
@@ -738,55 +711,28 @@ export default {
       
     
       if(nbApresTest !== null) {
+        loading.value = true;
         if(numberOfGuests.value > 1) {
           if (nbApresTest >= numberOfGuests.value) {
             errorCouvertsRestantsMessage.value = '';
             successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
+            verifPourPasserPageSuivante = "ok";
           } else if (nbApresTest < numberOfGuests.value) {
             errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${nbApresTest} places`;
             successCouvertsRestantsMessage.value = '';
             numberOfGuests.value = '';
+            verifPourPasserPageSuivante = "non";
           }
         } else {
             // successCouvertsRestantsMessage.value = '';
             // errorCouvertsRestantsMessage.value = '';
         }
       }
-      // if(nombreRestantAprèsTestMatin.value || nombreRestantAprèsTestSoir.value) {
 
-      // }
-      // try {
-      //   const response = await axios.get(`api/jours/${serviceDateCouverts.value}/couverts_restants`);
-        
-      //   console.log('response ici si entree dans la table', response.data);
-      //   serviceCouvertsRestants.value = response.data.couverts_restants;
-      //   if(numberOfGuests.value > 1) {
-      //     if (response.data.message === "no exist") {
-      //         successCouvertsRestantsMessage.value = '';
-      //         errorCouvertsRestantsMessage.value = '';
-      //         isDataAlreadyExist = false;
-      //     } else if (response.data.couverts_restants >= numberOfGuests.value) {
-      //       errorCouvertsRestantsMessage.value = '';
-      //       successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
-      //       isDataAlreadyExist = true;
-      //     } else if (response.data.couverts_restants < numberOfGuests.value) {
-      //       errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${response.data.couverts_restants} places`;
-      //       successCouvertsRestantsMessage.value = '';
-      //       numberOfGuests.value = '';
-      //       isDataAlreadyExist = true;
-      //   }
-      //   } else {
-      //       successCouvertsRestantsMessage.value = '';
-      //       errorCouvertsRestantsMessage.value = '';
-      //   }
-      // } catch (error) {
-      //   console.error("Erreur lors de la récupération des informations du nombre de couverts restants", error);
-      //   errorCouvertsRestantsMessage.value = 'Une erreur s\'est produite. Veuillez réessayer.';
-      //   numberOfGuests.value = ''; 
-      // }
         if(nbApresTest == null) {
           // DATA DE BASE
           try {
+              loading.value = true;
               const response = await axios.get(`api/jours/${selectedDay.value}/${selectedService.value}/couverts`);
               // console.log('response de base', response.data);
               nombreDeCouvertsRestantsDeBase.value = response.data.couverts;
@@ -795,10 +741,13 @@ export default {
                 if (serviceCouvertsRestants.value >= numberOfGuests.value) {
                   errorCouvertsRestantsMessage.value = '';
                   successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
+                  verifPourPasserPageSuivante = "ok";
+
                 } else if (serviceCouvertsRestants.value < numberOfGuests.value) {
                   errorCouvertsRestantsMessage.value = `Désolé il ne reste que ${serviceCouvertsRestants.value} places`;
                   successCouvertsRestantsMessage.value = '';
                   numberOfGuests.value = '';
+                  verifPourPasserPageSuivante = "non";
                 }
               } else {
                   // successCouvertsRestantsMessage.value = '';
@@ -811,7 +760,16 @@ export default {
           }
         }
 
-
+        if(verifPourPasserPageSuivante === "ok" && selectedCreneau) {
+          setTimeout(() => {
+            // Modifiez la valeur de loading après le délai
+            loading.value = false;
+            // Appelez la fonction goToPage après le délai
+            goToPage(4);
+          }, 2000);
+        } else if (verifPourPasserPageSuivante !== "ok" && selectedCreneau) {
+          loading.value = false;
+        }
 
       // Si entrée dans la table != no exist et différent de null alors on utilise, sinon on récupère la donnée de base.
 
@@ -837,6 +795,8 @@ export default {
 
     // Changement de page
     const goToPage = (page) => {
+      
+
       currentPage.value = page;
     };
     // TABLE JOURS
@@ -854,7 +814,8 @@ export default {
     const getFermetureData = async () => {
         try {
             const response = await axios.get('api/fermeture');
-            fermetureData.value = response.data;
+            fermetureData.value = response.data.fermeture;
+            resaOnlineActive.value = response.data.validation;
         } catch (error) {
             console.error("Erreur lors de la récupération des données de l'API de fermeture", error);
         }
@@ -1001,17 +962,20 @@ export default {
     onMounted(() => {
       getJoursData();
       getFermetureData();
+      modalResa.value = document.getElementById('modalResa');
     });
 
     return {
+        loading,
+        openDialog,
+        closeDialogOutside,
+        closeDialog,
         showModal,
         joursData,
         currentPage,
         fermetureData,
+        resaOnlineActive,
         disabledDates,
-        openModal,
-        closeModal,
-        closeModalOutside,
         selectedDate,
         handleDateSelection,
         goToPage,
@@ -1050,6 +1014,7 @@ export default {
     };
   },
 };
+
   </script>
   
 

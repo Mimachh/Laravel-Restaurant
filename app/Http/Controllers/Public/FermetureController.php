@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Public;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Fermeture;
+use App\Models\Validation;
+
 class FermetureController extends Controller
 {
     /**
@@ -13,8 +15,13 @@ class FermetureController extends Controller
     public function index()
     {
         $fermeture = Fermeture::first();
+        $validation = Validation::first();
 
-        return response()->json($fermeture);
+        $data = [
+            'fermeture' => $fermeture,
+            'validation' => $validation,
+        ];
+        return response()->json($data);
     }
 
 }

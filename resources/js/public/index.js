@@ -5,6 +5,7 @@ import 'animate.css';
 import "../../css/public/modules/nav.scss"
 
 
+
 import "./modules/toggle-navbar"
 import "./modules/slider"
 import "./modules/to-top"

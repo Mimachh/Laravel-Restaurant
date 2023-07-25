@@ -26,6 +26,14 @@
             <span class="reservation-card-value">{{ $reservation->userName() }}</span>
         </div>
         <div class="reservation-card-row">
+            <span class="reservation-card-label">Date</span>
+            <span class="reservation-card-value">{{ $reservation->date }}</span>
+        </div>
+        <div class="reservation-card-row">
+            <span class="reservation-card-label">Heure</span>
+            <span class="reservation-card-value">{{ $reservation->creneau }}</span>
+        </div>
+        <div class="reservation-card-row">
             <span class="reservation-card-label">Email:</span>
             <span class="reservation-card-value">{{ $reservation->email }}</span>
         </div>

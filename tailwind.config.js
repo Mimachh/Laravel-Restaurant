@@ -16,6 +16,8 @@ export default {
       creme: "rgb(244, 242, 237)",
       nav: "#383848",
       error: "#FF0000",
+      success: "#22543D",
+      successBG: "#B2D8B2"
     },
     fontFamily: {
       'figtree': ['Figtree', 'sans-serif'],

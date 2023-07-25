@@ -30,6 +30,10 @@
 function openModal() {
   // Ajoutez ici le code pour afficher la modale
   console.log('Ouvrir la modale');
+  const modale = document.getElementById('modalResa');
+  modale.classList.toggle('hidden');
+
+ modale.showModal();
 }
 
 function openModalEmporter() {

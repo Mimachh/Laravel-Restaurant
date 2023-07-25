@@ -57,3 +57,6 @@ Revoir aussi l'histoire des formules
 
 
 Modales
+il me reste le bouton de soumission
+nettoyer le code 
+Retirer la possibilité de réserver si le resto est fermé

@@ -8,7 +8,7 @@
             text-primary
             "
         />
-
+        @if( $fermeture["status"] != 1)
         <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-32 md:pb-24 pb-12">
             <div class=" bg-dark  rounded-md">
 
@@ -45,7 +45,15 @@
 
             </div>
         </div>
+        @else
+            <p class="pb-16 font-bold text-center">Nous sommes fermé du {{ $fermeture["date_debut"] }} au {{ $fermeture["date_fin"] }}
 
+                @if($fermeture["raison"])
+                pour {{ $fermeture["raison"] }}
+                @endif
+                nous nous excusons du désagrément.
+            </p>
+        @endif
 
     </div>
 </section>

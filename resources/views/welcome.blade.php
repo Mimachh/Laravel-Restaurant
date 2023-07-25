@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Laravel</title>
         <link
         rel="stylesheet"
@@ -44,7 +44,7 @@
             <x-header />
 
             <x-slider />       
-
+            
             <x-about.resto />
 
             <x-carte.formules />
@@ -64,10 +64,10 @@
             <x-footer />
 
             <x-to-top />
+            <div id="app">
+                <Counter />
+            </div>
         </main>
-
-
-
 
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
@@ -75,6 +75,7 @@
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 
     </body>
 </html>

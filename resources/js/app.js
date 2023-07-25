@@ -8,16 +8,21 @@ import { createApp } from 'vue'
 import ModaleReservation from './components/ModaleReservation.vue'
 import Carte from './components/Carte.vue'; 
 
-const app = createApp()
- 
+const createMyApp = () => {
+    const app = createApp();
+    return app;
+};
+
+// Modale Resa
+const app = createMyApp();
 app.component('counter', ModaleReservation)
- 
-app.mount('#app')
+app.mount('#app'); 
 
 
-app.component('carte', Carte); // Enregistrez le deuxième composant sous un nom de balise personnalisé
-
-app.mount('#carte');
+// Carte request
+const app2 = createMyApp();
+app2.component('carte', Carte);
+app2.mount('#carte');
 
 
 document.addEventListener('DOMContentLoaded', function () {

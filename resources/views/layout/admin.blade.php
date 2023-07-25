@@ -149,7 +149,6 @@
                             setMenuOpen([
                                 'admin.reservations.',
                                 'admin.historique.',
-                                'admin.options_reservation.',
                                 'admin.attente.',
                             ], 'open-links-div-resa') 
                         }}
