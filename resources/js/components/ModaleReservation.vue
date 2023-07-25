@@ -116,7 +116,7 @@ dialog[open] {
 <template>
     <!-- <button @click="openDialog" id="openModalBtn" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1">Ouvrir la fenêtre modale</button> -->
     <dialog id="modalResa" ref="modalResa" class="w-[85%] xl:w-[60%] min-h-[60%] rounded-md modalResa" @click="closeDialogOutside">
-      <form @submit.prevent="submitForm" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1">
+      <form @submit.prevent="submitForm" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1" >
         <div>
             <h2 class="text-center font-bold text-xl md:text-3xl mt-4 md:mt-8">Réserver une table</h2>
             
@@ -357,10 +357,14 @@ dialog[open] {
                 </div>
               </div>
 
+            <div class="w-full mx-auto text-center py-6">
               <button  v-if="selectedDate && selectedService && selectedCreneau && numberOfGuests && currentPage === 4"
                 type="submit"
-                class="btn btn-save"
+                class="bg-primary px-6 py-2 rounded-md text-light
+                font-medium font-quicksand
+                border border-transparent hover:bg-light hover:text-primary hover:border-primary"
               >Soumettre</button>
+            </div>
 
             <button type="button" class="bg-error px-3 py-1 rounded-xl font-bold font-quicksand absolute top-0 right-0 mr-2 mt-2"  @click="closeDialog">X</button>
         </div>

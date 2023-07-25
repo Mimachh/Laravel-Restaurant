@@ -45,18 +45,10 @@ Ajouter un encart pour calculer le nb de réservations depuis le début
 Quand tout le système admin sera opérationnel, changer le design de pagination : liste des dates à venir / liste des resa en attente / byDate / index
 
 
-## Le nombre de couverts c'est pour un service complet ou c'est juste pour un créneaux?
-
-
-## revoir le routing : je vais séparér réservations validées/en attente/annulées/réalisées
-
-
-
 ##Dans le design : ajouter les accompagnements en admin / en controller et en appel api pour la carte
 Revoir aussi l'histoire des formules
 
 
 Modales
-il me reste le bouton de soumission
 nettoyer le code 
 Retirer la possibilité de réserver si le resto est fermé
