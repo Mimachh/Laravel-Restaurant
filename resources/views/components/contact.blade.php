@@ -146,7 +146,7 @@
                                 required
                                 value="1"
                             />
-                            <label for="rules">J'ai pris connaissance des <a href="" class="underline">conditions d'utilisation*</a></label>
+                            <label for="rules">J'ai pris connaissance des <a href="{{ route('cgu') }}" class="underline">conditions d'utilisation*</a></label>
                             </div>
                             @error('rules')
                                 <span class="text-error">{{ $message }}</span>

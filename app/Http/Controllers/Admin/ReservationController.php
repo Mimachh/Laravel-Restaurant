@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Reservationreponse;
 use App\Models\Couvertsrestants;
 use Illuminate\Http\Request as Request2;
 use App\Models\Reservation;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -138,7 +140,8 @@ class ReservationController extends Controller
                         $dataCouvertsRestants->couverts_restants = $nouveauResultat;
                         $dataCouvertsRestants->save();
                     }
-                    // Mail
+                    // Mail confirmation.
+                    Mail::to($reservation->email)->send(new Reservationreponse($reservation, "Accepté"));
                     
                 }
                 // Soit on passe de 1 à 2 ou 3 et il faut incrémenter la table qui existe forcément et si c'était la seule entrée il faut supprimer la ligne
@@ -146,18 +149,17 @@ class ReservationController extends Controller
                     $nouveauResultat = $dataCouvertsRestants->couverts_restants + $reservation->convives;
                     $dataCouvertsRestants->couverts_restants = $nouveauResultat;
                     $dataCouvertsRestants->save();
-                    // Mail
+                    // Mail en attente
+                    Mail::to($reservation->email)->send(new Reservationreponse($reservation, "En attente"));
 
-                } else if($reservation->status == 1 && $request->status == 3) {
-                    $nouveauResultat = $dataCouvertsRestants->couverts_restants + $reservation->convives;
-                    $dataCouvertsRestants->couverts_restants = $nouveauResultat;
-                    $dataCouvertsRestants->save();
-                    // Mail
-                }
+                } else if($reservation->status == 2 && $request->status == 3) {
+                    // Mail annnulation
+                    Mail::to($reservation->email)->send(new Reservationreponse($reservation, "Annulé"));
+                } 
                 
             } else {
    
-                if($reservation->status != 1) {
+                if($reservation->status != 1 && $request->status == 1) {
                     $date = Carbon::createFromFormat('d-m-Y', $reservation->date);
                     $jourIndex = $date->format('w');
                     if($jourIndex === "0") {
@@ -180,8 +182,17 @@ class ReservationController extends Controller
                     } 
                     $nouvelleEntree->save();
 
-                    // Mail
-                }
+                    // Mail de confirmation
+                    Mail::to($reservation->email)->send(new Reservationreponse($reservation, "Accepté"));
+                } 
+                if($reservation->status == 2 && $request->status == 3) {
+                    // Mail annnulation
+                    Mail::to($reservation->email)->send(new Reservationreponse($reservation, "Annulé"));
+                } 
+                if($reservation->status == 3 && $request->status == 2) {
+                    // Mail annnulation
+                    Mail::to($reservation->email)->send(new Reservationreponse($reservation, "En attente"));
+                } 
             }
 
 

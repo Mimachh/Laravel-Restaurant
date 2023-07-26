@@ -9,9 +9,12 @@ use DateTime;
 use App\Models\Couvertsrestants;
 use App\Models\Jour;
 use Carbon\Carbon;
+
+use Illuminate\Notifications\Notifiable;
 class Reservation extends Model
 {
     use HasFactory;
+    use Notifiable;
 
     public function transformDateToCompare()
     {

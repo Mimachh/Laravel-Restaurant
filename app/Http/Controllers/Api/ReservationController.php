@@ -3,17 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TestTelegram;
+use App\Mail\Reservation as MailReservation;
+use App\Mail\ReservationAdmin as ReservationAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Reservation;
 
 use App\Models\Validation;
 use App\Models\Couvertsrestants;
+use Illuminate\Support\Facades\Mail;
 
+use Illuminate\Support\Facades\Http;
 class ReservationController extends Controller
 {
     public function store(Request $request) {
     
+        $adminEmail = env('MAIL_ADMIN', 'default_admin@example.com');
+
+
         $validator = Validator::make($request->all(), [
             'date' => 'required|string|max:60',
             'service' => 'required|string|max:60',
@@ -49,13 +57,7 @@ class ReservationController extends Controller
 
         $validation = Validation::first();
 
-        // Vérifier pour le mail
-        $validation_is_mail = $validation->is_email_confirmation;
-        if($validation_is_mail == '1') {
-            // envoyer un mail
-        } else {
-            // pas de mail
-        }
+
 
         // Vérifier si validation automatique ou non
         $validation_auto = $validation->is_automatic_validation;
@@ -80,7 +82,7 @@ class ReservationController extends Controller
         }
 
 
-       
+
 
         
 
@@ -99,6 +101,36 @@ class ReservationController extends Controller
         $reservation->status = $validation_auto_status;
 
 
+        $reservationMailable = array(
+            'date' => $cleanedData['date'],
+            'service' => $cleanedData['service'],
+            'creneau' => $cleanedData['creneau'],
+            'convives' => $cleanedData['convives'],
+            'nom' => $cleanedData['nom'],
+            'prenom' => $cleanedData['prenom'],
+            'email' => $cleanedData['mail'],
+            'telephone' => $cleanedData['telephone'],
+            'informations' => $cleanedData['informations'],
+            'status' => $validation_auto_status
+        );
+
+                // Vérifier pour le mail
+                $validation_is_mail = $validation->is_email_confirmation;
+                if($validation_is_mail == '1') {
+                    Mail::to($cleanedData['mail'])->send(new MailReservation($reservationMailable));
+                } 
+
+        // NOTIF POUR L'ADMIN 
+        // Mail::to($adminEmail)->send(new ReservationAdmin($reservationMailable));
+        $validation_auto_status_traduit_pour_telegram = "";
+        if($validation_auto_status == 1) {
+            $validation_auto_status_traduit_pour_telegram = "nouvelle réservation";
+        } else if ($validation_auto_status == 2) {
+            $validation_auto_status_traduit_pour_telegram = "réservation en attente de validation";
+        }
+        $dataToTelegram = "Vous avez reçu une " . $validation_auto_status_traduit_pour_telegram . " pour " . $cleanedData['convives'] . " personnes. Réservation pour le " . $cleanedData['date'] . " " . $cleanedData['service'];
+        $telegramController = new TestTelegram();
+        $response = $telegramController->sendMessageToTelegram($dataToTelegram);
 
         // Verifier si déjà une entrée dans la table de calcul de couverts restants
         $nomDeLaTableCouvertsRestants = $request->nomPourTableCouvertsRestants;
@@ -166,6 +198,9 @@ class ReservationController extends Controller
                 ], 200);
             }
         }
+
+
+
 
     }
 }

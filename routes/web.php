@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\HistoriqueReservation;
 use App\Http\Controllers\Admin\ReservationEnAttenteController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TestTelegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,9 +32,15 @@ use App\Http\Controllers\ContactController;
 |
 */
 
+// Route::get('/telegram', [TestTelegram::class, 'index']);
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+
+Route::get('/cgu', function () {
+    return view('cgu');
+})->name('cgu');
 
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

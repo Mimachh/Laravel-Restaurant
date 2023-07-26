@@ -3,6 +3,8 @@
         <nav class="md:flex md:justify-between md:bg-transparent 
          w-full items-center px-4 hidden mt-8 md:mt-0 z-40
         " id="navbar">
+
+        @if(request()->routeIs('welcome'))
             <ul class="md:flex block gap-3 space-y-2 md:space-y-0  justify-center md:justify-start">
                 <x-nav-link route="welcome" title="Accueil"/>
                 <x-nav-link route="a_propos" title="A propos"/>
@@ -11,7 +13,9 @@
                 <x-nav-link route="horaire" title="Horaire"/>
                 <x-nav-link route="contact" title="Contact"/>
             </ul>
-
+        @else 
+            <a href="{{ route('welcome') }}">Retour sur le site</a>
+        @endif
             <x-button 
             title="RESERVER"
             class="border border-primaryDark text-primaryDark 
@@ -25,7 +29,8 @@
             <x-jam-menu  class="text-light w-10 h-10 hover:text-gold transition duration-100 ease"/>
         </button> 
         
-        <a href="#welcome">
+
+        <a href="@if(request()->routeIs('welcome')) #welcome @else {{ route('welcome') }} @endif">
             <img src="{{ asset('images/test.png') }}" width="100px" height="100px" alt="Logo"
             class="bottom-0 z-50"
             >

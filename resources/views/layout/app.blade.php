@@ -8,13 +8,20 @@
     @yield('styles')
 </head>
 <body>
-
-    @yield('content')
-
-
+    <x-header />
+    
+    <main class="">
+        @yield('content')
+    </main>
+    
+        <div id="app">
+            <Counter />
+        </div>
+    <x-footer />
     @yield('scripts')
+    
 
-    @vite('resources/js/public/index.js')
     @vite('resources/js/app.js')
+
 </body>
 </html>

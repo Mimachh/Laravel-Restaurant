@@ -3,14 +3,17 @@
             @php
                 $sliders = [
                     [
+                        'id' => '1',
                         'alt' => 'Salade',
                         'image' => 'images/salade.jpg'
                     ],
                     [
+                        'id' => '2',
                         'alt' => 'Pate',
                         'image' => 'images/pate.jpg'
                     ],
                     [
+                        'id' => '3',
                         'alt' => 'Sandwich',
                         'image' => 'images/sandwich.jpg'
                     ]
@@ -22,6 +25,7 @@
             class="object-cover w-full max-h-[80vh]"
                     src="{{ asset($slider['image']) }}"
                     alt="{{ $slider['alt'] }}"
+                    @if($slider['id'] === 1) preload="auto" @endif
             />
 
           </div>
@@ -39,7 +43,7 @@
                 <div class="text-center space-y-6">
                     <h1 class="md:text-7xl text-xl font-semibold font-quicksand opacity-0" id="main-title">
                         <span class="text-light">BIENVENUE SUR</span> 
-                        <span class="text-primaryDark">LABOOM</span>
+                        <span class="text-primaryDark">{{ env('APP_NAME') }}</span>
                     </h1>
                     <p class="text-md md:text-xl text-light opacity-0" id="subtitle">Cuisine traditionnelle</p>
 

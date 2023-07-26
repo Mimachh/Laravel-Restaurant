@@ -3,7 +3,7 @@
 
 
         <x-section-title 
-        title="Bienvenue à notre restaurant"
+        title="Bienvenue dans notre restaurant"
         subtitle="La meilleure street food du coin"
         class="py-4 md:py-8 text-primary"
         />
@@ -15,7 +15,7 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore perspiciatis corporis nemo sequi aperiam quam, ipsum, sapiente ullam quia porro placeat numquam necessitatibus. Quam deserunt tempore dolorem! Ipsam, in nisi?
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, commodi ducimus obcaecati deleniti dolor, expedita quisquam nesciunt, officia corporis voluptatum eaque assumenda porro necessitatibus et rerum non quidem quis quia.
                 </p>
-                <p class="italic">L'equipe du restaurant</p>
+                <p class="italic">L'equipe de {{env('APP_NAME')}}</p>
                 <x-button 
                     title="Réserver"
                     class="text-primary hover:bg-primary 

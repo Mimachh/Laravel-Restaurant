@@ -1,7 +1,7 @@
 <section class="bg-nav text-primaryDark">
     <div class="max-w-[1400px] mx-auto">
 <!-- Logo -->
-    <a href="#welcome">
+    <a href="@if(request()->routeIs('welcome')) #welcome @else {{ route('welcome') }} @endif">
         <img src="{{ asset('images/test.png') }}" width="100px" height="100px" alt="Logo"
             class="mx-auto pt-4 pb-8"
         >
@@ -9,7 +9,7 @@
 <!-- Nom du resto -->
         <h2 class="text-center
         font-bold text-xl font-quicksand pb-4
-        ">La Boom</h2>
+        ">{{ env('APP_NAME')}}</h2>
 
         <p class="
         text-light text-center text-md font-quicksand

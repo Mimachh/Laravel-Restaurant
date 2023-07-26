@@ -716,7 +716,7 @@ export default {
     
       if(nbApresTest !== null) {
         loading.value = true;
-        if(numberOfGuests.value > 1) {
+        if(numberOfGuests.value >= 1) {
           if (nbApresTest >= numberOfGuests.value) {
             errorCouvertsRestantsMessage.value = '';
             successCouvertsRestantsMessage.value = `Il nous reste assez de place`;
@@ -780,7 +780,7 @@ export default {
     };
 
     const returnToPage1AndReset = () => {
-      closeModal();
+      closeDialog();
       currentPage.value = 1;
       selectedDate.value = null;
       formattedDateToStore.value = null;
@@ -910,6 +910,7 @@ export default {
 
     const submitForm = async () => {
       try {
+        loading.value = true;
         errorMessages.value = [];
         successMessages.value = [];
         const cleanedData = cleanFormData();
@@ -926,6 +927,7 @@ export default {
 
         console.log(response.data.message);
         confirmationMessage.value = response.data.message;
+        loading.value = false;
         goToPage(5);
         setTimeout(() => {
           returnToPage1AndReset();

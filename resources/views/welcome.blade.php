@@ -9,10 +9,9 @@
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
         />
-
     </head>
     <body>
-        <div class="font-poppins">
+        <!-- <div class="font-poppins">
             @if (Route::has('login'))
                 <div class="">
                     @auth
@@ -33,7 +32,7 @@
                     @endauth
                 </div>
             @endif
-        </div>
+        </div> -->
  
         <main class="relative">
         @if (session('success'))
