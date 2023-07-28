@@ -17,16 +17,16 @@ class formules extends Component
     {
         $this->formules = Formule::where('status', 1)->get();
     }
-    public function boot()
-    {
-        $this->formules = Formule::where('status', 1)->get();
-    }
+    // public function boot()
+    // {
+    //     $this->formules = Formule::where('status', 1)->get();
+    // }
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.carte.formules', compact('formules'));
+        return view('components.carte.formules');
     }
 }
