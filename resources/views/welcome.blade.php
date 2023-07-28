@@ -46,7 +46,7 @@
             
             <x-about.resto />
 
-            
+            <!-- <x-carte.formules /> -->
 
             <x-carte.carte />
 
