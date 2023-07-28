@@ -370,6 +370,8 @@ dialog[open] {
         </div>
       </form>  
       <p v-if="fermetureData.status == 1 || resaOnlineActive.is_online_booking !== 1">Les réservations ne sont pas disponibles pour l'instant</p>
+      <p v-if="fermetureData.status == 1">Fermé</p>
+      <p v-if="resaOnlineActive.is_online_booking !== 1">Pas de résa en ligne</p>
     </dialog>
   </template>
   
