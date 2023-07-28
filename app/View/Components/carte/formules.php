@@ -13,10 +13,10 @@ class formules extends Component
     /**
      * Create a new component instance.
      */
-    // public function __construct()
-    // {
-    //     $this->formules = Formule::where('status', 1)->get();
-    // }
+    public function __construct()
+    {
+        $this->formules = Formule::where('status', 1)->get();
+    }
     public function boot()
     {
         $this->formules = Formule::where('status', 1)->get();
@@ -27,6 +27,6 @@ class formules extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.carte.formules');
+        return view('components.carte.formules', compact('formules'));
     }
 }
