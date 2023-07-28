@@ -1,4 +1,4 @@
-<section class="bg-ardoise text-primaryDark"  id="contact" style="background-image: url('{{ env('APP_URL') }}/images/ardoise.jpg')">
+<section class="bg-ardoise text-primaryDark"  id="contact" >
     <div class="max-w-[1400px] mx-auto relative z-20 py-24 md:py-32">
 
 
