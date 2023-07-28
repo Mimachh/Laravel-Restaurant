@@ -25,7 +25,7 @@
             class="object-cover w-full max-h-[80vh]"
                     src="{{ asset($slider['image']) }}"
                     alt="{{ $slider['alt'] }}"
-                    @if($slider['id'] === 1) preload="auto" @endif
+                    @if($slider['id'] === 1) preload="auto" @else loading="lazy" @endif
             />
 
           </div>
