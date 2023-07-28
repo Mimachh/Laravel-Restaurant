@@ -19,7 +19,7 @@
                 </div>
                 <ul>
                     @foreach($formule->menus as $menu)
-                        @if($menu->status === 1)
+                        @if($menu->status == 1)
                         <li class="flex flex-col">
                             <!-- <span>{{$menu->nom}}</span> -->
                             <span>{{$menu->getEntrees()}} + {{$menu->getPlats()}} + {{$menu->getDesserts()}}</span>
