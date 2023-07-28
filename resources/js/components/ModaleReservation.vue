@@ -924,7 +924,7 @@ export default {
 
         const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
 
-        const response = await axios.post('/api/reservation', cleanedData, {
+        const response = await axios.post('/templates/resto/public/api/reservation', cleanedData, {
           headers: {
             'X-CSRF-TOKEN': csrfToken
           }
