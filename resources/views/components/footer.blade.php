@@ -21,26 +21,26 @@
             </div>
 
             <div>
-                
+            <div>Suivre le restaurant sur :</div>
                 <ul class="flex justify-center items-center
                 gap-4
                 ">
-                <h5>Suivre le restaurant sur :</h5>
+                
                     <li>
-                        <a href=""
+                        <a href="https://google.com" target="_blank"  aria-label="Lien vers un RS"
                         >
                             <x-jam-facebook class="social-icon text-light hover:text-primaryDark transition-colors duration-100 ease"/>
                         </a>
                     </li>
                     <li class="
                     ">
-                        <a href="">
+                        <a href="https://google.com" target="_blank" aria-label="Lien vers un RS">
                             <x-jam-instagram  class="social-icon text-light hover:text-primaryDark transition-colors duration-100 ease"/>
                         </a>
                     </li>
                     <li class="
                     ">
-                        <a href="">
+                        <a href="https://google.com" target="_blank" aria-label="Lien vers un RS">
                             <x-jam-twitter class="social-icon text-light hover:text-primaryDark transition-colors duration-100 ease"/>
                         </a>
                     </li>
