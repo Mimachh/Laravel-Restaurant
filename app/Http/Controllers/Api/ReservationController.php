@@ -117,20 +117,20 @@ class ReservationController extends Controller
                 // Vérifier pour le mail
                 $validation_is_mail = $validation->is_email_confirmation;
                 if($validation_is_mail == '1') {
-                    Mail::to($cleanedData['mail'])->send(new MailReservation($reservationMailable));
+                    // Mail::to($cleanedData['mail'])->send(new MailReservation($reservationMailable));
                 } 
 
         // NOTIF POUR L'ADMIN 
         // Mail::to($adminEmail)->send(new ReservationAdmin($reservationMailable));
-        // $validation_auto_status_traduit_pour_telegram = "";
-        // if($validation_auto_status == 1) {
-        //     $validation_auto_status_traduit_pour_telegram = "nouvelle réservation";
-        // } else if ($validation_auto_status == 2) {
-        //     $validation_auto_status_traduit_pour_telegram = "réservation en attente de validation";
-        // }
-        // $dataToTelegram = "Vous avez reçu une " . $validation_auto_status_traduit_pour_telegram . " pour " . $cleanedData['convives'] . " personnes. Réservation pour le " . $cleanedData['date'] . " " . $cleanedData['service'];
-        // $telegramController = new TestTelegram();
-        // $response = $telegramController->sendMessageToTelegram($dataToTelegram);
+        $validation_auto_status_traduit_pour_telegram = "";
+        if($validation_auto_status == 1) {
+            $validation_auto_status_traduit_pour_telegram = "nouvelle réservation";
+        } else if ($validation_auto_status == 2) {
+            $validation_auto_status_traduit_pour_telegram = "réservation en attente de validation";
+        }
+        $dataToTelegram = "Vous avez reçu une " . $validation_auto_status_traduit_pour_telegram . " pour " . $cleanedData['convives'] . " personnes. Réservation pour le " . $cleanedData['date'] . " " . $cleanedData['service'];
+        $telegramController = new TestTelegram();
+        $response = $telegramController->sendMessageToTelegram($dataToTelegram);
 
         // Verifier si déjà une entrée dans la table de calcul de couverts restants
         $nomDeLaTableCouvertsRestants = $request->nomPourTableCouvertsRestants;
