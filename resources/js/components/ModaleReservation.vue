@@ -846,7 +846,8 @@ export default {
           }
           });
       }
-
+      console.log('joursData.value',joursData.value);
+      console.log('disabledDate', idDayDisabled);
       // Remplacer 7 par 0 si présent dans idDayDisabled car le Dimanche vaut 0
       const index = idDayDisabled.indexOf(7);
       if (index !== -1) {
