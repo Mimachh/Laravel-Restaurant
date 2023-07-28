@@ -5,8 +5,7 @@
 "id" => ""])
 
 <div class="relative {{$class}}" id="{{ $id }}">
-<img src="{{ asset($src) }}" 
-    width="100%" height="auto" alt="Image"
+<img src="{{ asset($src) }}"  alt="Image"
     class="mx-auto rounded-xl 
     "
     loading="lazy"
