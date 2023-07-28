@@ -974,6 +974,7 @@ export default {
     onMounted(() => {
       getJoursData();
       getFermetureData();
+      generateDisabledDates();
       modalResa.value = document.getElementById('modalResa');
     });
 
