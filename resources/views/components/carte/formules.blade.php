@@ -10,7 +10,7 @@
         "
         />
         <div class="w-full flex flex-wrap gap-3 justify-center py-4">
-        @foreach($formules as $formule)
+        @forelse($formules as $formule)
             <div class="border border-gold py-8 px-4 rounded-md text-light">
                 <div class="flex justify-between items-center pb-4">
                     <h3 class="text-xl font-bold">{{ $formule->nom }}</h3>
@@ -33,7 +33,9 @@
                 <p>{{ $formule->info_supp }}</p> -->
                 
             </div>
-        @endforeach
+        @empty
+        <p>Pas de formule pour l'instant</p>
+        @endforelse
         </div>
 
 
