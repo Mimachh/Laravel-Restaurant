@@ -8,9 +8,10 @@
 <img src="{{ asset($src) }}" 
     width="100%" height="auto" alt="Image"
     class="mx-auto rounded-xl 
-    
     "
     loading="lazy"
+    width="250"
+    height="150"
 >
 <span
 class="absolute inset-0
