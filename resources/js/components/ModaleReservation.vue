@@ -116,7 +116,7 @@ dialog[open] {
 <template>
     <!-- <button @click="openDialog" id="openModalBtn" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1">Ouvrir la fenêtre modale</button> -->
     <dialog id="modalResa" ref="modalResa" class="w-[85%] xl:w-[60%] min-h-[60%] rounded-md modalResa" @click="closeDialogOutside">
-      <form @submit.prevent="submitForm" v-if="fermetureData.status !== 1 && resaOnlineActive.is_online_booking == 1" >
+      <form @submit.prevent="submitForm" v-if="fermetureData.status != 1 && resaOnlineActive.is_online_booking == 1" >
         <div>
             <h2 class="text-center font-bold text-xl md:text-3xl mt-4 md:mt-8">Réserver une table</h2>
             
