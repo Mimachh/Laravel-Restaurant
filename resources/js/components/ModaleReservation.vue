@@ -841,12 +841,13 @@ export default {
       const idDayDisabled = [];
       if (Array.isArray(joursData.value)) {
           joursData.value.forEach((jour) => {
+            console.log('joursData.value',joursData.value);
           if (jour.is_open_midi != 1 && jour.is_open_soir != 1) {
               idDayDisabled.push(jour.id);
           }
           });
       }
-      console.log('joursData.value',joursData.value);
+      
       console.log('disabledDate', idDayDisabled);
       // Remplacer 7 par 0 si présent dans idDayDisabled car le Dimanche vaut 0
       const index = idDayDisabled.indexOf(7);
