@@ -10,8 +10,7 @@
     class="mx-auto rounded-xl 
     "
     loading="lazy"
-    width="250"
-    height="150"
+    width="640" height="360"
 >
 <span
 class="absolute inset-0
