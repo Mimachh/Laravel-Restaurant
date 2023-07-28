@@ -14,14 +14,14 @@
         <div class="py-16 md:py-32 px-12 space-y-24 md:space-y-0 flex flex-col md:flex-row justify-center items-center md:gap-2 lg:gap-8">
             <div class="group w-fit z-10 opacity-0" id="teamImage1">
                 <div class="outline outline-creme relative rounded-xl
-                w-[235px] h-[350px] flex flex-col justify-end cursor-pointer
+                w-64 h-[350px] flex flex-col justify-end cursor-pointer
                 
                 group-hover:outline-primary
                 ">
                     <img 
                     src="{{ asset('images/chef.png') }}"
                     alt="Photo du chef"
-                    class="w-[235px] h-[350px]
+                    class="w-64 h-[350px]
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
@@ -70,14 +70,14 @@
 
             <div class="group w-fit z-20 opacity-0" id="teamImage2">
                 <div class="outline outline-creme relative rounded-xl
-                w-[235px] h-[350px] flex flex-col justify-end cursor-pointer
+                w-64 h-[350px] flex flex-col justify-end cursor-pointer
                 
                 group-hover:outline-primary
                 ">
                     <img 
                     src="{{ asset('images/chef.png') }}"
                     alt="Photo du chef"
-                    class="w-[235px] h-[350px]
+                    class="w-64 h-[350px]
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
@@ -126,14 +126,14 @@
 
             <div class="group w-fit z-30 opacity-0" id="teamImage3">
                 <div class="outline outline-creme relative rounded-xl
-                w-[235px] h-[350px] flex flex-col justify-end cursor-pointer
+                w-64 h-[350px] flex flex-col justify-end cursor-pointer
                 
                 group-hover:outline-primary
                 ">
                     <img 
                     src="{{ asset('images/chef.png') }}"
                     alt="Photo du chef"
-                    class="w-auto h-[350px]
+                    class="w-64 h-[350px]
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
