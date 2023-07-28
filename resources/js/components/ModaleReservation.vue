@@ -598,7 +598,7 @@ export default {
             axios.get(`api/jours/${selectedDay.value}/opening-hours`)
             .then((response) => {
                 const openingHours = response.data;
-                console.log(openingHours);
+                console.log('openingHours',openingHours);
                 if (openingHours.is_open_midi === 1 && openingHours.is_open_soir === 1) {
                     selectedChoice.value = "Le restaurant est ouvert pour le midi et le soir.";
                     isRestaurantOpenMidi.value = true;
