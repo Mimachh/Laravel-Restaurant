@@ -1,7 +1,6 @@
-deploy:
-	ssh rzgf6652@expresso.o2switch.net 'cd ~/public_html/templates/resto && git pull origin main && make install'
+ssh rzgf6652@expresso.o2switch.net 'cd ~/public_html/templates/resto && git pull origin main && make install'
 
-install: .env public/storage vendore/autoload.php public/build/manifest.json
+install: .env public/storage vendor/autoload.php public/build/manifest.json
 	php artisan cache:clear
 	php artisan migrate
 
