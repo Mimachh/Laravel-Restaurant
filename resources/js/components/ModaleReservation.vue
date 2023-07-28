@@ -808,6 +808,7 @@ export default {
         try {
             const response = await axios.get('api/jours');
             joursData.value = response.data;
+            console.log(response.data);
             generateDisabledDates();
         } catch (error) {
             console.error("Erreur lors de la récupération des données de l'API des jours", error);
@@ -819,7 +820,9 @@ export default {
         try {
             const response = await axios.get('api/fermeture');
             fermetureData.value = response.data.fermeture;
+            console.log('fermeture', response.data.fermeture);
             resaOnlineActive.value = response.data.validation;
+            console.log('validation', response.data.validation);
         } catch (error) {
             console.error("Erreur lors de la récupération des données de l'API de fermeture", error);
         }
