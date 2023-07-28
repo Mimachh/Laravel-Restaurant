@@ -369,9 +369,7 @@ dialog[open] {
             <button type="button" class="bg-error px-3 py-1 rounded-xl font-bold font-quicksand absolute top-0 right-0 mr-2 mt-2"  @click="closeDialog">X</button>
         </div>
       </form>  
-      <p v-if="fermetureData.status == 1 || resaOnlineActive.is_online_booking !== 1">Les réservations ne sont pas disponibles pour l'instant</p>
-      <p v-if="fermetureData.status == 1">Fermé</p>
-      <p v-if="resaOnlineActive.is_online_booking != 1">Pas de résa en ligne</p>
+      <p v-if="fermetureData.status == 1 || resaOnlineActive.is_online_booking != 1">Les réservations ne sont pas disponibles pour l'instant</p>
     </dialog>
   </template>
   
