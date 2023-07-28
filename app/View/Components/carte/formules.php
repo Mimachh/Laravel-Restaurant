@@ -13,7 +13,11 @@ class formules extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    // public function __construct()
+    // {
+    //     $this->formules = Formule::where('status', 1)->get();
+    // }
+    public function boot()
     {
         $this->formules = Formule::where('status', 1)->get();
     }
