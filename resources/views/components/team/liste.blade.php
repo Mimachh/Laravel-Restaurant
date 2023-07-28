@@ -133,7 +133,7 @@
                     <img 
                     src="{{ asset('images/chef.png') }}"
                     alt="Photo du chef"
-                    class="w-[235px] h-[350px]
+                    class="w-auto h-[350px]
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
