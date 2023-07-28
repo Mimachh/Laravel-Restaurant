@@ -1,4 +1,4 @@
-<section class="bg-ardoise md:py-32 py-16" id="menu">
+<section class="bg-ardoise md:py-32 py-16" id="menu" style="background-image: url('{{ env('APP_URL') }}/images/ardoise.jpg')">
     <div class="max-w-[1400px] mx-auto relative z-10">
 
 
