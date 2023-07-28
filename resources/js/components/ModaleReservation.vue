@@ -598,7 +598,7 @@ export default {
             axios.get(`api/jours/${selectedDay.value}/opening-hours`)
             .then((response) => {
                 const openingHours = response.data;
-                if (openingHours.is_open_midi === 1 && openingHours.is_open_soir === 1) {
+                if (openingHours.is_open_midi == 1 && openingHours.is_open_soir == 1) {
                     selectedChoice.value = "Le restaurant est ouvert pour le midi et le soir.";
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = true;
@@ -626,7 +626,7 @@ export default {
                     }
 
                     
-                } else if (openingHours.is_open_midi === 1) {
+                } else if (openingHours.is_open_midi == 1) {
                     isRestaurantOpenMidi.value = true;
                     isRestaurantOpenSoir.value = false;
 
@@ -643,7 +643,7 @@ export default {
                     nbCouvertsSoir.value = "";
 
                 selectedChoice.value = "Le restaurant est ouvert uniquement le midi.";
-                } else if (openingHours.is_open_soir === 1) {
+                } else if (openingHours.is_open_soir == 1) {
                     selectedChoice.value = "Le restaurant est ouvert uniquement le soir.";
                     isRestaurantOpenSoir.value = true;
                     isRestaurantOpenMidi.value = false;
@@ -819,9 +819,9 @@ export default {
         try {
             const response = await axios.get('api/fermeture');
             fermetureData.value = response.data.fermeture;
-            console.log('fermeture', response.data.fermeture);
+            // console.log('fermeture', response.data.fermeture);
             resaOnlineActive.value = response.data.validation;
-            console.log('validation', response.data.validation);
+            // console.log('validation', response.data.validation);
         } catch (error) {
             console.error("Erreur lors de la récupération des données de l'API de fermeture", error);
         }
