@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css', 
                 'resources/js/app.js',
+                'resources/js/components/ModaleReservation.vue',
 
                 'resources/js/public/index.js',
                 'resources/js/public/modules/login-register.js',
