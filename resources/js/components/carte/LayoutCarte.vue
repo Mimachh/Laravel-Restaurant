@@ -14,7 +14,7 @@
                 <h3 class="text-lg font-bold font-quicksand text-primary">{{ item.nom }}</h3>
                 <p class="text-primaryDark font-bold text-lg font-quicksand">{{ item.prix }} €</p>
             </div>
-            <p class="pt-2">{{ item.description }}</p>
+            <p class="pt-2 text-primary">{{ item.description }}</p>
         </div>
      </div>
     </div>
