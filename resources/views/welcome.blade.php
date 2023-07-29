@@ -80,7 +80,7 @@
         <script nonce="<?php echo $nonce; ?>">
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script nonce="<?php echo $nonce; ?>" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
     </body>
