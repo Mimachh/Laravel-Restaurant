@@ -17,7 +17,7 @@
 
         <div class="text-light py-12 flex justify-around items-center">
             <div>
-                <p>Copyright &copy; {{ date('Y') }} <a href="" class="underline pb-1">Mimach</a>. All rights reserved.</p>
+                <p>Copyright &copy; {{ date('Y') }} <a href="mailto:karl.mullr@gmail.com" class="underline pb-1" aria-label="mail du développeur">Mimach</a>. All rights reserved.</p>
             </div>
 
             <div>
