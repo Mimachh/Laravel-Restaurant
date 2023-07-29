@@ -21,7 +21,7 @@
                     <img 
                     src="{{ asset('images/chef.webp') }}"
                     alt="Photo du chef"
-                    class="w-64 h-[350px]
+                    class="w-64 h-auto
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
@@ -77,7 +77,7 @@
                     <img 
                     src="{{ asset('images/chef.webp') }}"
                     alt="Photo du chef"
-                    class="w-64 h-[350px]
+                    class="w-64 h-auto
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
@@ -133,7 +133,7 @@
                     <img 
                     src="{{ asset('images/chef.webp') }}"
                     alt="Photo du chef"
-                    class="w-64 h-[350px]
+                    class="w-64 h-auto
                     absolute top-0 translate-y-[-19%]"
                     >
                     <div class=" bg-creme py-2 group-hover:bg-primary relative">
