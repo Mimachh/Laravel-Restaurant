@@ -83,9 +83,9 @@
 
         <script nonce="<?php echo $nonce; ?>" src="@vite('resources/js/app.js')"></script>
     <script nonce="<?php echo $nonce; ?>" src="@vite('resources/js/public/index.js')"></script>
-    
-        @vite('resources/js/app.js')
-        @vite('resources/js/public/index.js')
+
+        <!-- @vite('resources/js/app.js')
+        @vite('resources/js/public/index.js') -->
         <script nonce="<?php echo $nonce; ?>">
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
