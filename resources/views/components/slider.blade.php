@@ -26,7 +26,7 @@
                     src="{{ asset($slider['image']) }}"
                     alt="{{ $slider['alt'] }}"
                     width="640" height="360"
-                    @if($slider['id'] === 1) preload="auto" @else loading="lazy" @endif
+                    @if($slider['id'] === 1) fetchpriority="high" @else loading="lazy" @endif
             />
 
           </div>
