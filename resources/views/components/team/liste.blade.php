@@ -47,17 +47,23 @@
                             <div class="text-light py-3">
                                 <ul class="flex gap-2 justify-center items-center">
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-facebook class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-instagram  class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-twitter class="social-icon text-light hover:text-light transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
@@ -103,17 +109,23 @@
                             <div class="text-light py-3">
                                 <ul class="flex gap-2 justify-center items-center">
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-facebook class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-instagram  class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-twitter class="social-icon text-light hover:text-light transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
@@ -159,17 +171,23 @@
                             <div class="text-light py-3">
                                 <ul class="flex gap-2 justify-center items-center">
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-facebook class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-instagram  class="social-icon text-light hover:text-gold transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://google.com"
+                                        aria-label="lien rs"
+                                        >
                                             <x-jam-twitter class="social-icon text-light hover:text-light transition-colors duration-100 ease"/>
                                         </a>
                                     </li>
