@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="Content-Security-Policy" content="default-src *; 
-        script-src 'self' https://unpkg.com;">
+        script-src 'self' nonce-<?php echo $nonce; ?> https://unpkg.com;">
         <title>{{ env('APP_NAME')}}</title>
         <meta name="description" content="Votre restaurant en ligne.">
         <link
