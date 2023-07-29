@@ -17,11 +17,12 @@
         ">
         <title>{{ env('APP_NAME')}}</title>
         <meta name="description" content="Votre restaurant en ligne.">
-        <link
+        <link nonce="<?php echo $nonce; ?>"
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
         />
-        @vite('resources/css/welcome-page.scss')
+        <!-- @vite('resources/css/welcome-page.scss') -->
+        <link rel="stylesheet" href="@vite('resources/css/welcome-page.scss')" nonce="<?php echo $nonce; ?>">
     </head>
     <body>
         <!-- <div class="font-poppins">
