@@ -77,7 +77,7 @@
 
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
-        <script>
+        <script nonce="<?php echo $nonce; ?>">
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
