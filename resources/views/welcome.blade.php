@@ -5,10 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <?php
+        @php
         // Générer un nonce de 16 octets (128 bits)
         $nonce = bin2hex(random_bytes(16));
-        ?>
+        @endphp
 
 
         <meta http-equiv="Content-Security-Policy" content="connect-src 'self'; object-src 'self';
