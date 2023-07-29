@@ -4,8 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <?php
+        // Générer un nonce de 16 octets (128 bits)
+        $nonce = bin2hex(random_bytes(16));
+        ?>
+
+
         <meta http-equiv="Content-Security-Policy" content="connect-src 'self'; object-src 'self';
-        script-src 'self' 'unsafe-inline' https://unpkg.com/swiper/swiper-bundle.min.js https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js;
+        script-src 'self' 'nonce-<?php echo $nonce; ?>' https://unpkg.com/swiper/swiper-bundle.min.js https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js;
         
         ">
         <title>{{ env('APP_NAME')}}</title>
@@ -74,12 +81,15 @@
             </div>
         </main>
 
+        <script nonce="<?php echo $nonce; ?>" src="@vite('resources/js/app.js')"></script>
+    <script nonce="<?php echo $nonce; ?>" src="@vite('resources/js/public/index.js')"></script>
+    
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
-        <script>
+        <script nonce="<?php echo $nonce; ?>">
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script nonce="<?php echo $nonce; ?>" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
     </body>
