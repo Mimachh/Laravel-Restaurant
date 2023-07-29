@@ -4,9 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta http-equiv="Content-Security-Policy" content="connect-src 'self'; object-src 'self';
-        script-src 'self' https://unpkg.com https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js;
-        ">
+        <meta http-equiv="Content-Security-Policy" content="connect-src 'self'; object-src 'self'; 
+        script-src 'self' https://unpkg.com https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js 'nonce-<?php echo $nonce ?>';">
         <title>{{ env('APP_NAME')}}</title>
         <meta name="description" content="Votre restaurant en ligne.">
         <link
