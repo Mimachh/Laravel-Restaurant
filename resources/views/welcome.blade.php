@@ -4,12 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <?php
-        $nonce = bin2hex(random_bytes(16));
-        ?>
-        <meta http-equiv="Content-Security-Policy" content="
-        script-src 'self' nonce-<?php echo $nonce; ?> https://unpkg.com;
-        ">
+
 
 
         <title>{{ env('APP_NAME')}}</title>
@@ -80,10 +75,10 @@
 
         @vite('resources/js/app.js')
         @vite('resources/js/public/index.js')
-        <script nonce="<?php echo $nonce; ?>">
+        <script>
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
-        <script nonce="<?php echo $nonce; ?>" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
     </body>
