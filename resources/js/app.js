@@ -37,3 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 5000); // 5000 millisecondes équivalent à 5 secondes
     }
 });
+
+
+window.APP_URL = "{{ env('APP_URL') }}";
+console.log(window.APP_URL);
