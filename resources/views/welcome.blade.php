@@ -8,10 +8,13 @@
         $nonce = bin2hex(random_bytes(16));
         ?>
         <meta http-equiv="Content-Security-Policy" content="
-        script-src 'self' nonce-<?php echo $nonce; ?> https://unpkg.com;">
+        script-src 'self' nonce-<?php echo $nonce; ?> https://unpkg.com;
+        ">
+
+
         <title>{{ env('APP_NAME')}}</title>
         <meta name="description" content="Votre restaurant en ligne.">
-        <link nonce="<?php echo $nonce; ?>"
+        <link 
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
         />
