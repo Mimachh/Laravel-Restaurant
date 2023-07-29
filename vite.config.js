@@ -13,6 +13,8 @@ export default defineConfig({
                 'resources/js/public/modules/login-register.js',
 
                 'resources/js/admin/dashboard.js',
+
+                'resources/css/welcome-page.scss',
             ],
             refresh: true,
         }),

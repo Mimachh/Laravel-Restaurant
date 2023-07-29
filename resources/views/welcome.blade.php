@@ -10,6 +10,7 @@
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
         />
+        @vite('resources/css/welcome-page.scss')
     </head>
     <body>
         <!-- <div class="font-poppins">
