@@ -15,7 +15,7 @@
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
         />
-        <!-- @vite('resources/css/welcome-page.scss') -->
+        @vite('resources/css/welcome-page.scss')
     </head>
     <body>
         <!-- <div class="font-poppins">
@@ -75,8 +75,8 @@
             </div>
         </main>
 
-        <!-- @vite('resources/js/app.js')
-        @vite('resources/js/public/index.js') -->
+        @vite('resources/js/app.js')
+        @vite('resources/js/public/index.js')
         <script nonce="<?php echo $nonce; ?>">
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
