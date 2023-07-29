@@ -39,5 +39,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-window.APP_URL = "{{ env('APP_URL') }}";
-console.log(window.APP_URL);
