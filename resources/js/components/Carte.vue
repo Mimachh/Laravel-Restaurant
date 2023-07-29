@@ -2,44 +2,44 @@
     <div class="pt-4 pb-24">
         <div class="md:flex gap-2 bg-light w-[90%] md:w-fit mx-auto rounded-md md:rounded-full space-y-2 md:space-y-0">
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
-                :class="categorieSelectionnee === 'entrees' ? 'bg-primary text-light' : ''"
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
+                :class="categorieSelectionnee === 'entrees' ? 'bg-primary text-light' : 'text-primary'"
                 @click="selectionnerCategorie('entrees')">Entrée</button>
             </div>
 
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
-                :class="categorieSelectionnee === 'plats' ? 'bg-primary text-light' : ''"
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
+                :class="categorieSelectionnee === 'plats' ? 'bg-primary text-light' : 'text-primary'"
                 @click="selectionnerCategorie('plats')">Plat</button>
             </div>
 
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
-                :class="categorieSelectionnee === 'accompagnements' ? 'bg-primary text-light' : ''" 
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
+                :class="categorieSelectionnee === 'accompagnements' ? 'bg-primary text-light' : 'text-primary'" 
                 @click="selectionnerCategorie('accompagnements')">Accompagnements</button>
             </div>
 
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in" 
-                :class="categorieSelectionnee === 'desserts' ? 'bg-primary text-light' : ''" 
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in" 
+                :class="categorieSelectionnee === 'desserts' ? 'bg-primary text-light' : 'text-primary'" 
                 @click="selectionnerCategorie('desserts')">Desserts</button>
             </div>
 
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in" 
-                :class="categorieSelectionnee === 'vins' ? 'bg-primary text-light' : ''"
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in" 
+                :class="categorieSelectionnee === 'vins' ? 'bg-primary text-light' : 'text-primary'"
                 @click="selectionnerCategorie('vins')">Vins</button>
             </div>
 
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in" 
-                :class="categorieSelectionnee === 'alcools' ? 'bg-primary text-light' : ''"
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in" 
+                :class="categorieSelectionnee === 'alcools' ? 'bg-primary text-light' : 'text-primary'"
                 @click="selectionnerCategorie('alcools')">Alcools</button>
             </div>
 
             <div>
-                <button class="text-primary px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
-                :class="categorieSelectionnee === 'softs' ? 'bg-primary text-light' : ''"
+                <button class=" px-6 py-3 w-full rounded-md md:rounded-full hover:bg-primary hover:text-light transition-colors duration-200 ease-in"
+                :class="categorieSelectionnee === 'softs' ? 'bg-primary text-light' : 'text-primary'"
                 @click="selectionnerCategorie('softs')">Boissons non alcolisées</button>
             </div>
 
