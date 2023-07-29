@@ -31,7 +31,7 @@
         
 
         <a href="@if(request()->routeIs('welcome')) #welcome @else {{ route('welcome') }} @endif">
-            <img src="{{ asset('images/test.png') }}" width="100px" height="100px" alt="Logo"
+            <img src="{{ asset('images/test.webp') }}" width="100px" height="100px" alt="Logo"
             class="bottom-0 z-50"
             >
         </a>

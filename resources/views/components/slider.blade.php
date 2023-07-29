@@ -5,17 +5,17 @@
                     [
                         'id' => '1',
                         'alt' => 'Salade',
-                        'image' => 'images/salade.jpg'
+                        'image' => 'images/salade.webp'
                     ],
                     [
                         'id' => '2',
                         'alt' => 'Pate',
-                        'image' => 'images/pate.jpg'
+                        'image' => 'images/pate.webp'
                     ],
                     [
                         'id' => '3',
                         'alt' => 'Sandwich',
-                        'image' => 'images/sandwich.jpg'
+                        'image' => 'images/sandwich.webp'
                     ]
                 ]
             @endphp

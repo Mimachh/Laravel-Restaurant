@@ -19,7 +19,7 @@
                 group-hover:outline-primary
                 ">
                     <img 
-                    src="{{ asset('images/chef.png') }}"
+                    src="{{ asset('images/chef.webp') }}"
                     alt="Photo du chef"
                     class="w-64 h-[350px]
                     absolute top-0 translate-y-[-19%]"
@@ -75,7 +75,7 @@
                 group-hover:outline-primary
                 ">
                     <img 
-                    src="{{ asset('images/chef.png') }}"
+                    src="{{ asset('images/chef.webp') }}"
                     alt="Photo du chef"
                     class="w-64 h-[350px]
                     absolute top-0 translate-y-[-19%]"
@@ -131,7 +131,7 @@
                 group-hover:outline-primary
                 ">
                     <img 
-                    src="{{ asset('images/chef.png') }}"
+                    src="{{ asset('images/chef.webp') }}"
                     alt="Photo du chef"
                     class="w-64 h-[350px]
                     absolute top-0 translate-y-[-19%]"

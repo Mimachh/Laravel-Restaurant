@@ -31,14 +31,14 @@
             ">
 
                 <x-about.image 
-                src="images/salade.jpg"
+                src="images/salade.webp"
                 backdrop="backdrop-filter bg-gold/20"
                 id="aboutImage1"
                 class="opacity-0"
                 />
 
                 <x-about.image 
-                src="images/pate.jpg"
+                src="images/pate.webp"
                 backdrop="backdrop-filter bg-primary/60"
                 id="aboutImage2"
                 class="opacity-0"
@@ -49,14 +49,14 @@
             space-y-8 md:pt-0 lg:pt-8
             ">
                 <x-about.image 
-                src="images/salade.jpg"
+                src="images/salade.webp"
                 backdrop="backdrop-filter bg-primary/40"
                 id="aboutImage3"
                 class="opacity-0"
                 />
 
                 <x-about.image 
-                src="images/pate.jpg"
+                src="images/pate.webp"
                 backdrop="backdrop-filter bg-gold/20"
                 id="aboutImage4"
                 class="opacity-0"
