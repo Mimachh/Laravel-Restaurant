@@ -4,25 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        @php
-        // Générer un nonce de 16 octets (128 bits)
-        $nonce = bin2hex(random_bytes(16));
-        @endphp
-
-
-        <meta http-equiv="Content-Security-Policy" content="connect-src 'self'; object-src 'self';
-        script-src 'self' 'nonce-<?php echo $nonce; ?>' https://unpkg.com/swiper/swiper-bundle.min.js https://cdn.jsdelivr.net/npm/axios@latest/dist/axios.min.js;
-        
-        ">
+        <!-- <meta http-equiv="Content-Security-Policy" content="allows"> -->
         <title>{{ env('APP_NAME')}}</title>
         <meta name="description" content="Votre restaurant en ligne.">
-        <link nonce="<?php echo $nonce; ?>"
+        <link
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
-        >
-        <!-- @vite('resources/css/welcome-page.scss') -->
-        <link rel="stylesheet" href="@vite('resources/css/welcome-page.scss')" nonce="<?php echo $nonce; ?>">
+        />
+        @vite('resources/css/welcome-page.scss')
     </head>
     <body>
         <!-- <div class="font-poppins">
@@ -82,15 +71,12 @@
             </div>
         </main>
 
-        <script nonce="<?php echo $nonce; ?>" src="@vite('resources/js/app.js')"></script>
-    <script nonce="<?php echo $nonce; ?>" src="@vite('resources/js/public/index.js')"></script>
-
-        <!-- @vite('resources/js/app.js')
-        @vite('resources/js/public/index.js') -->
-        <script nonce="<?php echo $nonce; ?>">
+        @vite('resources/js/app.js')
+        @vite('resources/js/public/index.js')
+        <script>
              window.APP_URL = "{{ env('APP_URL') }}";
         </script>
-        <script nonce="<?php echo $nonce; ?>" src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 
     </body>
