@@ -20,7 +20,7 @@
         <link nonce="<?php echo $nonce; ?>"
         rel="stylesheet"
         href="https://unpkg.com/swiper/swiper-bundle.min.css"
-        />
+        >
         <!-- @vite('resources/css/welcome-page.scss') -->
         <link rel="stylesheet" href="@vite('resources/css/welcome-page.scss')" nonce="<?php echo $nonce; ?>">
     </head>
